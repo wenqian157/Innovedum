@@ -108,9 +108,6 @@ public class CameraController : MonoBehaviour
     }
     public void ResetCamera()
     {
-        Debug.Log($"target: {target.position}");
-        Debug.Log($"origin: {originTarPos}");
-        PopOutInfo.Instance.text.text = "Reset!!!";
         target.SetPositionAndRotation(originTarPos, originTarRot);
         transform.SetPositionAndRotation(originCamPos, originCamRot);
         Init();
