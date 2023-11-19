@@ -29,8 +29,8 @@ public class CameraController : MonoBehaviour
     private Quaternion originTarRot;
     private Vector3 originCamPos;
     private Quaternion originCamRot;
-
-    private void OnEnable()
+    
+    private void Start()
     {
         //If there is no target, create a temporary target at 'distance' from the cameras current viewpoint
         GameObject go = new GameObject("Cam Target");

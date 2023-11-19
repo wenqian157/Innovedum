@@ -13,11 +13,11 @@ TagManager:
   - UI
   - Concrete
   - Reinforcement
-  - Insulation
-  - TopLayer
-  - StructrualSystem
-  - 
-  - 
+  - TransverseBendingMoment
+  - SlabStripTransverse
+  - StrutAndTie
+  - AeraLoad
+  - T-BeamLongidtudinal
   - 
   - 
   - 

@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class LayerController : MonoBehaviour
 {
-    private Camera cam;
+    public Camera arCam;
+    public Camera cam;
     private List<string> layerList;
     private void Awake()
     {
-        cam = Camera.main;
-
-        string[] layersArray = { "Default", "UI", "Concrete" }; //"Reinforcement", "Insulation", "TopLayer", "StructuralSystem"
+        string[] layersArray = { "Default", "UI", "Concrete", "Reinforcement", "TransverseBendingMoment", "SlabStripTransverse", "StrutAndTie", "AeraLoad", "T-BeamLongidtudinal" };
         layerList = new List<string>(layersArray);
 
         cam.cullingMask = LayerMask.GetMask(layerList.ToArray());
-
+        arCam.cullingMask = LayerMask.GetMask(layerList.ToArray());
     }
     public void OnClickDisplayLayer(string layer)
     {
@@ -27,5 +26,6 @@ public class LayerController : MonoBehaviour
             layerList.Remove(layer);
         }
         cam.cullingMask = LayerMask.GetMask(layerList.ToArray());
+        arCam.cullingMask = LayerMask.GetMask(layerList.ToArray());
     }
 }

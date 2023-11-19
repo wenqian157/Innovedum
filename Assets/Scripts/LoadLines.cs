@@ -9,7 +9,9 @@ using Newtonsoft.Json;
 public class LoadLines : MonoBehaviour
 {
     public string fileName;
-    public float lineWidth = 0.2f;
+    public float lineWidth = 0.05f;
+    public float arrowSize = 0.3f;
+    public Color color;
     private LinesFromRhino data;
 
     private void Start()
@@ -19,7 +21,8 @@ public class LoadLines : MonoBehaviour
     public void OnClickLoadLines()
     {
         LoadFromJson();
-        AddLineRenderers(true);  
+        AddLineRenderers(true, color);
+        //AddLineRenderersWithArrow(true, Color.red);
     }
     public void DestroyChildren()
     {
@@ -45,10 +48,50 @@ public class LoadLines : MonoBehaviour
             //throw new ArgumentException($"{path}IsNullOrEmpty");
         }
     }
-    private void AddLineRenderers(bool flipYZ)
+    private void AddLineRenderers(bool flipYZ, Color c)
+    {
+        DestroyChildren();
+        List<Vector3[]> lines = ReadLines(flipYZ);
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var line = AddLineObject();
+            line.name = "line";
+            AddLineRenderer(line, lines[i], lineWidth, c);
+        }
+    }
+    private void AddLineRenderersWithArrow(bool flipYZ, Color c)
     {
         DestroyChildren();
 
+        List<Vector3[]> lines = ReadLines(flipYZ);
+
+        for (int i = 0; i < lines.Count; i++)
+        {
+            var line = AddLineObject();
+            line.name = "line";
+            AddLineRenderer(line, lines[i], lineWidth, c);
+
+            // add arrow
+            GameObject arrow = new GameObject();
+            arrow.transform.parent = line.transform;
+            arrow.transform.localPosition = new Vector3(0, 0, 0);
+            arrow.transform.localRotation = Quaternion.identity;
+            arrow.transform.localScale = new Vector3(1, 1, 1);
+
+            var arrowR = arrow.AddComponent<LineRenderer>();
+            Vector3 vNew = (lines[i][1] - lines[i][0]).normalized * arrowSize * 2 + lines[i][0];
+            arrowR.SetPositions(new Vector3[] { lines[i][0], vNew });
+            arrowR.material = new Material(Shader.Find("Sprites/Default"));
+            arrowR.startColor = c;
+            arrowR.endColor = c;
+            arrowR.startWidth = 0;
+            arrowR.endWidth = arrowSize;
+            arrowR.useWorldSpace = false;
+        }
+    }
+    private List<Vector3[]> ReadLines(bool flipYZ)
+    {
         List<Vector3[]> lines = new List<Vector3[]>();
         foreach (var item in data.lines)
         {
@@ -61,13 +104,9 @@ public class LoadLines : MonoBehaviour
             }
             lines.Add(line);
         }
-        for (int i = 0; i < lines.Count; i++)
-        {
-            var line = AddLineObject();
-            line.name = "line";
-            AddLineRenderer(line, lines[i], lineWidth, Color.blue);
-        }
+        return lines;
     }
+
     private void FlipYZ(Vector3[] vertices)
     {
         for (int i = 0; i < vertices.Length; i++)
