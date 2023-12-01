@@ -9,7 +9,8 @@ public class LayerController : MonoBehaviour
     private List<string> layerList;
     private void Awake()
     {
-        string[] layersArray = { "Default", "UI", "Concrete", "Reinforcement", "TransverseBendingMoment", "SlabStripTransverse", "StrutAndTie", "AeraLoad", "T-BeamLongidtudinal" };
+        string[] layersArray = { "Default", "UI", "Concrete", "Reinforcement", "TransverseBendingMoment", "SlabStripTransverse", "StrutAndTie", "AeraLoad", "T-BeamLongidtudinal",
+        "ReinforcementTransverse", "ReinforcementLongitudinal", "ReinforcementShear"};
         layerList = new List<string>(layersArray);
 
         cam.cullingMask = LayerMask.GetMask(layerList.ToArray());

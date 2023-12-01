@@ -29,7 +29,10 @@ public class CameraController : MonoBehaviour
     private Quaternion originTarRot;
     private Vector3 originCamPos;
     private Quaternion originCamRot;
-    
+
+    private enum camStates { perspective, top, front, left};
+    private camStates currentCam;
+
     private void Start()
     {
         //If there is no target, create a temporary target at 'distance' from the cameras current viewpoint
@@ -46,6 +49,7 @@ public class CameraController : MonoBehaviour
     }
     private void Init()
     {
+        currentCam = camStates.perspective;
         distance = Vector3.Distance(transform.position, target.position);
         currentDistance = distance;
         desiredDistance = distance;
@@ -95,7 +99,26 @@ public class CameraController : MonoBehaviour
         currentDistance = Mathf.Lerp(currentDistance, desiredDistance, Time.deltaTime * zoomDampening);
 
         // calculate position based on the new currentDistance
-        position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
+        if(currentCam == camStates.top)
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+            position = target.position - rotation * Vector3.down *currentDistance;
+        }
+        else if (currentCam == camStates.left)
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+            position = target.position - rotation * Vector3.right * currentDistance;
+        }
+        else if (currentCam == camStates.front)
+        {
+            rotation = Quaternion.Euler(0, 0, 0);
+            position = target.position - rotation * Vector3.back * currentDistance;
+        }
+        else
+        {
+            position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
+        }
+        
         transform.position = position;
     }
     private static float ClampAngle(float angle, float min, float max)
@@ -111,5 +134,41 @@ public class CameraController : MonoBehaviour
         target.SetPositionAndRotation(originTarPos, originTarRot);
         transform.SetPositionAndRotation(originCamPos, originCamRot);
         Init();
+
+        var cam = this.GetComponent<Camera>();
+        cam.orthographic = false;
+    }
+    public void TopView()
+    {
+        currentCam = camStates.top;
+        rotation = Quaternion.Euler(90, 0, 0);
+        target.SetPositionAndRotation(new Vector3(0, 20 - distance, 0), Quaternion.Euler(90, 0, 0));
+        transform.SetPositionAndRotation(new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
+        
+        var cam = this.GetComponent<Camera>();
+        cam.orthographic = true;
+        cam.orthographicSize = 15;
+    }
+    public void LeftView()
+    {
+        currentCam = camStates.left;
+        rotation = Quaternion.Euler(0, 90, 0);
+        target.SetPositionAndRotation(new Vector3(-20 - distance, 0, 0), Quaternion.Euler(0, 90, 0));
+        transform.SetPositionAndRotation(new Vector3(-20, 0, 0), Quaternion.Euler(0, 90, 0));
+
+        var cam = this.GetComponent<Camera>();
+        cam.orthographic = true;
+        cam.orthographicSize = 15;
+    }
+    public void FrontView()
+    {
+        currentCam = camStates.left;
+        rotation = Quaternion.Euler(0, 90, 0);
+        target.SetPositionAndRotation(new Vector3(0, 0, -20 - distance), Quaternion.Euler(0, 0, 0));
+        transform.SetPositionAndRotation(new Vector3(0, 0, -20), Quaternion.Euler(0, 0, 0));
+
+        var cam = this.GetComponent<Camera>();
+        cam.orthographic = true;
+        cam.orthographicSize = 15;
     }
 }
