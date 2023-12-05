@@ -11,6 +11,7 @@ public class LoadLines : MonoBehaviour
     public string fileName;
     public float lineWidth = 0.05f;
     public float arrowSize = 0.3f;
+    public bool arrow = false;
     public Color color;
     private LinesFromRhino data;
 
@@ -22,7 +23,10 @@ public class LoadLines : MonoBehaviour
     {
         LoadFromJson();
         AddLineRenderers(true, color);
-        //AddLineRenderersWithArrow(true, Color.red);
+        if (arrow)
+        {
+            AddLineRenderersWithArrow(true, Color.yellow);
+        }
     }
     public void DestroyChildren()
     {

@@ -11,31 +11,31 @@ TagManager:
   - 
   - Water
   - UI
-  - Concrete
-  - Reinforcement
-  - TransverseBendingMoment
-  - SlabStripTransverse
-  - StrutAndTie
-  - AeraLoad
-  - T-BeamLongidtudinal
-  - ReinforcementTransverse
-  - ReinforcementLongitudinal
-  - ReinforcementShear
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ConcreteWandscheibe
+  - ConcreteHohlkasten
+  - StrutAndTieWandscheibeStrut
+  - StrutAndTieWandscheibeTie
+  - StrutAndTieHohlkastenStrut
+  - StrutAndTieHohlkastenTie
+  - ReinforcementWandscheibeA
+  - ReinforcementWandscheibeB
+  - ReinforcementWandscheibeC
+  - ReinforcementWandscheibeD
+  - ReinforcementWandscheibeE
+  - ReinforcementWandscheibeF
+  - ReinforcementWandscheibeH
+  - ReinforcementWandscheibeBuegel4
+  - ReinforcementWandscheibeLaengsbewehrungVerteilt
+  - ReinforcementWandscheibeSteckbuegel
+  - ReinforcementHohlkastenLaengsbewehrungVerteilt
+  - ReinforcementHohlkastenBuegel
+  - ReinforcementHohlkastenGurt1-2_2-3
+  - ReinforcementHohlkastenGurt3-4_4-1
+  - ExternalForce
+  - InternalForceWandscheibe
+  - InternalForceHohlkasten
+  - SectionForcesWandscheibe
+  - SectionForcesHohlkasten
   - 
   m_SortingLayers:
   - name: Default
