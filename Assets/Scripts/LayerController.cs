@@ -94,8 +94,8 @@ public class LayerController : MonoBehaviour
             "Betongeometrie", "Kräfte auf Wandscheibe", "Schnittgrössen Wandscheibe", "Zugstreben Wandscheibe", "Fachwerkmodell Wandscheibe",
             "Bewehrung Strebe A", "Bewehrung Strebe B", "Bewehrung Strebe C", "Bewehrung Strebe D", "Bewehrung Strebe E",
             "Bewehrung Strebe F", "Bewehrung Strebe H", "Konstruktive Bewehrung Wandscheibe", "Bewehrung Wandscheibe", "Kräfte auf Wandscheibe",
-            "Kräfte auf Wandscheibe", "Kräfte auf Hohlkasten", "Schnittgeössen Hohlkasten", "Fachwerkmodell Hohlkasten", "Fachwerkmodell komplett",
-            "Fachwerkmodell Hohlkasten", "Zugstreben Hohlkasten", "Bügelbewehrung Hohlkasten", "Verteilte Längsbewehrung Hohlkasten", "Bewherung Gurt 1-2/2-3 Hohlkasten",
+            "Kräfte auf Wandscheibe", "Kräfte auf Hohlkasten", "Schnittgrössen Hohlkasten", "Fachwerkmodell Hohlkasten", "Fachwerkmodell komplett",
+            "Fachwerkmodell Hohlkasten", "Zugstreben Hohlkasten", "Bügelbewehrung Hohlkasten", "Verteilte Längsbewehrung Hohlkasten", "Bewehrung Gurt 1-2/2-3 Hohlkasten",
             "Bewehrung Gurt 3-4/4-1 Hohlkasten", "Bewehrung Hohlkasten", "Bewehrung komplett", 
         };
     }
