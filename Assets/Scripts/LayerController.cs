@@ -91,7 +91,7 @@ public class LayerController : MonoBehaviour
     {
         layerNames = new List<string>
         {
-            "Betongeometrie", "Kräfte auf Wandscheibe", "Schnittgrössen Wandscheibe", "Zugstreben Wandscheibe", "Fachwerkmodell Wandscheibe",
+            "Betongeometrie", "Kräfte auf Wandscheibe", "Schnittgrössen Wandscheibe", "Fachwerkmodell Wandscheibe", "Zugstreben Wandscheibe",
             "Bewehrung Strebe A", "Bewehrung Strebe B", "Bewehrung Strebe C", "Bewehrung Strebe D", "Bewehrung Strebe E",
             "Bewehrung Strebe F", "Bewehrung Strebe H", "Konstruktive Bewehrung Wandscheibe", "Bewehrung Wandscheibe", "Kräfte auf Wandscheibe",
             "Kräfte auf Wandscheibe", "Kräfte auf Hohlkasten", "Schnittgrössen Hohlkasten", "Fachwerkmodell Hohlkasten", "Fachwerkmodell komplett",
