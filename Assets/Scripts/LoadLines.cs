@@ -13,6 +13,7 @@ public class LoadLines : MonoBehaviour
     public float arrowSize = 0.3f;
     public bool arrow = false;
     public Color color;
+    public bool finish = false;
     private LinesFromRhino data;
 
     private void Start()
@@ -22,10 +23,13 @@ public class LoadLines : MonoBehaviour
     public void OnClickLoadLines()
     {
         LoadFromJson();
-        AddLineRenderers(true, color);
         if (arrow)
         {
             AddLineRenderersWithArrow(true, Color.yellow);
+        }
+        else
+        {
+            AddLineRenderers(true, Color.blue);
         }
     }
     public void DestroyChildren()
@@ -42,7 +46,7 @@ public class LoadLines : MonoBehaviour
 
         try
         {
-            Debug.Log("read file");
+            //Debug.Log("read file");
             string jsonString = File.ReadAllText(path);
             data = JsonConvert.DeserializeObject<LinesFromRhino>(jsonString);
         }
@@ -63,6 +67,7 @@ public class LoadLines : MonoBehaviour
             line.name = "line";
             AddLineRenderer(line, lines[i], lineWidth, c);
         }
+        finish = true;
     }
     private void AddLineRenderersWithArrow(bool flipYZ, Color c)
     {
@@ -93,6 +98,7 @@ public class LoadLines : MonoBehaviour
             arrowR.endWidth = arrowSize;
             arrowR.useWorldSpace = false;
         }
+        finish = true;
     }
     private List<Vector3[]> ReadLines(bool flipYZ)
     {

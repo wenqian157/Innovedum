@@ -11,32 +11,32 @@ TagManager:
   - 
   - Water
   - UI
-  - ConcreteWandscheibe
-  - ConcreteHohlkasten
-  - StrutAndTieWandscheibeStrut
-  - StrutAndTieWandscheibeTie
-  - StrutAndTieHohlkastenStrut
-  - StrutAndTieHohlkastenTie
-  - ReinforcementWandscheibeA
-  - ReinforcementWandscheibeB
-  - ReinforcementWandscheibeC
-  - ReinforcementWandscheibeD
-  - ReinforcementWandscheibeE
-  - ReinforcementWandscheibeF
-  - ReinforcementWandscheibeH
-  - ReinforcementWandscheibeBuegel4
-  - ReinforcementWandscheibeLaengsbewehrungVerteilt
-  - ReinforcementWandscheibeSteckbuegel
-  - ReinforcementHohlkastenLaengsbewehrungVerteilt
-  - ReinforcementHohlkastenBuegel
-  - ReinforcementHohlkastenGurt1-2_2-3
-  - ReinforcementHohlkastenGurt3-4_4-1
-  - ExternalForce
-  - InternalForceWandscheibe
-  - InternalForceHohlkasten
-  - SectionForcesWandscheibe
-  - SectionForcesHohlkasten
-  - 
+  - LayerObject0
+  - LayerObject1
+  - LayerObject2
+  - LayerObject3
+  - LayerObject4
+  - LayerObject5
+  - LayerObject6
+  - LayerObject7
+  - LayerObject8
+  - LayerObject9
+  - LayerObject10
+  - LayerObject11
+  - LayerObject12
+  - LayerObject13
+  - LayerObject14
+  - LayerObject15
+  - LayerObject16
+  - LayerObject17
+  - LayerObject18
+  - LayerObject19
+  - LayerObject20
+  - LayerObject21
+  - LayerObject22
+  - LayerObject23
+  - LayerObject24
+  - LayerObject25
   m_SortingLayers:
   - name: Default
     uniqueID: 0
