@@ -7,23 +7,17 @@ using UnityEngine.Networking;
 
 public class RemoteResourceLoader : MonoBehaviour
 {
-    public TMP_Text URLAddressText;
-    private string address;
+    public TMP_InputField inputField;
+    public static string urlAddress;
     private void Awake()
     {
-        address = "https://github.com/wenqian157/Innovedum/tree/main/OnlineResources";
+        urlAddress = "https://github.com/wenqian157/Innovedum/tree/main/OnlineResources";
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(GetComponent<RemoteResourceLoader>());
     }
     public void OnClickLoadScene()
     {
-        // todo verify url address
-        //if ()
-        //{
-
-        //}
-        address = URLAddressText.text;
-        StartCoroutine(VerifyWebAddress(address));
+        urlAddress = inputField.text;
+        StartCoroutine(VerifyWebAddress(urlAddress));
     }
     public void OpenMainScene()
     {
@@ -31,22 +25,24 @@ public class RemoteResourceLoader : MonoBehaviour
     }
     private IEnumerator VerifyWebAddress(string url)
     {
-        using(UnityWebRequest www = UnityWebRequest.Get(url))
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
+            www.certificateHandler = new BypassCertificate();
             yield return www.SendWebRequest();
-            if(www.result != UnityWebRequest.Result.Success) { }
-            Debug.LogError($"{www.error}");
-            yield break;
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"{www.error}");
+                yield break;
+            }
+            Debug.Log("Found remote resources");
         }
-
-        //var wwwww = UnityWebRequest.Get(url);
-        //Debug.Log(url);
-        //yield return www.SendWebRequest();
-        //if(www.result != UnityWebRequest.Result.Success)
-        //{
-        //    Debug.LogError($"{www.error}");
-        //    yield break;
-        //}
-        //OpenMainScene();
+        OpenMainScene();
+    }
+}
+public class BypassCertificate : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        return true;
     }
 }

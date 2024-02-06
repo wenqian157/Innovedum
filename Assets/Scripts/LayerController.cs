@@ -27,13 +27,13 @@ public class LayerController : MonoBehaviour
     }
     IEnumerator ReadCSVAsync()
     {
-        while (CSVReader.StoryLine.layerFilters.Length == 0)
+        while (RemoteCSVLoader.StoryLine.layerFilters.Length == 0)
         {
             yield return new WaitForSeconds(1.0f);
             Debug.Log("reading cvs file...");
         }
         //layerNames = CSVReader.StoryLine.layerNameArray.ToList();
-        layerFilters = CSVReader.StoryLine.layerFilters.ToList();
+        layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
 
         cam.cullingMask = IndexesToLayerMask(layerFilters[0]);
         arCam.cullingMask = IndexesToLayerMask(layerFilters[0]);
@@ -64,7 +64,7 @@ public class LayerController : MonoBehaviour
     public void OnClickPreviousNext(int nextIndex)
     {
         tempState += nextIndex;
-        if (tempState < 0 || tempState > CSVReader.stepCount - 1)
+        if (tempState < 0 || tempState > RemoteCSVLoader.stepCount - 1)
         {
             tempState = currentState;
             return;
