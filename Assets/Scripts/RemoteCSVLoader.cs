@@ -23,9 +23,9 @@ public class RemoteCSVLoader : MonoBehaviour
         public string contentType;
         public string material;
     }
-    public static LayerObject[] myLayerObjects;
+    public static LayerObject[] myLayerObjects; // for obj loader and line loader 
     [Serializable]
-    public static class StoryLine
+    public static class StoryLine // for story telling
     {
         public static string[] layerNameArray;
         public static List<int>[] layerFilters;
@@ -35,6 +35,7 @@ public class RemoteCSVLoader : MonoBehaviour
         urlBase = RemoteResourceLoader.urlAddress;
         //urlCSV = string.Format("{0}/{1}", urlBase, "layerInfo.csv");
         urlCSV = urlBase;
+        StoryLine.layerFilters = new List<int>[steps];
         StartCoroutine(ReadCSV());
     }
     public IEnumerator ReadCSV()
@@ -58,7 +59,6 @@ public class RemoteCSVLoader : MonoBehaviour
 
             layerCount = data.Length / (steps + 4) - 1;
             myLayerObjects = new LayerObject[layerCount];
-            StoryLine.layerFilters = new List<int>[steps];
 
             for (int i = 0; i < layerCount; i++)
             {
