@@ -2,19 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class RemoteCSVLoader : MonoBehaviour
 {
+    public TMP_InputField inputField;
+
     public int steps;
     public static int stepCount;
     public static int layerCount;
     public static List<int> objLayers = new List<int>();
     public static List<int> linesLayers = new List<int>();
     public static List<int> linesWithArrowLayers = new List<int>();
-    private string urlBase;
+
+    public static string urlBase;
     private string urlCSV;
     public class LayerObject
     {
@@ -23,25 +28,31 @@ public class RemoteCSVLoader : MonoBehaviour
         public string contentType;
         public string material;
     }
-    public static LayerObject[] myLayerObjects; // for obj loader and line loader 
+    public static LayerObject[] myLayerObjects; 
     [Serializable]
-    public static class StoryLine // for story telling
+    public static class StoryLine 
     {
         public static string[] layerNameArray;
         public static List<int>[] layerFilters;
     }
     private void Awake()
     {
-        urlBase = RemoteResourceLoader.urlAddress;
-        //urlCSV = string.Format("{0}/{1}", urlBase, "layerInfo.csv");
-        urlCSV = urlBase;
-        StoryLine.layerFilters = new List<int>[steps];
-        StartCoroutine(ReadCSV());
+        DontDestroyOnLoad(gameObject);
     }
-    public IEnumerator ReadCSV()
+    public void OnClickLoadScene()
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(urlCSV))
+        urlBase = inputField.text;
+        urlCSV = urlBase + "/layerInfo.csv";
+        //urlCSV = string.Format("{0}/{1}", urlBase, "layerInfo.csv");
+        //urlCSV = urlBase;
+
+        StartCoroutine(ReadCSV(urlCSV));
+    }
+    public IEnumerator ReadCSV(string url)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
+            www.certificateHandler = new BypassCertificate();
             www.SendWebRequest();
             if (!string.IsNullOrEmpty(www.error))
             {
@@ -53,10 +64,10 @@ public class RemoteCSVLoader : MonoBehaviour
                 Debug.Log("loading...");
                 yield return new WaitForSeconds(0.2f);
             }
-            Debug.Log(www.downloadHandler.text);
+            Debug.Log(www.downloadHandler.text); //
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
-
+            StoryLine.layerFilters = new List<int>[steps];
             layerCount = data.Length / (steps + 4) - 1;
             myLayerObjects = new LayerObject[layerCount];
 
@@ -96,7 +107,20 @@ public class RemoteCSVLoader : MonoBehaviour
                 }
                 //Debug.Log(string.Join(", ", StoryLine.layerFilters[j]));
             }
+            OpenMainScene();
         }
+    }
+    public void OpenMainScene()
+    {
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
+    }
+
+}
+public class BypassCertificate : CertificateHandler
+{
+    protected override bool ValidateCertificate(byte[] certificateData)
+    {
+        return true;
     }
 }
 
