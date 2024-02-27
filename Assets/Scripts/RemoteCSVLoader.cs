@@ -10,8 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class RemoteCSVLoader : MonoBehaviour
 {
-    public TMP_InputField inputField;
-
+    //public TMP_InputField inputField;
+    
     public int steps;
     public static int stepCount;
     public static int layerCount;
@@ -19,6 +19,7 @@ public class RemoteCSVLoader : MonoBehaviour
     public static List<int> linesLayers = new List<int>();
     public static List<int> linesWithArrowLayers = new List<int>();
 
+    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
     public static string urlBase;
     private string urlCSV;
     public class LayerObject
@@ -38,14 +39,13 @@ public class RemoteCSVLoader : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        urlBase = projectUrl;
     }
     public void OnClickLoadScene()
     {
-        urlBase = inputField.text;
+        //urlBase = inputField.text;
         urlCSV = urlBase + "/layerInfo.csv";
-        //urlCSV = string.Format("{0}/{1}", urlBase, "layerInfo.csv");
-        //urlCSV = urlBase;
-
+        stepCount = steps;
         StartCoroutine(ReadCSV(urlCSV));
     }
     public IEnumerator ReadCSV(string url)
@@ -64,10 +64,11 @@ public class RemoteCSVLoader : MonoBehaviour
                 Debug.Log("loading...");
                 yield return new WaitForSeconds(0.2f);
             }
-            Debug.Log(www.downloadHandler.text); //
+            Debug.Log(www.downloadHandler.text); 
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
             StoryLine.layerFilters = new List<int>[steps];
+            //StoryLine.layerNameArray = new string[steps];
             layerCount = data.Length / (steps + 4) - 1;
             myLayerObjects = new LayerObject[layerCount];
 

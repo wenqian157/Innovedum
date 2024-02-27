@@ -7,10 +7,8 @@ using Dummiesman;
 
 public class RemoteObjLoader : MonoBehaviour
 {
-    private string urlBase;
     void Start()
     {
-        urlBase = RemoteCSVLoader.urlBase;
         StartCoroutine(ReadCSVAsync());
     }
     IEnumerator ReadCSVAsync()
@@ -20,7 +18,6 @@ public class RemoteObjLoader : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             Debug.Log("reading cvs file...");
         }
-        //LoadObj();
         RemoteLoadObj();
     }
     private void LoadObj()
@@ -49,6 +46,8 @@ public class RemoteObjLoader : MonoBehaviour
 
             var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.text));
             GameObject mesh = new OBJLoader().Load(textStream);
+            mesh.name = layerName;
+            mesh.transform.SetParent(this.transform);
             mesh.layer = layerIndex;
             foreach (Transform child in mesh.GetComponentsInChildren<Transform>())
             {

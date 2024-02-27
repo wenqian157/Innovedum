@@ -32,8 +32,8 @@ public class LayerController : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             Debug.Log("reading cvs file...");
         }
-        //layerNames = CSVReader.StoryLine.layerNameArray.ToList();
         layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
+        //layerNames = RemoteCSVLoader.StoryLine.layerNameArray.ToList();
 
         cam.cullingMask = IndexesToLayerMask(layerFilters[0]);
         arCam.cullingMask = IndexesToLayerMask(layerFilters[0]);
@@ -77,7 +77,7 @@ public class LayerController : MonoBehaviour
             cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
             arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
-            //text.text = currentState.ToString();
+            text.text = currentState.ToString();
             //nameText.text = layerNames[currentState];
         }
     }
