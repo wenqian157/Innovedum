@@ -64,7 +64,7 @@ public class LayerController : MonoBehaviour
     public void OnClickPreviousNext(int nextIndex)
     {
         tempState += nextIndex;
-        if (tempState < 0 || tempState > RemoteCSVLoader.stepCount - 1)
+        if (tempState < 0 || tempState > RemoteCSVLoader.storyCount - 1)
         {
             tempState = currentState;
             return;
