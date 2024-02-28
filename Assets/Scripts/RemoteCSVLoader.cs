@@ -70,7 +70,7 @@ public class RemoteCSVLoader : MonoBehaviour
 
             layerCount = data.Length / 4 - 1;
             myLayerObjects = new LayerObject[layerCount];
-
+            Debug.Log(layerCount);
             for (int i = 0; i < layerCount; i++)
             {
                 myLayerObjects[i] = new LayerObject();
