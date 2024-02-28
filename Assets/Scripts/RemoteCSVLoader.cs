@@ -116,6 +116,7 @@ public class RemoteCSVLoader : MonoBehaviour
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
             storyCount = data.Length / (layerCount + 3);
+            Debug.Log(storyCount);
             StoryLine.layerFilters = new List<int>[storyCount];
             
             for (int j = 0; j < storyCount; j++)
