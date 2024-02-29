@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class LayerController : MonoBehaviour
+public class StoryController : MonoBehaviour
 {
     public Camera arCam;
     public Camera cam;
-    public TMPro.TextMeshProUGUI text;
-    public TMPro.TextMeshProUGUI nameText;
+    public TMPro.TextMeshProUGUI step;
+    public TMPro.TextMeshProUGUI stepNameText;
     private List<List<int>> layerFilters;
     private List<int> currentLayerFilter;
-    private List<string> layerNames;
+    private List<string> stepNames;
     private List<int> layerRange;
     private int currentState;
     private int tempState;
@@ -33,7 +33,7 @@ public class LayerController : MonoBehaviour
             Debug.Log("reading cvs file...");
         }
         layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
-        //layerNames = RemoteCSVLoader.StoryLine.layerNameArray.ToList();
+        stepNames = RemoteCSVLoader.StoryLine.stepNameArray.ToList();
 
         cam.cullingMask = IndexesToLayerMask(layerFilters[0]);
         arCam.cullingMask = IndexesToLayerMask(layerFilters[0]);
@@ -48,19 +48,6 @@ public class LayerController : MonoBehaviour
         }
         return mask;
     }
-    //public void OnClickDisplayLayer(int layerIndex)
-    //{
-    //    if (!layerRange.Contains(layerIndex))
-    //    {
-    //        layerList.Add(layer);
-    //    }
-    //    else
-    //    {
-    //        layerList.Remove(layer);
-    //    }
-    //    cam.cullingMask = LayerMask.GetMask(layerList.ToArray());
-    //    arCam.cullingMask = LayerMask.GetMask(layerList.ToArray());
-    //}
     public void OnClickPreviousNext(int nextIndex)
     {
         tempState += nextIndex;
@@ -77,8 +64,21 @@ public class LayerController : MonoBehaviour
             cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
             arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
-            text.text = currentState.ToString();
-            //nameText.text = layerNames[currentState];
+            step.text = currentState.ToString();
+            stepNameText.text = stepNames[currentState];
         }
     }
+    //public void OnClickDisplayLayer(int layerIndex)
+    //{
+    //    if (!layerRange.Contains(layerIndex))
+    //    {
+    //        layerList.Add(layer);
+    //    }
+    //    else
+    //    {
+    //        layerList.Remove(layer);
+    //    }
+    //    cam.cullingMask = LayerMask.GetMask(layerList.ToArray());
+    //    arCam.cullingMask = LayerMask.GetMask(layerList.ToArray());
+    //}
 }

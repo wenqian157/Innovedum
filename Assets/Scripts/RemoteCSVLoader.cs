@@ -33,8 +33,9 @@ public class RemoteCSVLoader : MonoBehaviour
     [Serializable]
     public static class StoryLine 
     {
-        public static string[] layerNameArray;
+        public static string[] stepNameArray;
         public static List<int>[] layerFilters;
+        public static string[] stepInfoArray;
     }
     private void Awake()
     {
@@ -70,7 +71,6 @@ public class RemoteCSVLoader : MonoBehaviour
 
             layerCount = data.Length / 4 - 1;
             myLayerObjects = new LayerObject[layerCount];
-            Debug.Log(layerCount);
             for (int i = 0; i < layerCount; i++)
             {
                 myLayerObjects[i] = new LayerObject();
@@ -115,8 +115,7 @@ public class RemoteCSVLoader : MonoBehaviour
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
-            storyCount = data.Length / (layerCount + 3);
-            Debug.Log(storyCount);
+            storyCount = data.Length / (layerCount + 2);
             StoryLine.layerFilters = new List<int>[storyCount];
             
             for (int j = 0; j < storyCount; j++)
@@ -125,15 +124,17 @@ public class RemoteCSVLoader : MonoBehaviour
                 StoryLine.layerFilters[j].Add(0); // add default layer
                 for (int i = 0; i < layerCount; i++)
                 {
-                    if (int.Parse(data[layerCount * (i + 1) + j]) == 0)
+                    if (int.Parse(data[storyCount * (i + 1) + j]) == 0)
                     {
                         StoryLine.layerFilters[j].Add(myLayerObjects[i].index);
                     }
                 }
-                Debug.Log(string.Join(", ", StoryLine.layerFilters[j]));
             }
-            //StoryLine.layerNameArray[i] = myLayerObjects[i].name;
-            //StoryLine.layerNameArray = new string[steps];
+            StoryLine.stepNameArray = new string[storyCount];
+            for (int j = 0; j < storyCount; j++)
+            {
+                StoryLine.stepNameArray[j] = data[storyCount * (layerCount + 1) + j];
+            }
             OpenMainScene();
         }
     }
