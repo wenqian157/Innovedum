@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Text;
 using Dummiesman;
+using UnityEngine.Networking;
 
 public class RemoteObjLoader : MonoBehaviour
 {
@@ -11,40 +12,41 @@ public class RemoteObjLoader : MonoBehaviour
     {
         StartCoroutine(ReadCSVAsync());
     }
+    public void OnClickLoadObj()
+    {
+        StartCoroutine(ReadCSVAsync());
+    }
     IEnumerator ReadCSVAsync()
     {
-        while (RemoteCSVLoader.StoryLine.layerFilters.Length == 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            Debug.Log("reading cvs file...");
-        }
+        yield return new WaitForSeconds(1.0f);
         RemoteLoadObj();
     }
-    private void LoadObj()
-    {
-        Debug.Log($"found {RemoteCSVLoader.objLayers.Count} LayerObject");
-        foreach (int layerIndex in RemoteCSVLoader.objLayers)
-        {
-            string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            GameObject mesh = Resources.Load<GameObject>($"obj/{layerName}");
-            mesh = Instantiate(mesh, this.transform);
-            mesh.layer = layerIndex;
-            foreach (Transform child in mesh.GetComponentsInChildren<Transform>())
-            {
-                child.gameObject.layer = layerIndex;
-            }
-        }
-    }
+
     private void RemoteLoadObj()
     {
         Debug.Log($"found {RemoteCSVLoader.objLayers.Count} LayerObject");
         foreach (int layerIndex in RemoteCSVLoader.objLayers)
         {
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            var www = new WWW(RemoteCSVLoader.urlBase + "/obj/" + layerName + ".obj");
-            while (!www.isDone) System.Threading.Thread.Sleep(1);
-
-            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.text));
+            StartCoroutine(LoadObjAsync(layerIndex, layerName));
+        }
+    }
+    IEnumerator LoadObjAsync(int layerIndex, string layerName)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/obj/" + layerName + ".obj"))
+        {
+            www.SendWebRequest();
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Debug.LogError($"{www.error}");
+                yield break;
+            }
+            while (!www.isDone)
+            {
+                Debug.Log("loading...");
+                yield return new WaitForSeconds(0.2f);
+            }
+            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
             GameObject mesh = new OBJLoader().Load(textStream);
             mesh.name = layerName;
             mesh.transform.SetParent(this.transform);

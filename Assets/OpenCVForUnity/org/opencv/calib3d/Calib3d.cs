@@ -102,11 +102,6 @@ namespace OpenCVForUnity.Calib3dModule
         public const int NEIGH_FLANN_KNN = 0;
         public const int NEIGH_GRID = 1;
         public const int NEIGH_FLANN_RADIUS = 2;
-        // C++: enum cv.PolishingMethod
-        public const int NONE_POLISHER = 0;
-        public const int LSQ_POLISHER = 1;
-        public const int MAGSAC = 2;
-        public const int COV_POLISHER = 3;
         // C++: enum cv.RobotWorldHandEyeCalibrationMethod
         public const int CALIB_ROBOT_WORLD_HAND_EYE_SHAH = 0;
         public const int CALIB_ROBOT_WORLD_HAND_EYE_LI = 1;
@@ -261,8 +256,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum allowed reprojection error to treat a point pair as an inlier
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
@@ -272,6 +265,8 @@ namespace OpenCVForUnity.Calib3dModule
          * mask values are ignored.
          * param maxIters The maximum number of RANSAC iterations.
          * param confidence Confidence level, between 0 and 1.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -344,8 +339,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum allowed reprojection error to treat a point pair as an inlier
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
@@ -354,6 +347,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param mask Optional output mask set by a robust method ( RANSAC or LMeDS ). Note that the input
          * mask values are ignored.
          * param maxIters The maximum number of RANSAC iterations.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -426,8 +421,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum allowed reprojection error to treat a point pair as an inlier
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
@@ -435,6 +428,8 @@ namespace OpenCVForUnity.Calib3dModule
          * it usually makes sense to set this parameter somewhere in the range of 1 to 10.
          * param mask Optional output mask set by a robust method ( RANSAC or LMeDS ). Note that the input
          * mask values are ignored.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -507,14 +502,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum allowed reprojection error to treat a point pair as an inlier
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
          * then the point \(i\) is considered as an outlier. If srcPoints and dstPoints are measured in pixels,
          * it usually makes sense to set this parameter somewhere in the range of 1 to 10.
          * mask values are ignored.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -586,13 +581,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
          * then the point \(i\) is considered as an outlier. If srcPoints and dstPoints are measured in pixels,
          * it usually makes sense to set this parameter somewhere in the range of 1 to 10.
          * mask values are ignored.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -663,13 +658,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: RHO - PROSAC-based robust method
-         *   </li>
-         * </ul>
          * (used in the RANSAC and RHO methods only). That is, if
          * \(\| \texttt{dstPoints} _i -  \texttt{convertPointsHomogeneous} ( \texttt{H} \cdot \texttt{srcPoints} _i) \|_2  &gt;  \texttt{ransacReprojThreshold}\)
          * then the point \(i\) is considered as an outlier. If srcPoints and dstPoints are measured in pixels,
          * it usually makes sense to set this parameter somewhere in the range of 1 to 10.
          * mask values are ignored.
+         *   </li>
+         * </ul>
          *
          * The function finds and returns the perspective transformation \(H\) between the source and the
          * destination planes:
@@ -3971,11 +3966,9 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: CALIB_CB_MARKER The detected pattern must have a marker (see description).
          * This should be used if an accurate camera calibration is required.
-         *   </li>
-         * </ul>
          * param meta Optional output arrray of detected corners (CV_8UC1 and size = cv::Size(columns,rows)).
          * Each entry stands for one corner of the pattern and can have one of the following values:
-         * <ul>
+         *   </li>
          *   <li>
          *    0 = no meta data attached
          *   </li>
@@ -4463,9 +4456,9 @@ namespace OpenCVForUnity.Calib3dModule
          *    REF: CALIB_FIX_TAUX_TAUY The coefficients of the tilted sensor model are not changed during
          * the optimization. If REF: CALIB_USE_INTRINSIC_GUESS is set, the coefficient from the
          * supplied distCoeffs matrix is used. Otherwise, it is set to 0.
+         * param criteria Termination criteria for the iterative optimization algorithm.
          *   </li>
          * </ul>
-         * param criteria Termination criteria for the iterative optimization algorithm.
          *
          * return the overall RMS re-projection error.
          *
@@ -5376,9 +5369,9 @@ namespace OpenCVForUnity.Calib3dModule
          *    REF: CALIB_FIX_TAUX_TAUY The coefficients of the tilted sensor model are not changed during
          * the optimization. If REF: CALIB_USE_INTRINSIC_GUESS is set, the coefficient from the
          * supplied distCoeffs matrix is used. Otherwise, it is set to 0.
+         * param criteria Termination criteria for the iterative optimization algorithm.
          *   </li>
          * </ul>
-         * param criteria Termination criteria for the iterative optimization algorithm.
          *
          * The function estimates the transformation between two cameras making a stereo pair. If one computes
          * the poses of an object relative to the first camera and to the second camera,
@@ -7923,8 +7916,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: FM_LMEDS for the LMedS algorithm. \(N \ge 8\)
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Parameter used only for RANSAC. It is the maximum distance from a point to an epipolar
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
@@ -7933,6 +7924,8 @@ namespace OpenCVForUnity.Calib3dModule
          * of confidence (probability) that the estimated matrix is correct.
          * param mask optional output mask
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * The epipolar geometry is described by the following equation:
          *
@@ -7998,8 +7991,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: FM_LMEDS for the LMedS algorithm. \(N \ge 8\)
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Parameter used only for RANSAC. It is the maximum distance from a point to an epipolar
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
@@ -8007,6 +7998,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param confidence Parameter used for the RANSAC and LMedS methods only. It specifies a desirable level
          * of confidence (probability) that the estimated matrix is correct.
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * The epipolar geometry is described by the following equation:
          *
@@ -8155,8 +8148,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -8166,6 +8157,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param mask Output array of N elements, every element of which is set to 0 for outliers and to 1
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8208,8 +8201,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -8218,6 +8209,8 @@ namespace OpenCVForUnity.Calib3dModule
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8259,8 +8252,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -8268,6 +8259,8 @@ namespace OpenCVForUnity.Calib3dModule
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8309,14 +8302,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8358,13 +8351,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8405,13 +8398,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8454,8 +8447,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
@@ -8465,6 +8456,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param mask Output array of N elements, every element of which is set to 0 for outliers and to 1
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8503,8 +8496,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
@@ -8513,6 +8504,8 @@ namespace OpenCVForUnity.Calib3dModule
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
          * param maxIters The maximum number of robust method iterations.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8550,8 +8543,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
@@ -8559,6 +8550,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8596,14 +8589,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8641,13 +8634,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8684,13 +8677,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8726,13 +8719,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8767,13 +8760,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * confidence (probability) that the estimated matrix is correct.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function differs from the one above that it computes camera intrinsic matrix from focal length and
          * principal point:
@@ -8832,8 +8825,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -8842,6 +8833,8 @@ namespace OpenCVForUnity.Calib3dModule
          * point localization, image resolution, and the image noise.
          * param mask Output array of N elements, every element of which is set to 0 for outliers and to 1
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8899,8 +8892,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -8908,6 +8899,8 @@ namespace OpenCVForUnity.Calib3dModule
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -8964,14 +8957,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -9028,13 +9021,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -9090,13 +9083,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * for the other points. The array is computed only in the RANSAC and LMedS methods.
+         *   </li>
+         * </ul>
          *
          * This function estimates essential matrix based on the five-point algorithm solver in CITE: Nister03 .
          * CITE: SteweniusCFS is also a related. The epipolar geometry is described by the following equation:
@@ -9214,8 +9207,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -9225,6 +9216,8 @@ namespace OpenCVForUnity.Calib3dModule
          * param mask Input/output mask for inliers in points1 and points2. If it is not empty, then it marks
          * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
          * recover pose. In the output mask only inliers which pass the cheirality check.
+         *   </li>
+         * </ul>
          *
          * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
          * possible pose hypotheses by doing cheirality check. The cheirality check means that the
@@ -9303,8 +9296,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
@@ -9313,6 +9304,8 @@ namespace OpenCVForUnity.Calib3dModule
          * point localization, image resolution, and the image noise.
          * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
          * recover pose. In the output mask only inliers which pass the cheirality check.
+         *   </li>
+         * </ul>
          *
          * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
          * possible pose hypotheses by doing cheirality check. The cheirality check means that the
@@ -9390,8 +9383,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
@@ -9399,6 +9390,8 @@ namespace OpenCVForUnity.Calib3dModule
          * point localization, image resolution, and the image noise.
          * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
          * recover pose. In the output mask only inliers which pass the cheirality check.
+         *   </li>
+         * </ul>
          *
          * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
          * possible pose hypotheses by doing cheirality check. The cheirality check means that the
@@ -9476,14 +9469,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
          * recover pose. In the output mask only inliers which pass the cheirality check.
+         *   </li>
+         * </ul>
          *
          * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
          * possible pose hypotheses by doing cheirality check. The cheirality check means that the
@@ -9560,14 +9553,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   </li>
          *   <li>
          *    REF: LMEDS for the LMedS algorithm.
-         *   </li>
-         * </ul>
          * confidence (probability) that the estimated matrix is correct.
          * line in pixels, beyond which the point is considered an outlier and is not used for computing the
          * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
          * point localization, image resolution, and the image noise.
          * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
          * recover pose. In the output mask only inliers which pass the cheirality check.
+         *   </li>
+         * </ul>
          *
          * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
          * possible pose hypotheses by doing cheirality check. The cheirality check means that the
@@ -10961,8 +10954,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
@@ -10971,6 +10962,8 @@ namespace OpenCVForUnity.Calib3dModule
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * param refineIters Maximum number of iterations of refining algorithm (Levenberg-Marquardt).
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11041,8 +11034,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
@@ -11050,6 +11041,8 @@ namespace OpenCVForUnity.Calib3dModule
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11120,14 +11113,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11198,13 +11191,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11275,12 +11268,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11350,12 +11343,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11424,12 +11417,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation matrix \(2 \times 3\) or empty matrix if transformation
          * could not be estimated. The returned matrix has the following form:
@@ -11500,8 +11493,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
@@ -11510,6 +11501,8 @@ namespace OpenCVForUnity.Calib3dModule
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * param refineIters Maximum number of iterations of refining algorithm (Levenberg-Marquardt).
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11561,8 +11554,6 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
@@ -11570,6 +11561,8 @@ namespace OpenCVForUnity.Calib3dModule
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11621,14 +11614,14 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * param maxIters The maximum number of robust method iterations.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11680,13 +11673,13 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * param ransacReprojThreshold Maximum reprojection error in the RANSAC algorithm to consider
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11738,12 +11731,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11794,12 +11787,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -11849,12 +11842,12 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *    REF: LMEDS - Least-Median robust method
          * RANSAC is the default method.
-         *   </li>
-         * </ul>
          * a point as an inlier. Applies only to RANSAC.
          * between 0.95 and 0.99 is usually good enough. Values too close to 1 can slow down the estimation
          * significantly. Values lower than 0.8-0.9 can result in an incorrectly estimated transformation.
          * Passing 0 will disable refining, so the output matrix will be output of robust method.
+         *   </li>
+         * </ul>
          *
          * return Output 2D affine transformation (4 degrees of freedom) matrix \(2 \times 3\) or
          * empty matrix if transformation could not be estimated.
@@ -13157,9 +13150,9 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *         REF: fisheye::CALIB_FIX_FOCAL_LENGTH The focal length is not changed during the global
          * optimization. It is the \(max(width,height)/\pi\) or the provided \(f_x\), \(f_y\) when REF: fisheye::CALIB_USE_INTRINSIC_GUESS is set too.
+         *     param criteria Termination criteria for the iterative optimization algorithm.
          *   </li>
          * </ul>
-         *     param criteria Termination criteria for the iterative optimization algorithm.
          * return automatically generated
          */
         public static double fisheye_calibrate(List<Mat> objectPoints, List<Mat> imagePoints, Size image_size, Mat K, Mat D, List<Mat> rvecs, List<Mat> tvecs, int flags, TermCriteria criteria)
@@ -13569,9 +13562,9 @@ namespace OpenCVForUnity.Calib3dModule
          *   <li>
          *        REF: fisheye::CALIB_FIX_K1,..., REF: fisheye::CALIB_FIX_K4 Selected distortion coefficients are set to zeros and stay
          *     zero.
+         *     param criteria Termination criteria for the iterative optimization algorithm.
          *   </li>
          * </ul>
-         *     param criteria Termination criteria for the iterative optimization algorithm.
          * return automatically generated
          */
         public static double fisheye_stereoCalibrate(List<Mat> objectPoints, List<Mat> imagePoints1, List<Mat> imagePoints2, Mat K1, Mat D1, Mat K2, Mat D2, Size imageSize, Mat R, Mat T, List<Mat> rvecs, List<Mat> tvecs, int flags, TermCriteria criteria)

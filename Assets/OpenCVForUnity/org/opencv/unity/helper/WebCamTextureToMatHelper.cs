@@ -1,4 +1,5 @@
 #if !OPENCV_DONT_USE_WEBCAMTEXTURE_API
+#if !(PLATFORM_LUMIN && !UNITY_EDITOR)
 
 using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.ImgprocModule;
@@ -13,7 +14,7 @@ namespace OpenCVForUnity.UnityUtils.Helper
 {
     /// <summary>
     /// WebCamTexture to mat helper.
-    /// v 1.1.6
+    /// v 1.1.5
     /// 
     /// By setting outputColorFormat to RGBA, processing that does not include extra color conversion is performed.
     /// </summary>
@@ -196,7 +197,7 @@ namespace OpenCVForUnity.UnityUtils.Helper
         /// The number of frames before the initialization process times out.
         /// </summary>
         [SerializeField, FormerlySerializedAs("timeoutFrameCount"), TooltipAttribute("The number of frames before the initialization process times out.")]
-        protected int _timeoutFrameCount = 1500;
+        protected int _timeoutFrameCount = 300;
 
         public virtual int timeoutFrameCount
         {
@@ -1265,4 +1266,5 @@ namespace OpenCVForUnity.UnityUtils.Helper
     }
 }
 
+#endif
 #endif

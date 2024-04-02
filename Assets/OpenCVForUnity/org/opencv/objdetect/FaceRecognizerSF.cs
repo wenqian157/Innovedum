@@ -1,5 +1,4 @@
 
-
 using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.UtilsModule;
 using System;

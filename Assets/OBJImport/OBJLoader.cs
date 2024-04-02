@@ -291,6 +291,23 @@ namespace Dummiesman
 
             return Load(input);
         }
+        public GameObject Load(Stream input, string mtlPath)
+        {
+            if (!string.IsNullOrEmpty(mtlPath) && File.Exists(mtlPath))
+            {
+                var mtlLoader = new MTLLoader();
+                Materials = mtlLoader.Load(mtlPath);
+                foreach (KeyValuePair<string, Material> entry in Materials)
+                {
+                    Debug.Log(entry.Value);
+                }
+                return Load(input);
+            }
+            else
+            {
+                return Load(input);
+            }
+        }
 
         /// <summary>
         /// Load an OBJ and MTL file from a file path.
@@ -305,7 +322,7 @@ namespace Dummiesman
             {
                 var mtlLoader = new MTLLoader();
                 Materials = mtlLoader.Load(mtlPath);
-
+                
                 using (var fs = new FileStream(path, FileMode.Open))
                 {
                     return Load(fs);

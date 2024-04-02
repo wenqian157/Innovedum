@@ -13,10 +13,10 @@ namespace OpenCVForUnity.CoreModule
     public class Core
     {
         // these constants are wrapped inside functions to prevent inlining
-        private static string getVersion() { return "4.8.0-dev"; }
+        private static string getVersion() { return "4.7.0-dev"; }
         private static string getNativeLibraryName() { return "opencvforunity"; }
         private static int getVersionMajorJ() { return 4; }
-        private static int getVersionMinorJ() { return 8; }
+        private static int getVersionMinorJ() { return 7; }
         private static int getVersionRevisionJ() { return 0; }
         private static string getVersionStatusJ() { return "-dev"; }
 
@@ -184,8 +184,6 @@ namespace OpenCVForUnity.CoreModule
         public const int Param_UINT64 = 9;
         public const int Param_UCHAR = 11;
         public const int Param_SCALAR = 12;
-        // C++: enum cv.ReduceTypes
-        public const int REDUCE_SUM2 = 4;
         // C++: enum cv.RotateFlags
         public const int ROTATE_90_CLOCKWISE = 0;
         public const int ROTATE_180 = 1;
@@ -1356,28 +1354,6 @@ namespace OpenCVForUnity.CoreModule
 
 
         //
-        // C++:  bool cv::hasNonZero(Mat src)
-        //
-
-        /**
-         * Checks for the presence of at least one non-zero array element.
-         *
-         * The function returns whether there are non-zero elements in src
-         * param src single-channel array.
-         * SEE:  mean, meanStdDev, norm, minMaxLoc, calcCovarMatrix
-         * return automatically generated
-         */
-        public static bool hasNonZero(Mat src)
-        {
-            if (src != null) src.ThrowIfDisposed();
-
-            return core_Core_hasNonZero_10(src.nativeObj);
-
-
-        }
-
-
-        //
         // C++:  int cv::countNonZero(Mat src)
         //
 
@@ -2531,7 +2507,7 @@ namespace OpenCVForUnity.CoreModule
          * 1D vectors and performing the specified operation on the vectors until a single row/column is
          * obtained. For example, the function can be used to compute horizontal and vertical projections of a
          * raster image. In case of #REDUCE_MAX and #REDUCE_MIN , the output image should have the same type as the source one.
-         * In case of #REDUCE_SUM, #REDUCE_SUM2 and #REDUCE_AVG , the output may have a larger element bit-depth to preserve accuracy.
+         * In case of #REDUCE_SUM and #REDUCE_AVG , the output may have a larger element bit-depth to preserve accuracy.
          * And multi-channel arrays are also supported in these two reduction modes.
          *
          * The following code demonstrates its usage for a single channel matrix.
@@ -2566,7 +2542,7 @@ namespace OpenCVForUnity.CoreModule
          * 1D vectors and performing the specified operation on the vectors until a single row/column is
          * obtained. For example, the function can be used to compute horizontal and vertical projections of a
          * raster image. In case of #REDUCE_MAX and #REDUCE_MIN , the output image should have the same type as the source one.
-         * In case of #REDUCE_SUM, #REDUCE_SUM2 and #REDUCE_AVG , the output may have a larger element bit-depth to preserve accuracy.
+         * In case of #REDUCE_SUM and #REDUCE_AVG , the output may have a larger element bit-depth to preserve accuracy.
          * And multi-channel arrays are also supported in these two reduction modes.
          *
          * The following code demonstrates its usage for a single channel matrix.
@@ -3756,14 +3732,14 @@ namespace OpenCVForUnity.CoreModule
          * maxVal. In case of multi-channel arrays, each channel is processed independently. If some values
          * are out of range, position of the first outlier is stored in pos (when pos != NULL). Then, the
          * function either returns false (when quiet=true) or throws an exception.
-         *   </li>
-         * </ul>
          * param a input array.
          * param quiet a flag, indicating whether the functions quietly return false when the array elements
          * are out of range or they throw an exception.
          * elements.
          * param minVal inclusive lower boundary of valid values range.
          * param maxVal exclusive upper boundary of valid values range.
+         *   </li>
+         * </ul>
          * return automatically generated
          */
         public static bool checkRange(Mat a, bool quiet, double minVal, double maxVal)
@@ -3785,13 +3761,13 @@ namespace OpenCVForUnity.CoreModule
          * maxVal. In case of multi-channel arrays, each channel is processed independently. If some values
          * are out of range, position of the first outlier is stored in pos (when pos != NULL). Then, the
          * function either returns false (when quiet=true) or throws an exception.
-         *   </li>
-         * </ul>
          * param a input array.
          * param quiet a flag, indicating whether the functions quietly return false when the array elements
          * are out of range or they throw an exception.
          * elements.
          * param minVal inclusive lower boundary of valid values range.
+         *   </li>
+         * </ul>
          * return automatically generated
          */
         public static bool checkRange(Mat a, bool quiet, double minVal)
@@ -3813,12 +3789,12 @@ namespace OpenCVForUnity.CoreModule
          * maxVal. In case of multi-channel arrays, each channel is processed independently. If some values
          * are out of range, position of the first outlier is stored in pos (when pos != NULL). Then, the
          * function either returns false (when quiet=true) or throws an exception.
-         *   </li>
-         * </ul>
          * param a input array.
          * param quiet a flag, indicating whether the functions quietly return false when the array elements
          * are out of range or they throw an exception.
          * elements.
+         *   </li>
+         * </ul>
          * return automatically generated
          */
         public static bool checkRange(Mat a, bool quiet)
@@ -3840,11 +3816,11 @@ namespace OpenCVForUnity.CoreModule
          * maxVal. In case of multi-channel arrays, each channel is processed independently. If some values
          * are out of range, position of the first outlier is stored in pos (when pos != NULL). Then, the
          * function either returns false (when quiet=true) or throws an exception.
-         *   </li>
-         * </ul>
          * param a input array.
          * are out of range or they throw an exception.
          * elements.
+         *   </li>
+         * </ul>
          * return automatically generated
          */
         public static bool checkRange(Mat a)
@@ -5317,8 +5293,6 @@ namespace OpenCVForUnity.CoreModule
          *   <li>
          *    (Python) An example rearranging the quadrants of a Fourier image can be found at
          *     opencv_source/samples/python/dft.py
-         *   </li>
-         * </ul>
          * param src input array that could be real or complex.
          * param dst output array whose size and type depends on the flags .
          * param flags transformation flags, representing a combination of the #DftFlags
@@ -5329,6 +5303,8 @@ namespace OpenCVForUnity.CoreModule
          * cross-correlation or convolution using DFT.
          * SEE: dct , getOptimalDFTSize , mulSpectrums, filter2D , matchTemplate , flip , cartToPolar ,
          * magnitude , phase
+         *   </li>
+         * </ul>
          */
         public static void dft(Mat src, Mat dst, int flags, int nonzeroRows)
         {
@@ -5501,8 +5477,6 @@ namespace OpenCVForUnity.CoreModule
          *   <li>
          *    (Python) An example rearranging the quadrants of a Fourier image can be found at
          *     opencv_source/samples/python/dft.py
-         *   </li>
-         * </ul>
          * param src input array that could be real or complex.
          * param dst output array whose size and type depends on the flags .
          * param flags transformation flags, representing a combination of the #DftFlags
@@ -5512,6 +5486,8 @@ namespace OpenCVForUnity.CoreModule
          * cross-correlation or convolution using DFT.
          * SEE: dct , getOptimalDFTSize , mulSpectrums, filter2D , matchTemplate , flip , cartToPolar ,
          * magnitude , phase
+         *   </li>
+         * </ul>
          */
         public static void dft(Mat src, Mat dst, int flags)
         {
@@ -5684,8 +5660,6 @@ namespace OpenCVForUnity.CoreModule
          *   <li>
          *    (Python) An example rearranging the quadrants of a Fourier image can be found at
          *     opencv_source/samples/python/dft.py
-         *   </li>
-         * </ul>
          * param src input array that could be real or complex.
          * param dst output array whose size and type depends on the flags .
          * nonzeroRows rows of the input array (#DFT_INVERSE is not set) or only the first nonzeroRows of the
@@ -5694,6 +5668,8 @@ namespace OpenCVForUnity.CoreModule
          * cross-correlation or convolution using DFT.
          * SEE: dct , getOptimalDFTSize , mulSpectrums, filter2D , matchTemplate , flip , cartToPolar ,
          * magnitude , phase
+         *   </li>
+         * </ul>
          */
         public static void dft(Mat src, Mat dst)
         {
@@ -6194,11 +6170,9 @@ namespace OpenCVForUnity.CoreModule
          *   <li>
          *    (Python) An example on K-means clustering can be found at
          *     opencv_source_code/samples/python/kmeans.py
-         *   </li>
-         * </ul>
          * param data Data for clustering. An array of N-Dimensional points with float coordinates is needed.
          * Examples of this array can be:
-         * <ul>
+         *   </li>
          *   <li>
          *    Mat points(count, 2, CV_32F);
          *   </li>
@@ -6210,8 +6184,6 @@ namespace OpenCVForUnity.CoreModule
          *   </li>
          *   <li>
          *    std::vector&lt;cv::Point2f&gt; points(sampleCount);
-         *   </li>
-         * </ul>
          * param K Number of clusters to split the set by.
          * param bestLabels Input/output integer array that stores the cluster indices for every sample.
          * param criteria The algorithm termination criteria, that is, the maximum number of iterations and/or
@@ -6229,6 +6201,8 @@ namespace OpenCVForUnity.CoreModule
          * function, set the number of attempts to 1, initialize labels each time using a custom algorithm,
          * pass them with the ( flags = #KMEANS_USE_INITIAL_LABELS ) flag, and then choose the best
          * (most-compact) clustering.
+         *   </li>
+         * </ul>
          */
         public static double kmeans(Mat data, int K, Mat bestLabels, TermCriteria criteria, int attempts, int flags, Mat centers)
         {
@@ -6253,11 +6227,9 @@ namespace OpenCVForUnity.CoreModule
          *   <li>
          *    (Python) An example on K-means clustering can be found at
          *     opencv_source_code/samples/python/kmeans.py
-         *   </li>
-         * </ul>
          * param data Data for clustering. An array of N-Dimensional points with float coordinates is needed.
          * Examples of this array can be:
-         * <ul>
+         *   </li>
          *   <li>
          *    Mat points(count, 2, CV_32F);
          *   </li>
@@ -6269,8 +6241,6 @@ namespace OpenCVForUnity.CoreModule
          *   </li>
          *   <li>
          *    std::vector&lt;cv::Point2f&gt; points(sampleCount);
-         *   </li>
-         * </ul>
          * param K Number of clusters to split the set by.
          * param bestLabels Input/output integer array that stores the cluster indices for every sample.
          * param criteria The algorithm termination criteria, that is, the maximum number of iterations and/or
@@ -6287,6 +6257,8 @@ namespace OpenCVForUnity.CoreModule
          * function, set the number of attempts to 1, initialize labels each time using a custom algorithm,
          * pass them with the ( flags = #KMEANS_USE_INITIAL_LABELS ) flag, and then choose the best
          * (most-compact) clustering.
+         *   </li>
+         * </ul>
          */
         public static double kmeans(Mat data, int K, Mat bestLabels, TermCriteria criteria, int attempts, int flags)
         {
@@ -6304,11 +6276,11 @@ namespace OpenCVForUnity.CoreModule
         //
 
         /**
-         * OpenCV will try to set the number of threads for subsequent parallel regions.
+         * OpenCV will try to set the number of threads for the next parallel region.
          *
-         * If threads == 1, OpenCV will disable threading optimizations and run all it's functions
-         * sequentially. Passing threads &lt; 0 will reset threads number to system default.
-         * The function is not thread-safe. It must not be called in parallel region or concurrent threads.
+         * If threads == 0, OpenCV will disable threading optimizations and run all it's functions
+         * sequentially. Passing threads &lt; 0 will reset threads number to system default. This function must
+         * be called outside of parallel region.
          *
          * OpenCV will try to run its functions with specified threads number, but some behaviour differs from
          * framework:
@@ -6329,10 +6301,10 @@ namespace OpenCVForUnity.CoreModule
          *   </li>
          *   <li>
          *    {code C=} - No special defined behaviour.
-         *   </li>
-         * </ul>
          * param nthreads Number of threads used by OpenCV.
          * SEE: getNumThreads, getThreadNum
+         *   </li>
+         * </ul>
          */
         public static void setNumThreads(int nthreads)
         {
@@ -6608,30 +6580,6 @@ namespace OpenCVForUnity.CoreModule
 
 
         //
-        // C++:  bool cv::checkHardwareSupport(int feature)
-        //
-
-        /**
-         * Returns true if the specified feature is supported by the host hardware.
-         *
-         * The function returns true if the host hardware supports the specified feature. When user calls
-         * setUseOptimized(false), the subsequent calls to checkHardwareSupport() will return false until
-         * setUseOptimized(true) is called. This way user can dynamically switch on and off the optimized code
-         * in OpenCV.
-         * param feature The feature of interest, one of cv::CpuFeatures
-         * return automatically generated
-         */
-        public static bool checkHardwareSupport(int feature)
-        {
-
-
-            return core_Core_checkHardwareSupport_10(feature);
-
-
-        }
-
-
-        //
         // C++:  String cv::getHardwareFeatureName(int feature)
         //
 
@@ -6699,54 +6647,6 @@ namespace OpenCVForUnity.CoreModule
 
 
             return core_Core_getNumberOfCPUs_10();
-
-
-        }
-
-
-        //
-        // C++:  void cv::setUseOptimized(bool onoff)
-        //
-
-        /**
-         * Enables or disables the optimized code.
-         *
-         * The function can be used to dynamically turn on and off optimized dispatched code (code that uses SSE4.2, AVX/AVX2,
-         * and other instructions on the platforms that support it). It sets a global flag that is further
-         * checked by OpenCV functions. Since the flag is not checked in the inner OpenCV loops, it is only
-         * safe to call the function on the very top level in your application where you can be sure that no
-         * other OpenCV function is currently executed.
-         *
-         * By default, the optimized code is enabled unless you disable it in CMake. The current status can be
-         * retrieved using useOptimized.
-         * param onoff The boolean flag specifying whether the optimized code should be used (onoff=true)
-         * or not (onoff=false).
-         */
-        public static void setUseOptimized(bool onoff)
-        {
-
-
-            core_Core_setUseOptimized_10(onoff);
-
-
-        }
-
-
-        //
-        // C++:  bool cv::useOptimized()
-        //
-
-        /**
-         * Returns the status of optimized code usage.
-         *
-         * The function returns true if the optimized code is enabled. Otherwise, it returns false.
-         * return automatically generated
-         */
-        public static bool useOptimized()
-        {
-
-
-            return core_Core_useOptimized_10();
 
 
         }
@@ -7310,11 +7210,6 @@ namespace OpenCVForUnity.CoreModule
         [DllImport(LIBNAME)]
         private static extern void core_Core_sumElems_10(IntPtr src_nativeObj, double[] retVal);
 
-        // C++:  bool cv::hasNonZero(Mat src)
-        [DllImport(LIBNAME)]
-        [return: MarshalAs(UnmanagedType.U1)]
-        private static extern bool core_Core_hasNonZero_10(IntPtr src_nativeObj);
-
         // C++:  int cv::countNonZero(Mat src)
         [DllImport(LIBNAME)]
         private static extern int core_Core_countNonZero_10(IntPtr src_nativeObj);
@@ -7803,11 +7698,6 @@ namespace OpenCVForUnity.CoreModule
         [DllImport(LIBNAME)]
         private static extern long core_Core_getCPUTickCount_10();
 
-        // C++:  bool cv::checkHardwareSupport(int feature)
-        [DllImport(LIBNAME)]
-        [return: MarshalAs(UnmanagedType.U1)]
-        private static extern bool core_Core_checkHardwareSupport_10(int feature);
-
         // C++:  String cv::getHardwareFeatureName(int feature)
         [DllImport(LIBNAME)]
         private static extern IntPtr core_Core_getHardwareFeatureName_10(int feature);
@@ -7819,15 +7709,6 @@ namespace OpenCVForUnity.CoreModule
         // C++:  int cv::getNumberOfCPUs()
         [DllImport(LIBNAME)]
         private static extern int core_Core_getNumberOfCPUs_10();
-
-        // C++:  void cv::setUseOptimized(bool onoff)
-        [DllImport(LIBNAME)]
-        private static extern void core_Core_setUseOptimized_10([MarshalAs(UnmanagedType.U1)] bool onoff);
-
-        // C++:  bool cv::useOptimized()
-        [DllImport(LIBNAME)]
-        [return: MarshalAs(UnmanagedType.U1)]
-        private static extern bool core_Core_useOptimized_10();
 
         // C++:  String cv::samples::findFile(String relative_path, bool required = true, bool silentMode = false)
         [DllImport(LIBNAME)]

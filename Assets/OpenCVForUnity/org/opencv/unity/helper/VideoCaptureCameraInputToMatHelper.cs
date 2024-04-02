@@ -1,4 +1,5 @@
 #if !OPENCV_DONT_USE_WEBCAMTEXTURE_API
+#if !(PLATFORM_LUMIN && !UNITY_EDITOR)
 
 using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.ImgprocModule;
@@ -576,4 +577,5 @@ namespace OpenCVForUnity.UnityUtils.Helper
     }
 }
 
+#endif
 #endif

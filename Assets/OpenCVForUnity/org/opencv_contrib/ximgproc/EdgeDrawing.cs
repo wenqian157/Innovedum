@@ -194,7 +194,7 @@ namespace OpenCVForUnity.XimgprocModule
          * sets parameters.
          *
          *     this function is meant to be used for parameter setting in other languages than c++ like python.
-         *     param parameters Parameters of the algorithm
+         *     param parameters
          */
         public void setParams(EdgeDrawing_Params parameters)
         {

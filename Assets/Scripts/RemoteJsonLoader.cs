@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class RemoteJsonLoader : MonoBehaviour
 {
@@ -11,27 +12,55 @@ public class RemoteJsonLoader : MonoBehaviour
     public Color lineColorA = Color.blue;
     public Color lineColorB = Color.yellow;
     private LinesFromRhino lineData;
+    private List<LinesFromRhino> lineDatas;
     void Start()
+    {
+        StartCoroutine(ReadCSVAsync());
+    }
+    public void OnClickLoadJson()
     {
         StartCoroutine(ReadCSVAsync());
     }
     IEnumerator ReadCSVAsync()
     {
-        while (RemoteCSVLoader.StoryLine.layerFilters.Length == 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            Debug.Log("reading cvs file...");
-        }
+        yield return new WaitForSeconds(1.0f);
         RemoteLoadLine();
     }
     private void RemoteLoadLine()
     {
-        Debug.Log($"found {RemoteCSVLoader.linesLayers.Count} LayerObject");
+        Debug.Log($"found {RemoteCSVLoader.linesLayers.Count}line LayerObject");
         foreach (int layerIndex in RemoteCSVLoader.linesLayers)
         {
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            LinesFromRhino lineData = LoadLineJson(layerIndex, layerName);
+            StartCoroutine(LoadLineJsonAsync(layerIndex, layerName));
+        }
 
+        Debug.Log($"found {RemoteCSVLoader.linesWithArrowLayers.Count}arrow LayerObject");
+        foreach (int layerIndex in RemoteCSVLoader.linesWithArrowLayers)
+        {
+            string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
+            StartCoroutine(LoadArrowJsonAsync(layerIndex, layerName));
+        }
+    }
+
+    IEnumerator LoadLineJsonAsync(int layerIndex, string layerName)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/json/" + layerName + ".json"))
+        {
+            www.SendWebRequest();
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Debug.LogError($"{www.error}");
+                yield break;
+            }
+            while (!www.isDone)
+            {
+                Debug.Log("loading json...");
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            string stringData = www.downloadHandler.text;
+            lineData = JsonConvert.DeserializeObject<LinesFromRhino>(stringData);
             GameObject line = new GameObject();
             line.transform.SetParent(transform);
             line.name = layerName;
@@ -42,12 +71,22 @@ public class RemoteJsonLoader : MonoBehaviour
                 child.gameObject.layer = layerIndex;
             }
         }
-
-        Debug.Log($"found {RemoteCSVLoader.linesWithArrowLayers.Count} LayerObject");
-        foreach (int layerIndex in RemoteCSVLoader.linesWithArrowLayers)
+    }
+    IEnumerator LoadArrowJsonAsync(int layerIndex, string layerName)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/json/" + layerName + ".json"))
         {
-            string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            LinesFromRhino lineData = LoadLineJson(layerIndex, layerName);
+            www.SendWebRequest();
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Debug.LogError($"{www.error}");
+                yield break;
+            }
+            while (!www.isDone)
+            {
+                Debug.Log("loading arrow...");
+                yield return new WaitForSeconds(0.2f);
+            }
 
             GameObject lineWithArrow = new GameObject();
             lineWithArrow.transform.SetParent(transform);
@@ -58,22 +97,7 @@ public class RemoteJsonLoader : MonoBehaviour
             {
                 child.gameObject.layer = layerIndex;
             }
-        }
-    }
-    private LinesFromRhino LoadLineJson(int layerIndex, string layerName)
-    {
-        var www = new WWW(RemoteCSVLoader.urlBase + "/json/" + layerName + ".json");
-        while (!www.isDone) System.Threading.Thread.Sleep(1);
-        try
-        {
-            string jsonString = www.text;
-            lineData = JsonConvert.DeserializeObject<LinesFromRhino>(jsonString);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogException(ex, this);
-        }
-        return lineData;
+            }
     }
     private void AddLines(Transform parent, LinesFromRhino lineData, Color c)
     {
@@ -158,7 +182,7 @@ public class RemoteJsonLoader : MonoBehaviour
         lineR.useWorldSpace = false;
     }
     [Serializable]
-    struct LinesFromRhino
+    public struct LinesFromRhino
     {
         public List<List<List<float>>> lines;
     }

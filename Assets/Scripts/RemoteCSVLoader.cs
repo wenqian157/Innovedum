@@ -11,7 +11,8 @@ using UnityEngine.SceneManagement;
 public class RemoteCSVLoader : MonoBehaviour
 {
     //public TMP_InputField inputField;
-    
+
+    public static int testInt = 0;
     public static int storyCount;
     public static int layerCount;
     public static List<int> objLayers = new List<int>();
@@ -65,9 +66,10 @@ public class RemoteCSVLoader : MonoBehaviour
                 Debug.Log("loading...");
                 yield return new WaitForSeconds(0.2f);
             }
-            //Debug.Log(www.downloadHandler.text); 
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
+
+            Debug.Log("load layer data: " + data.Length);
 
             layerCount = data.Length / 4 - 1;
             myLayerObjects = new LayerObject[layerCount];
@@ -115,6 +117,8 @@ public class RemoteCSVLoader : MonoBehaviour
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
+            Debug.Log("load story data: " + data.Length);
+
             storyCount = data.Length / (layerCount + 2);
             StoryLine.layerFilters = new List<int>[storyCount];
             
@@ -140,6 +144,7 @@ public class RemoteCSVLoader : MonoBehaviour
     }
     public void OpenMainScene()
     {
+        Debug.Log("load main scene...");
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 

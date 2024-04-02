@@ -24,18 +24,6 @@ namespace OpenCVForUnity.DnnModule
         public const int DNN_BACKEND_WEBNN = 0 + 6;
         public const int DNN_BACKEND_TIMVX = 0 + 7;
         public const int DNN_BACKEND_CANN = 0 + 8;
-        // C++: enum cv.dnn.DataLayout
-        public const int DNN_LAYOUT_UNKNOWN = 0;
-        public const int DNN_LAYOUT_ND = 1;
-        public const int DNN_LAYOUT_NCHW = 2;
-        public const int DNN_LAYOUT_NCDHW = 3;
-        public const int DNN_LAYOUT_NHWC = 4;
-        public const int DNN_LAYOUT_NDHWC = 5;
-        public const int DNN_LAYOUT_PLANAR = 6;
-        // C++: enum cv.dnn.ImagePaddingMode
-        public const int DNN_PMODE_NULL = 0;
-        public const int DNN_PMODE_CROP_CENTER = 1;
-        public const int DNN_PMODE_LETTERBOX = 2;
         // C++: enum cv.dnn.SoftNMSMethod
         public const int SoftNMSMethod_SOFTNMS_LINEAR = 1;
         public const int SoftNMSMethod_SOFTNMS_GAUSSIAN = 2;
@@ -50,7 +38,6 @@ namespace OpenCVForUnity.DnnModule
         public const int DNN_TARGET_CUDA_FP16 = 0 + 7;
         public const int DNN_TARGET_HDDL = 0 + 8;
         public const int DNN_TARGET_NPU = 0 + 9;
-        public const int DNN_TARGET_CPU_FP16 = 0 + 10;
         //
         // C++:  vector_Target cv::dnn::getAvailableTargets(dnn_Backend be)
         //
@@ -74,6 +61,7 @@ namespace OpenCVForUnity.DnnModule
          * param cfgFile      path to the .cfg file with text description of the network architecture.
          * param darknetModel path to the .weights file with learned network.
          * return Network object that ready to do forward, throw an exception in failure cases.
+         * return Net object.
          */
         public static Net readNetFromDarknet(string cfgFile, string darknetModel)
         {
@@ -88,6 +76,7 @@ namespace OpenCVForUnity.DnnModule
          * Reads a network model stored in &lt;a href="https://pjreddie.com/darknet/"&gt;Darknet&lt;/a&gt; model files.
          * param cfgFile      path to the .cfg file with text description of the network architecture.
          * return Network object that ready to do forward, throw an exception in failure cases.
+         * return Net object.
          */
         public static Net readNetFromDarknet(string cfgFile)
         {
@@ -274,44 +263,6 @@ namespace OpenCVForUnity.DnnModule
             if (bufferModel != null) bufferModel.ThrowIfDisposed();
             Mat bufferModel_mat = bufferModel;
             return new Net(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_readNetFromTensorflow_13(bufferModel_mat.nativeObj)));
-
-
-        }
-
-
-        //
-        // C++:  Net cv::dnn::readNetFromTFLite(String model)
-        //
-
-        /**
-         * Reads a network model stored in &lt;a href="https://www.tensorflow.org/lite"&gt;TFLite&lt;/a&gt; framework's format.
-         * param model  path to the .tflite file with binary flatbuffers description of the network architecture
-         * return Net object.
-         */
-        public static Net readNetFromTFLite(string model)
-        {
-
-
-            return new Net(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_readNetFromTFLite_10(model)));
-
-
-        }
-
-
-        //
-        // C++:  Net cv::dnn::readNetFromTFLite(vector_uchar bufferModel)
-        //
-
-        /**
-         * Reads a network model stored in &lt;a href="https://www.tensorflow.org/lite"&gt;TFLite&lt;/a&gt; framework's format.
-         * param bufferModel buffer containing the content of the tflite file
-         * return Net object.
-         */
-        public static Net readNetFromTFLite(MatOfByte bufferModel)
-        {
-            if (bufferModel != null) bufferModel.ThrowIfDisposed();
-            Mat bufferModel_mat = bufferModel;
-            return new Net(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_readNetFromTFLite_11(bufferModel_mat.nativeObj)));
 
 
         }
@@ -716,10 +667,10 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * param size spatial size for output image
          * param mean scalar with mean values which are subtracted from channels. Values are intended
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * param swapRB flag which indicates that swap first and last channels
          * in 3-channel image is necessary.
          * param crop flag which indicates whether image will be cropped after resize or not
@@ -728,9 +679,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor, Size size, Scalar mean, bool swapRB, bool crop, int ddepth)
         {
@@ -745,10 +693,10 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * param size spatial size for output image
          * param mean scalar with mean values which are subtracted from channels. Values are intended
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * param swapRB flag which indicates that swap first and last channels
          * in 3-channel image is necessary.
          * param crop flag which indicates whether image will be cropped after resize or not
@@ -756,9 +704,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor, Size size, Scalar mean, bool swapRB, bool crop)
         {
@@ -773,19 +718,16 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * param size spatial size for output image
          * param mean scalar with mean values which are subtracted from channels. Values are intended
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * param swapRB flag which indicates that swap first and last channels
          * in 3-channel image is necessary.
          * if {code crop} is true, input image is resized so one side after resize is equal to corresponding
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor, Size size, Scalar mean, bool swapRB)
         {
@@ -800,18 +742,15 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * param size spatial size for output image
          * param mean scalar with mean values which are subtracted from channels. Values are intended
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * in 3-channel image is necessary.
          * if {code crop} is true, input image is resized so one side after resize is equal to corresponding
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor, Size size, Scalar mean)
         {
@@ -826,17 +765,14 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * param size spatial size for output image
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * in 3-channel image is necessary.
          * if {code crop} is true, input image is resized so one side after resize is equal to corresponding
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor, Size size)
         {
@@ -851,16 +787,13 @@ namespace OpenCVForUnity.DnnModule
          * Creates 4-dimensional blob from image. Optionally resizes and crops {code image} from center,
          * subtract {code mean} values, scales values by {code scalefactor}, swap Blue and Red channels.
          * param image input image (with 1-, 3- or 4-channels).
-         * param scalefactor multiplier for {code images} values.
          * to be in (mean-R, mean-G, mean-B) order if {code image} has BGR ordering and {code swapRB} is true.
+         * param scalefactor multiplier for {code image} values.
          * in 3-channel image is necessary.
          * if {code crop} is true, input image is resized so one side after resize is equal to corresponding
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image, double scalefactor)
         {
@@ -881,9 +814,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImage(Mat image)
         {
@@ -916,9 +846,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor, Size size, Scalar mean, bool swapRB, bool crop, int ddepth)
         {
@@ -945,9 +872,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor, Size size, Scalar mean, bool swapRB, bool crop)
         {
@@ -973,9 +897,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor, Size size, Scalar mean, bool swapRB)
         {
@@ -1000,9 +921,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor, Size size, Scalar mean)
         {
@@ -1026,9 +944,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor, Size size)
         {
@@ -1051,9 +966,6 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images, double scalefactor)
         {
@@ -1075,150 +987,12 @@ namespace OpenCVForUnity.DnnModule
          * dimension in {code size} and another one is equal or larger. Then, crop from the center is performed.
          * If {code crop} is false, direct resize without cropping and preserving aspect ratio is performed.
          * return 4-dimensional Mat with NCHW dimensions order.
-         *
-         * <b>Note:</b>
-         * The order and usage of {code scalefactor} and {code mean} are (input - mean) * scalefactor.
          */
         public static Mat blobFromImages(List<Mat> images)
         {
 
             Mat images_mat = Converters.vector_Mat_to_Mat(images);
             return new Mat(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_blobFromImages_16(images_mat.nativeObj)));
-
-
-        }
-
-
-        //
-        // C++:  Mat cv::dnn::blobFromImageWithParams(Mat image, Image2BlobParams param = Image2BlobParams())
-        //
-
-        /**
-         * Creates 4-dimensional blob from image with given params.
-         *
-         * This function is an extension of REF: blobFromImage to meet more image preprocess needs.
-         * Given input image and preprocessing parameters, and function outputs the blob.
-         *
-         * param image input image (all with 1-, 3- or 4-channels).
-         * param param struct of Image2BlobParams, contains all parameters needed by processing of image to blob.
-         * return 4-dimensional Mat.
-         */
-        public static Mat blobFromImageWithParams(Mat image, Image2BlobParams param)
-        {
-            if (image != null) image.ThrowIfDisposed();
-            if (param != null) param.ThrowIfDisposed();
-
-            return new Mat(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_blobFromImageWithParams_10(image.nativeObj, param.nativeObj)));
-
-
-        }
-
-        /**
-         * Creates 4-dimensional blob from image with given params.
-         *
-         * This function is an extension of REF: blobFromImage to meet more image preprocess needs.
-         * Given input image and preprocessing parameters, and function outputs the blob.
-         *
-         * param image input image (all with 1-, 3- or 4-channels).
-         * return 4-dimensional Mat.
-         */
-        public static Mat blobFromImageWithParams(Mat image)
-        {
-            if (image != null) image.ThrowIfDisposed();
-
-            return new Mat(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_blobFromImageWithParams_11(image.nativeObj)));
-
-
-        }
-
-
-        //
-        // C++:  void cv::dnn::blobFromImageWithParams(Mat image, Mat& blob, Image2BlobParams param = Image2BlobParams())
-        //
-
-        public static void blobFromImageWithParams(Mat image, Mat blob, Image2BlobParams param)
-        {
-            if (image != null) image.ThrowIfDisposed();
-            if (blob != null) blob.ThrowIfDisposed();
-            if (param != null) param.ThrowIfDisposed();
-
-            dnn_Dnn_blobFromImageWithParams_12(image.nativeObj, blob.nativeObj, param.nativeObj);
-
-
-        }
-
-        public static void blobFromImageWithParams(Mat image, Mat blob)
-        {
-            if (image != null) image.ThrowIfDisposed();
-            if (blob != null) blob.ThrowIfDisposed();
-
-            dnn_Dnn_blobFromImageWithParams_13(image.nativeObj, blob.nativeObj);
-
-
-        }
-
-
-        //
-        // C++:  Mat cv::dnn::blobFromImagesWithParams(vector_Mat images, Image2BlobParams param = Image2BlobParams())
-        //
-
-        /**
-         * Creates 4-dimensional blob from series of images with given params.
-         *
-         * This function is an extension of REF: blobFromImages to meet more image preprocess needs.
-         * Given input image and preprocessing parameters, and function outputs the blob.
-         *
-         * param images input image (all with 1-, 3- or 4-channels).
-         * param param struct of Image2BlobParams, contains all parameters needed by processing of image to blob.
-         * return 4-dimensional Mat.
-         */
-        public static Mat blobFromImagesWithParams(List<Mat> images, Image2BlobParams param)
-        {
-            if (param != null) param.ThrowIfDisposed();
-            Mat images_mat = Converters.vector_Mat_to_Mat(images);
-            return new Mat(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_blobFromImagesWithParams_10(images_mat.nativeObj, param.nativeObj)));
-
-
-        }
-
-        /**
-         * Creates 4-dimensional blob from series of images with given params.
-         *
-         * This function is an extension of REF: blobFromImages to meet more image preprocess needs.
-         * Given input image and preprocessing parameters, and function outputs the blob.
-         *
-         * param images input image (all with 1-, 3- or 4-channels).
-         * return 4-dimensional Mat.
-         */
-        public static Mat blobFromImagesWithParams(List<Mat> images)
-        {
-
-            Mat images_mat = Converters.vector_Mat_to_Mat(images);
-            return new Mat(DisposableObject.ThrowIfNullIntPtr(dnn_Dnn_blobFromImagesWithParams_11(images_mat.nativeObj)));
-
-
-        }
-
-
-        //
-        // C++:  void cv::dnn::blobFromImagesWithParams(vector_Mat images, Mat& blob, Image2BlobParams param = Image2BlobParams())
-        //
-
-        public static void blobFromImagesWithParams(List<Mat> images, Mat blob, Image2BlobParams param)
-        {
-            if (blob != null) blob.ThrowIfDisposed();
-            if (param != null) param.ThrowIfDisposed();
-            Mat images_mat = Converters.vector_Mat_to_Mat(images);
-            dnn_Dnn_blobFromImagesWithParams_12(images_mat.nativeObj, blob.nativeObj, param.nativeObj);
-
-
-        }
-
-        public static void blobFromImagesWithParams(List<Mat> images, Mat blob)
-        {
-            if (blob != null) blob.ThrowIfDisposed();
-            Mat images_mat = Converters.vector_Mat_to_Mat(images);
-            dnn_Dnn_blobFromImagesWithParams_13(images_mat.nativeObj, blob.nativeObj);
 
 
         }
@@ -1781,14 +1555,6 @@ namespace OpenCVForUnity.DnnModule
         [DllImport(LIBNAME)]
         private static extern IntPtr dnn_Dnn_readNetFromTensorflow_13(IntPtr bufferModel_mat_nativeObj);
 
-        // C++:  Net cv::dnn::readNetFromTFLite(String model)
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_readNetFromTFLite_10(string model);
-
-        // C++:  Net cv::dnn::readNetFromTFLite(vector_uchar bufferModel)
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_readNetFromTFLite_11(IntPtr bufferModel_mat_nativeObj);
-
         // C++:  Net cv::dnn::readNetFromTorch(String model, bool isBinary = true, bool evaluate = true)
         [DllImport(LIBNAME)]
         private static extern IntPtr dnn_Dnn_readNetFromTorch_10(string model, [MarshalAs(UnmanagedType.U1)] bool isBinary, [MarshalAs(UnmanagedType.U1)] bool evaluate);
@@ -1868,30 +1634,6 @@ namespace OpenCVForUnity.DnnModule
         private static extern IntPtr dnn_Dnn_blobFromImages_15(IntPtr images_mat_nativeObj, double scalefactor);
         [DllImport(LIBNAME)]
         private static extern IntPtr dnn_Dnn_blobFromImages_16(IntPtr images_mat_nativeObj);
-
-        // C++:  Mat cv::dnn::blobFromImageWithParams(Mat image, Image2BlobParams param = Image2BlobParams())
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_blobFromImageWithParams_10(IntPtr image_nativeObj, IntPtr param_nativeObj);
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_blobFromImageWithParams_11(IntPtr image_nativeObj);
-
-        // C++:  void cv::dnn::blobFromImageWithParams(Mat image, Mat& blob, Image2BlobParams param = Image2BlobParams())
-        [DllImport(LIBNAME)]
-        private static extern void dnn_Dnn_blobFromImageWithParams_12(IntPtr image_nativeObj, IntPtr blob_nativeObj, IntPtr param_nativeObj);
-        [DllImport(LIBNAME)]
-        private static extern void dnn_Dnn_blobFromImageWithParams_13(IntPtr image_nativeObj, IntPtr blob_nativeObj);
-
-        // C++:  Mat cv::dnn::blobFromImagesWithParams(vector_Mat images, Image2BlobParams param = Image2BlobParams())
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_blobFromImagesWithParams_10(IntPtr images_mat_nativeObj, IntPtr param_nativeObj);
-        [DllImport(LIBNAME)]
-        private static extern IntPtr dnn_Dnn_blobFromImagesWithParams_11(IntPtr images_mat_nativeObj);
-
-        // C++:  void cv::dnn::blobFromImagesWithParams(vector_Mat images, Mat& blob, Image2BlobParams param = Image2BlobParams())
-        [DllImport(LIBNAME)]
-        private static extern void dnn_Dnn_blobFromImagesWithParams_12(IntPtr images_mat_nativeObj, IntPtr blob_nativeObj, IntPtr param_nativeObj);
-        [DllImport(LIBNAME)]
-        private static extern void dnn_Dnn_blobFromImagesWithParams_13(IntPtr images_mat_nativeObj, IntPtr blob_nativeObj);
 
         // C++:  void cv::dnn::imagesFromBlob(Mat blob_, vector_Mat& images_)
         [DllImport(LIBNAME)]
