@@ -1,14 +1,14 @@
-0
+00
 ====
-1
+01
 ====
-2
+02
 ====
-3
+03
 ====
-4
+04
 ====
-5
+05
 **Tie A**
 
 $$F_{d,A} = 506 kN$$
@@ -19,7 +19,7 @@ selected reinforcement: 4Ø20
 
 $$A_{s,A} = 4 \pi r^2 = 4\cdot\pi\cdot(10mm)^2=1257mm^2$$
 ====
-6
+06
 **Tie B**
 
 $$F_{d,B} = 150 kN$$
@@ -30,7 +30,7 @@ selected reinforcement: 2Ø16
 
 $$A_{s,B} = 2 \pi r^2 = 2\cdot\pi\cdot(8mm)^2=402mm^2$$
 ====
-7
+07
 **Tie C**
 
 $$F_{d,C} = 150 kN$$
@@ -41,7 +41,7 @@ selected reinforcement: 2Ø16
 
 $$A_{s,C} = 2 \pi r^2 = 2\cdot\pi\cdot(8mm)^2=402mm^2$$
 ====
-8
+08
 **Tie D**
 
 $$F_{d,D} = 150 kN / 0.933m = 160 kN/m$$
@@ -52,7 +52,7 @@ selected reinforcement: 2Ø8@150
 
 $$A_{s,A} = \frac{2 \pi r^2}{150mm} = \frac{2\cdot\pi\cdot(4mm)^2}{150mm}=640mm^2/m$$
 ====
-9
+09
 ====
 10
 ====
