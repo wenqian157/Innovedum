@@ -9,11 +9,12 @@ public class StoryController : MonoBehaviour
     public Camera cam;
     public TMPro.TextMeshProUGUI step;
     public TMPro.TextMeshProUGUI stepNameText;
+    public RemoteTextLoader textLoader;
     private List<List<int>> layerFilters;
     private List<int> currentLayerFilter;
     private List<string> stepNames;
     private List<int> layerRange;
-    private int currentState;
+    public static int currentState;
     private int tempState;
     private void Awake()
     {
@@ -27,11 +28,8 @@ public class StoryController : MonoBehaviour
     }
     IEnumerator ReadCSVAsync()
     {
-        while (RemoteCSVLoader.StoryLine.layerFilters.Length == 0)
-        {
-            yield return new WaitForSeconds(1.0f);
-            Debug.Log("reading cvs file...");
-        }
+        yield return new WaitForSeconds(1.0f);
+ 
         layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
         stepNames = RemoteCSVLoader.StoryLine.stepNameArray.ToList();
 
@@ -66,6 +64,8 @@ public class StoryController : MonoBehaviour
 
             step.text = currentState.ToString();
             stepNameText.text = stepNames[currentState];
+
+            textLoader.UpdateText(currentState);
         }
     }
     //public void OnClickDisplayLayer(int layerIndex)

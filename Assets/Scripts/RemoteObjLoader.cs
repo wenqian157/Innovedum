@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 
 public class RemoteObjLoader : MonoBehaviour
 {
+    public GameObject log;
     void Start()
     {
         StartCoroutine(ReadCSVAsync());
@@ -56,5 +57,7 @@ public class RemoteObjLoader : MonoBehaviour
                 child.gameObject.layer = layerIndex;
             }
         }
+
+        log.SetActive(false);
     }
 }
