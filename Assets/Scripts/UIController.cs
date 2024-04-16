@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject detialButtons;
+    public void OnUILoadMain()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("load main scene...");
+        Logs.Instance.announce.text = "load main scene...";
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }
