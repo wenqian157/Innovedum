@@ -23,6 +23,7 @@ public class RemoteCSVLoader : MonoBehaviour
     public static string urlBase;
     private string urlCSVLayer;
     private string urlCSVStory;
+    private string urlInfo;
     public class LayerObject
     {
         public int index;
@@ -48,7 +49,10 @@ public class RemoteCSVLoader : MonoBehaviour
         //urlBase = inputField.text;
         urlCSVLayer = urlBase + "/layerInfo.csv";
         urlCSVStory = urlBase + "/storyInfo.csv";
+        urlInfo = urlBase + "/info.txt";
+        RemoteInfoLoader.OnUIReadInfo(urlInfo);
         StartCoroutine(ReadCSVLayer(urlCSVLayer));
+
     }
     public IEnumerator ReadCSVLayer(string url)
     {
@@ -68,8 +72,6 @@ public class RemoteCSVLoader : MonoBehaviour
             }
             string stringData = www.downloadHandler.text;
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
-
-            Debug.Log("load layer data: " + data.Length);
 
             layerCount = data.Length / 4 - 1;
             myLayerObjects = new LayerObject[layerCount];
@@ -139,15 +141,8 @@ public class RemoteCSVLoader : MonoBehaviour
             {
                 StoryLine.stepNameArray[j] = data[storyCount * (layerCount + 1) + j];
             }
-            OpenMainScene();
         }
     }
-    public void OpenMainScene()
-    {
-        Debug.Log("load main scene...");
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-    }
-
 }
 public class BypassCertificate : CertificateHandler
 {
