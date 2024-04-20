@@ -75,35 +75,24 @@ public class CameraController : MonoBehaviour
         // orbit!
         else if (Input.GetMouseButton(1))
         {
-            if(currentCam == camStates.perspective)
-            {
-                xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-                yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+            yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
-                ////////OrbitAngle
+            ////////OrbitAngle
 
-                //Clamp the vertical axis for the orbit
-                yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
-                // set camera rotation
-                desiredRotation = Quaternion.Euler(yDeg, xDeg, 0);
-                currentRotation = transform.rotation;
+            //Clamp the vertical axis for the orbit
+            yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
+            // set camera rotation
+            desiredRotation = Quaternion.Euler(yDeg, xDeg, 0);
+            currentRotation = transform.rotation;
 
-                rotation = Quaternion.Lerp(currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
-                transform.rotation = rotation;
-            }
+            rotation = Quaternion.Lerp(currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
+            transform.rotation = rotation;
         }
 
         // zoom!
         // affect the desired Zoom distance if we roll the scrollwheel
-        if(currentCam == camStates.perspective)
-        {
-            desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs(desiredDistance);
-        }
-        else
-        {
-            this.GetComponent<Camera>().orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * 8;
-        }
-        
+        desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs(desiredDistance);
         //clamp the zoom min/max
         desiredDistance = Mathf.Clamp(desiredDistance, minDistance, maxDistance);
         // For smoothing of the zoom, lerp distance
@@ -158,28 +147,28 @@ public class CameraController : MonoBehaviour
         
         var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
-        cam.orthographicSize = 5;
+        cam.orthographicSize = 15;
     }
     public void LeftView()
     {
         currentCam = camStates.left;
         rotation = Quaternion.Euler(0, 90, 0);
-        target.SetPositionAndRotation(new Vector3(-20 - distance, 0, -3), Quaternion.Euler(0, 90, 0));
-        transform.SetPositionAndRotation(new Vector3(-20, 0, -3), Quaternion.Euler(0, 90, 0));
+        target.SetPositionAndRotation(new Vector3(-20 - distance, 0, 0), Quaternion.Euler(0, 90, 0));
+        transform.SetPositionAndRotation(new Vector3(-20, 0, 0), Quaternion.Euler(0, 90, 0));
 
         var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
-        cam.orthographicSize = 5;
+        cam.orthographicSize = 15;
     }
     public void FrontView()
     {
-        currentCam = camStates.front;
+        currentCam = camStates.left;
         rotation = Quaternion.Euler(0, 90, 0);
         target.SetPositionAndRotation(new Vector3(0, 0, -20 - distance), Quaternion.Euler(0, 0, 0));
         transform.SetPositionAndRotation(new Vector3(0, 0, -20), Quaternion.Euler(0, 0, 0));
 
         var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
-        cam.orthographicSize = 5;
+        cam.orthographicSize = 15;
     }
 }

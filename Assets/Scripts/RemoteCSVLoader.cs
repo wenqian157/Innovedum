@@ -12,18 +12,17 @@ public class RemoteCSVLoader : MonoBehaviour
 {
     //public TMP_InputField inputField;
 
-    public static int testInt = 0;
     public static int storyCount;
     public static int layerCount;
     public static List<int> objLayers = new List<int>();
     public static List<int> linesLayers = new List<int>();
     public static List<int> linesWithArrowLayers = new List<int>();
 
-    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
     public static string urlBase;
-    private string urlCSVLayer;
-    private string urlCSVStory;
-    private string urlInfo;
+    private static string urlCSVLayer;
+    private static string urlCSVStory;
+    public static RemoteCSVLoader instance;
+    
     public class LayerObject
     {
         public int index;
@@ -41,20 +40,18 @@ public class RemoteCSVLoader : MonoBehaviour
     }
     private void Awake()
     {
+        instance = this;
         DontDestroyOnLoad(gameObject);
-        urlBase = projectUrl;
     }
-    public void OnClickLoadScene()
+    public static void OnUILoadScene()
     {
-        //urlBase = inputField.text;
+        urlBase = RemoteInfoLoader.Instance.projectUrl;
         urlCSVLayer = urlBase + "/layerInfo.csv";
         urlCSVStory = urlBase + "/storyInfo.csv";
-        urlInfo = urlBase + "/info.txt";
-        RemoteInfoLoader.OnUIReadInfo(urlInfo);
-        StartCoroutine(ReadCSVLayer(urlCSVLayer));
-
+        
+        instance.StartCoroutine(ReadCSVLayer(urlCSVLayer));
     }
-    public IEnumerator ReadCSVLayer(string url)
+    public static IEnumerator ReadCSVLayer(string url)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -67,7 +64,8 @@ public class RemoteCSVLoader : MonoBehaviour
             }
             while (!www.isDone)
             {
-                Debug.Log("loading...");
+                Debug.Log("loading layer csv...");
+                Logs.Instance.announce.text = "loading layer csv...";
                 yield return new WaitForSeconds(0.2f);
             }
             string stringData = www.downloadHandler.text;
@@ -97,10 +95,10 @@ public class RemoteCSVLoader : MonoBehaviour
                     linesWithArrowLayers.Add(myLayerObjects[i].index);
                 }
             }
-            StartCoroutine(ReadCSVStory(urlCSVStory));
+            instance.StartCoroutine(ReadCSVStory(urlCSVStory));
         }
     }
-    public IEnumerator ReadCSVStory(string url)
+    public static IEnumerator ReadCSVStory(string url)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -113,7 +111,8 @@ public class RemoteCSVLoader : MonoBehaviour
             }
             while (!www.isDone)
             {
-                Debug.Log("loading...");
+                Debug.Log("loading story csv...");
+                Logs.Instance.announce.text = "loading story csv...";
                 yield return new WaitForSeconds(0.2f);
             }
             string stringData = www.downloadHandler.text;
@@ -142,6 +141,13 @@ public class RemoteCSVLoader : MonoBehaviour
                 StoryLine.stepNameArray[j] = data[storyCount * (layerCount + 1) + j];
             }
         }
+        OnUILoadMain();
+    }
+    private static void OnUILoadMain()
+    {
+        Debug.Log("load main scene...");
+        Logs.Instance.announce.text = "load main scene...";
+        SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }
 public class BypassCertificate : CertificateHandler

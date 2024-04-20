@@ -21,7 +21,7 @@ public class AROnOff : MonoBehaviour
         if (arOn)
         {
             model.transform.SetParent(arModelParent.transform);
-            ResetTransform(model.transform, new Vector3(0, 0, 0.05f), Quaternion.identity, new Vector3(0.01f, 0.01f, 0.01f));
+            ResetTransform(model.transform, new Vector3(0, 0, 0.05f), Quaternion.identity, new Vector3(0.05f, 0.05f, 0.05f));
             model.transform.Rotate(new Vector3(90, 0, 0));
 
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();

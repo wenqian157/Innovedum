@@ -55,7 +55,7 @@ public class RemoteJsonLoader : MonoBehaviour
             }
             while (!www.isDone)
             {
-                Debug.Log("loading json...");
+                Debug.Log("loading line...");
                 yield return new WaitForSeconds(0.2f);
             }
 

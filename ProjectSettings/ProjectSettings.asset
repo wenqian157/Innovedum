@@ -723,7 +723,12 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: OPENCV_USE_UNSAFE_CODE
+    Standalone: OPENCV_USE_UNSAFE_CODE
+    WebGL: OPENCV_USE_UNSAFE_CODE
+    Windows Store Apps: OPENCV_USE_UNSAFE_CODE
+    iPhone: OPENCV_USE_UNSAFE_CODE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -739,14 +744,14 @@ PlayerSettings:
     QNX: 1
     Stadia: 1
     VisionOS: 1
-    WebGL: 1
+    WebGL: 4
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1
     tvOS: 1
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
-  allowUnsafeCode: 0
+  allowUnsafeCode: 1
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
   selectedPlatform: 3

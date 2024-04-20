@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class RemoteInfoLoader : MonoBehaviour
 {
-    private static RemoteInfoLoader Instance;
+    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
+    public static string urlBase;
+    public static RemoteInfoLoader Instance;
+    private string urlInfo;
     private void Awake()
     {
         if (Instance == null)
@@ -20,10 +23,12 @@ public class RemoteInfoLoader : MonoBehaviour
             Destroy(Instance.gameObject);
             Instance = this;
         }
+        urlBase = projectUrl;
     }
-    public static void OnUIReadInfo(string url)
+    public void OnUIReadInfo()
     {
-        Instance.StartCoroutine(ReadInfo(url));
+        urlInfo = urlBase + "/info.txt";
+        StartCoroutine(ReadInfo(urlInfo));
     }
     public static IEnumerator ReadInfo(string url)
     {
