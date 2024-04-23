@@ -8,7 +8,7 @@ public class LayerController : MonoBehaviour
     public Camera arCam;
     public Camera cam;
     public GameObject layerParent;
-    private List<string> layerList;
+    public static List<string> layerList;
     private void Start()
     {
         StartCoroutine(ReadCSVAsync());
@@ -21,8 +21,6 @@ public class LayerController : MonoBehaviour
         {
             layerList.Add(item.name);
         }
-        cam.cullingMask = LayerMask.GetMask(layerList.ToArray());
-        arCam.cullingMask = LayerMask.GetMask(layerList.ToArray());
 
         CreateLayerToggle();
     }
@@ -33,6 +31,11 @@ public class LayerController : MonoBehaviour
             var layerToggle = Resources.Load("ToggleLayer") as GameObject;
             layerToggle = Instantiate(layerToggle, layerParent.transform);
             layerToggle.GetComponentInChildren<Text>().text = name;
+
+            Toggle mToggle = layerToggle.GetComponent<Toggle>();
+            mToggle.onValueChanged.AddListener(delegate {
+                OnUIDisplayLayer(name);
+            });
         }
     }
     public void OnUIDisplayLayer(string layer)

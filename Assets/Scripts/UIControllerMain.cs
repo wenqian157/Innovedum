@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIControllerMain : MonoBehaviour
 {
+    public Camera arCam;
+    public Camera cam;
     public GameObject stepGO;
     public GameObject layerGO;
     public GameObject arGO;
@@ -24,12 +26,18 @@ public class UIControllerMain : MonoBehaviour
             stepGO.SetActive(true);
             layerGO.SetActive(false);
             arGO.SetActive(false);
+
+            cam.cullingMask = LayerMask.GetMask(LayerController.layerList.ToArray());
+            arCam.cullingMask = LayerMask.GetMask(LayerController.layerList.ToArray());
         }
         else if(currentState == 1)
         {
             stepGO.SetActive(false);
             layerGO.SetActive(true);
             arGO.SetActive(false);
+
+            cam.cullingMask = StoryController.IndexesToLayerMask(StoryController.currentLayerFilter);
+            arCam.cullingMask = StoryController.IndexesToLayerMask(StoryController.currentLayerFilter);
         }
         else if(currentState == 2)
         {

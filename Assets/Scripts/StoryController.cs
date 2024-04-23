@@ -11,7 +11,8 @@ public class StoryController : MonoBehaviour
     public TMPro.TextMeshProUGUI stepNameText;
     public RemoteTextLoader textLoader;
     private List<List<int>> layerFilters;
-    private List<int> currentLayerFilter;
+    [HideInInspector]
+    public static List<int> currentLayerFilter;
     private List<string> stepNames;
     private List<int> layerRange;
     public static int currentState;
@@ -32,11 +33,12 @@ public class StoryController : MonoBehaviour
  
         layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
         stepNames = RemoteCSVLoader.StoryLine.stepNameArray.ToList();
+        currentLayerFilter = layerFilters[0];
 
-        cam.cullingMask = IndexesToLayerMask(layerFilters[0]);
-        arCam.cullingMask = IndexesToLayerMask(layerFilters[0]);
+        cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+        arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
     }
-    private LayerMask IndexesToLayerMask(List<int> indexes)
+    public static LayerMask IndexesToLayerMask(List<int> indexes)
     {
         LayerMask mask = 1 << 0;
         foreach (int index in indexes)
