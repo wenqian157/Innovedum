@@ -26,7 +26,7 @@ public class Logs : MonoBehaviour
 
     private void Start()
     {
-        announce.text = "default text";
+        //announce.text = "...";
     }
     private void OnEnable()
     {
@@ -47,5 +47,4 @@ public class Logs : MonoBehaviour
             debug.text += message + "\n";
         }
     }
-
 }
