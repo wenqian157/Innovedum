@@ -11,11 +11,15 @@ public class UIControllerMain : MonoBehaviour
     public GameObject layerGO;
     public GameObject arGO;
     private int currentState = 0;
+    private int tempState;
 
+    private void Awake()
+    {
+        tempState = currentState;
+    }
     public void OnUIBack2Menu()
     {
         Debug.Log("load open scene...");
-        Logs.Instance.announce.text = "select the project to load...";
         SceneManager.LoadScene("Open", LoadSceneMode.Single);
     }
     public void OnUISwitchState(int state)
@@ -27,8 +31,14 @@ public class UIControllerMain : MonoBehaviour
             layerGO.SetActive(false);
             arGO.SetActive(false);
 
-            cam.cullingMask = LayerMask.GetMask(LayerController.layerList.ToArray());
-            arCam.cullingMask = LayerMask.GetMask(LayerController.layerList.ToArray());
+            if(tempState != 0)
+            {
+                StoryController.currentState = 0;
+                StoryController.instance.OnUISetStep(0);
+                cam.cullingMask = StoryController.instance.IndexesToLayerMask(StoryController.currentLayerFilter);
+                arCam.cullingMask = StoryController.instance.IndexesToLayerMask(StoryController.currentLayerFilter);
+            }
+            tempState = currentState;
         }
         else if(currentState == 1)
         {
@@ -36,8 +46,12 @@ public class UIControllerMain : MonoBehaviour
             layerGO.SetActive(true);
             arGO.SetActive(false);
 
-            cam.cullingMask = StoryController.IndexesToLayerMask(StoryController.currentLayerFilter);
-            arCam.cullingMask = StoryController.IndexesToLayerMask(StoryController.currentLayerFilter);
+            if(tempState != 1)
+            {
+                LayerController.instance.TurnOnAllLayers();
+            }
+            
+            tempState = currentState;
         }
         else if(currentState == 2)
         {

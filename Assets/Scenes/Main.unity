@@ -5402,8 +5402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe99428a56afd4be7aeba3e86dddda27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineWidth: 0.05
-  arrowSize: 0.3
+  lineWidth: 0.02
+  arrowSize: 0.1
   lineColorA: {r: 0, g: 0, b: 1, a: 1}
   lineColorB: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &838193900
@@ -8759,7 +8759,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 588745969}
   m_HandleRect: {fileID: 588745968}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

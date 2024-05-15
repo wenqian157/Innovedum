@@ -88,6 +88,8 @@ public class RemoteJsonLoader : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
 
+            string stringData = www.downloadHandler.text;
+            lineData = JsonConvert.DeserializeObject<LinesFromRhino>(stringData);
             GameObject lineWithArrow = new GameObject();
             lineWithArrow.transform.SetParent(transform);
             lineWithArrow.name = layerName;
