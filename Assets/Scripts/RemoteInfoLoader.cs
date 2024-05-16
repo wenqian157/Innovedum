@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class RemoteInfoLoader : MonoBehaviour
 {
-    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
+    public string projectUrl = "https://gitlab.ethz.ch/ibk-kfm-public/xr-apps/-/raw/main/examples/2_torsion/OnlineResources";
     public static string urlBase;
     public static RemoteInfoLoader Instance;
     private string urlInfo;
@@ -27,7 +27,7 @@ public class RemoteInfoLoader : MonoBehaviour
     }
     public void OnUIReadInfo()
     {
-        urlInfo = urlBase + "/info.txt";
+        urlInfo = urlBase + "/txt/info.txt";
         StartCoroutine(ReadInfo(urlInfo));
     }
     public static IEnumerator ReadInfo(string url)

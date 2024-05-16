@@ -20,7 +20,7 @@ public class RemoteTextLoader : MonoBehaviour
     public IEnumerator ReadText()
     {
         yield return new WaitForSeconds(1.0f);
-        using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/md" + "/text.md"))
+        using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/md" + "/formula.md"))
         {
             www.SendWebRequest();
             if (!string.IsNullOrEmpty(www.error))

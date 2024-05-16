@@ -46,8 +46,8 @@ public class RemoteCSVLoader : MonoBehaviour
     public static void OnUILoadScene()
     {
         urlBase = RemoteInfoLoader.Instance.projectUrl;
-        urlCSVLayer = urlBase + "/layerInfo.csv";
-        urlCSVStory = urlBase + "/storyInfo.csv";
+        urlCSVLayer = urlBase + "/csv/layerInfo.csv";
+        urlCSVStory = urlBase + "/csv/storyInfo.csv";
         
         instance.StartCoroutine(ReadCSVLayer(urlCSVLayer));
     }

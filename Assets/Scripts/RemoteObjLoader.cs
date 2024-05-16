@@ -58,6 +58,6 @@ public class RemoteObjLoader : MonoBehaviour
             }
         }
 
-        log.SetActive(false);
+        //log.SetActive(false);
     }
 }

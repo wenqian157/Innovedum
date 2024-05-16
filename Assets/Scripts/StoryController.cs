@@ -22,6 +22,8 @@ public class StoryController : MonoBehaviour
         instance = this;
         currentState = 0;
         tempState = 0;
+
+        arCam = cam;
     }
     private void Start()
     {
@@ -36,6 +38,8 @@ public class StoryController : MonoBehaviour
         currentLayerFilter = layerFilters[0];
         cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
         arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+
+        stepNameText.text = stepNames[0];
     }
     public LayerMask IndexesToLayerMask(List<int> indexes)
     {
