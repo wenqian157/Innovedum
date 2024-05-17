@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class RemoteInfoLoader : MonoBehaviour
 {
-    public string projectUrl = "https://gitlab.ethz.ch/ibk-kfm-public/xr-apps/-/raw/main/examples/2_torsion/OnlineResources";
+    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
     public static string urlBase;
     public static RemoteInfoLoader Instance;
     private string urlInfo;
@@ -47,6 +47,9 @@ public class RemoteInfoLoader : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
 
+            Debug.Log($"request is done: {www.downloadHandler.text}");
+            Debug.Log(www.result);
+            Debug.Log(www.downloadProgress);
             string stringData = www.downloadHandler.text;
             Logs.Instance.announce.text = stringData;
         }
