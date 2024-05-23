@@ -156,7 +156,7 @@ Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbewehrung durchge
 
 Die massgebende Scheibe 1 hat eine Querkraft von $$V_{d}/z = 562.5 kN/m $$ aufzunehmen. 
 
-Mit dem Winkel der Druckfeldneigung $$\alpha = 45 ° $$ und $$z_v = 0.8 m  $$ ergibt sich die erforderliche Bügelbewehrung zu: 
+Mit dem Winkel der Druckfeldneigung $\alpha = 45 ° $ und $z_v = 0.8 m  $ ergibt sich die erforderliche Bügelbewehrung zu: 
 
 $$ a_{sw,erf} = \frac{V_d}{z_v \cdot cot \alpha \cdot f_{sd}} = 1´293 mm^2/m $$
 
