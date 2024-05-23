@@ -131,27 +131,66 @@ Im Bereich der Lasteinleitung wird zusätzliche konstruktive Bewehrung angeordne
 Hier ist die gesamte Bewehrung der Wandscheibe dargestellt.
 ====
 13
+
+Die Auflagerkräfte der Wandscheibe wirken als Belastung auf den Hohlkasten.
 ====
 14
+
+Dabei ändert sich ihre Richtung.
 ====
 15
+
+Hier ist das gesamte Fachwerkmodell inklusive der Verbindung zwischen Wandscheibe und Hohlkasten dargestellt.
 ====
 16
+
+Für die Bemessung des Hohlkastens wird dieses Modell verwendet
 ====
 17
+
+Zur Bemessung der Bewehrung werden lediglich die Zugstreben benötigt. 
 ====
 18
+
+Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbewehrung durchgeführt. 
+
+Die massgebende Scheibe 1 hat eine Querkraft von $$V_{d}/z = 562.5 kN/m $$ aufzunehmen. 
+
+Mit dem Winkel der Druckfeldneigung $$\alpha = 45 ° $$ und $$z_v = 0.8 m  $$ ergibt sich die erforderliche Bügelbewehrung zu: 
+
+$$ a_{sw,erf} = \frac{V_d}{z_v \cdot cot \alpha \cdot f_{sd}} = 1´293 mm^2/m $$
+
+Diese wird abgedeckt mit einer gewählten Bewehrung von Ø12@150 zweischnittig mit 
+
+$$ a_{s} = 2 \cdot\pi\cdot(6 mm)^2 / 150 mm = 1´506 mm^2/m $$
 ====
 19
+
+Die notwendinge verteilte Längsbewehrung aus der Querkraftbemessung der Platte resultiert zu
+
+$$ a_{s,erf} = \frac{V_d}{z_v \cdot tan \alpha \cdot f_{sd}} = 1´293 mm^2/m $$
+
+Diese wird abgedeckt mit einer gewählten Bewehrung von 2Ø12@150 mit 
+
+$$ a_{s} = 2 \cdot\pi\cdot(6 mm)^2 / 150 mm = 1´506 mm^2/m $$
 ====
 20
+
+Die Gurte oben erhalten eine maximale Zugkraft am Auflager von 
+
+$$ N_{d,max} = 656 kN $$
+
+Es wird eine Bewehrung 4Ø20 gewählt.
 ====
 21
+
+In den auf Druck belastetetn unteren Gurten wird lediglich eine konstruktive Mindestbewehrung eingelegt. 
 ====
 22
+
+Dargestellt ist die gesamte Bewehrung des Hohlkastens
 ====
 23
-====
-24
-====
-25
+
+Hier dargestellt ist die Bewehrung für Hohlkasten und Wandscheibe
+
