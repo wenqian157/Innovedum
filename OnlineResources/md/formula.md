@@ -1,9 +1,10 @@
 
 00
-Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast belastet.
-$$Q_{d} = 150 kN$$
+Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast $Q_{d} = 150 kN$ belastet.
+
 ====
 01
+
 In einem ersten Schritt wird die Wandscheibe betrachtet, welche Auflagerreaktionen aus dem Hohlkasten erhält. 
 
 $$R_{d,1} = 450 kN$$
@@ -14,7 +15,7 @@ $$R_{d,4} = 281 kN$$
 ====
 02
 
-Dies ist ein beispielhaftes Fachwerkodell für diese Situation.
+Dies ist ein beispielhaftes Fachwerkodell für die Situation.
 
 ====
 03
@@ -152,11 +153,9 @@ Zur Bemessung der Bewehrung werden lediglich die Zugstreben benötigt.
 ====
 18
 
-Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbewehrung durchgeführt. 
+Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbewehrung durchgeführt. Die massgebende Scheibe 1 hat eine Querkraft von $V_{d}/z = 562.5 kN/m $ aufzunehmen. 
 
-Die massgebende Scheibe 1 hat eine Querkraft von $$V_{d}/z = 562.5 kN/m $$ aufzunehmen. 
-
-Mit dem Winkel der Druckfeldneigung $\alpha = 45 ° $ und $z_v = 0.8 m  $ ergibt sich die erforderliche Bügelbewehrung zu: 
+Mit dem Winkel der Druckfeldneigung $\alpha = 45 \degree $ und $z_v = 0.8 m  $ ergibt sich die erforderliche Bügelbewehrung zu: 
 
 $$ a_{sw,erf} = \frac{V_d}{z_v \cdot cot \alpha \cdot f_{sd}} = 1´293 mm^2/m $$
 
@@ -172,7 +171,7 @@ $$ a_{s,erf} = \frac{V_d}{z_v \cdot tan \alpha \cdot f_{sd}} = 1´293 mm^2/m $$
 
 Diese wird abgedeckt mit einer gewählten Bewehrung von 2Ø12@150 mit 
 
-$$ a_{s} = 2 \cdot\pi\cdot(6 mm)^2 / 150 mm = 1´506 mm^2/m $$
+$$ a_{s} = 2 \cdot\pi\cdot(6 mm)^2 / 150 mm = 1´506~mm^2/m $$
 ====
 20
 
@@ -184,13 +183,13 @@ Es wird eine Bewehrung 4Ø20 gewählt.
 ====
 21
 
-In den auf Druck belastetetn unteren Gurten wird lediglich eine konstruktive Mindestbewehrung eingelegt. 
+In den auf Druck belasteten unteren Gurten wird lediglich eine konstruktive Mindestbewehrung eingelegt. 
 ====
 22
 
-Dargestellt ist die gesamte Bewehrung des Hohlkastens
+Dargestellt ist die gesamte Bewehrung des Hohlkastens.
 ====
 23
 
-Hier dargestellt ist die Bewehrung für Hohlkasten und Wandscheibe
+Hier dargestellt ist die Bewehrung für Hohlkasten und Wandscheibe.
 
