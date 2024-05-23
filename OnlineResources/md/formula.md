@@ -1,6 +1,6 @@
 
 00
-Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast belastet
+Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast belastet.
 $$Q_{d} = 150 kN$$
 ====
 01
@@ -19,60 +19,116 @@ Dies ist ein beispielhaftes Fachwerkodell für diese Situation.
 ====
 03
 
-Für die Bemessung der Bewehrung werden lediglich die Zugstäbe des Fachwerkmodells benötigt.
+Für die Bemessung der Bewehrung werden lediglich die Zugstreben des Fachwerkmodells benötigt.
 ====
 04
 
 Für die Zugkraft in Strebe A 
 
-$$F_{d,A} = 506 kN$$
+$$F_{d,A} = 3.375 \cdot Q_{d} = 506 kN$$
 
 wird eine konzentrierte Bewehrung mit der Fläche 
 
-$$A_{s,erf,A} = F_{d,A}/f_{sd}=506kN/435kN=1164mm^2$$
+$$A_{s,erf,A} = F_{d,A}/f_{sd}=506 kN/435 kN/mm^2=1164 mm^2$$
 
 benötigt. Es wird eine Bewehrung gewählt von 4Ø20 mit der Fläche 
 
-$$A_{s,A} = 4 \pi r^2 = 4\cdot\pi\cdot(10mm)^2=1257mm^2$$
+$$A_{s,A} = 4 \pi r^2 = 4\cdot\pi\cdot(10 mm)^2=1257 mm^2$$
 ====
-
-
 05
+
+Für die Zugkraft in Strebe B 
+
+$$F_{d,B} = 1.0 \cdot Q_{d} = 150 kN$$
+
+wird eine konzentrierte Bewehrung mit der Fläche 
+
+$$A_{s,erf,B} = F_{d,B}/f_{sd}=150 kN/435 kN/mm^2 = 345 mm^2$$
+
+benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
+
+$$A_{s,B} = 2 \pi r^2 = 4\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
+
+
 ====
-$$F_{d,B} = 150 kN$$
+06 
 
-$$A_{s,erf,B} = F_{d,B}/f_{sd}=150kN/435kN=345mm^2$$
+Für die Zugkraft in Strebe C 
 
-selected reinforcement: 2Ø16
+$$F_{d,C} = 1.0 \cdot Q_{d} = 150 kN$$
 
-$$A_{s,B} = 2 \pi r^2 = 2\cdot\pi\cdot(8mm)^2=402mm^2$$
-06
-$$F_{d,C} = 150 kN$$
+wird eine konzentrierte Bewehrung mit der Fläche 
 
-$$A_{s,erf,C} = F_{d,C}/f_{sd}=150kN/435kN=345mm^2$$
+$$A_{s,erf,C} = F_{d,C}/f_{sd}=150 kN/435 kN/mm^2 = 345 mm^2$$
 
-selected reinforcement: 2Ø16
+benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
 
-$$A_{s,C} = 2 \pi r^2 = 2\cdot\pi\cdot(8mm)^2=402mm^2$$
+$$A_{s,C} = 2 \pi r^2 = 2\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
 ====
 07
-$$F_{d,D} = 150 kN / 0.933m = 160 kN/m$$
 
-$$A_{s,erf,D} = F_{d,D}/f_{sd}=\frac{160kN/m}{435kN}=370mm^2/m$$
+Für die Zugkraft in Strebe D 
 
-selected reinforcement: 2Ø8@150
+$$F_{d,D} = 1.0 \cdot Q_{d} / 0.933 m = 160 kN/m$$
 
-$$A_{s,A} = \frac{2 \pi r^2}{150mm} = \frac{2\cdot\pi\cdot(4mm)^2}{150mm}=640mm^2/m$$
+wird eine verteilte Bewehrung mit der Fläche 
+
+$$A_{s,erf,D} = F_{d,D}/f_{sd}=160 kN/m /435 kN/mm^2 = 370 mm^2/m$$
+
+benötigt. Es wird eine Bewehrung gewählt von 2Ø8@150 mit der Fläche 
+
+$$A_{s,D} = 2 \pi r^2 / 150 mm = 2\cdot\pi\cdot(4 mm)^2 / 150 mm = 670 mm^2/m$$
 ====
 08
+
+Für die Zugkraft in Strebe E 
+
+$$F_{d,E} = 2.0 \cdot Q_{d} / 0.6 m = 500 kN/m$$
+
+wird eine verteilte Bewehrung mit der Fläche 
+
+$$A_{s,erf,E} = F_{d,E}/f_{sd}=500 kN/m /435 kN/mm^2 = 1'149 mm^2/m$$
+
+benötigt. Es wird eine Bewehrung gewählt von 2Ø12@150 mit der Fläche 
+
+$$A_{s,E} = 2 \pi r^2 / 150 mm = 2\cdot\pi\cdot(6 mm)^2 / 150 mm = 1508 mm^2/m$$
 ====
 09
+
+Für die Zugkraft in Strebe F 
+
+$$F_{d,F} = 1.5 \cdot Q_{d} / 0.8 m = 281 kN/m$$
+
+wird eine verteilte Bewehrung mit der Fläche 
+
+$$A_{s,erf,F} = F_{d,F}/f_{sd}=281 kN/m /435 kN/mm^2 = 646 mm^2/m$$
+
+benötigt. Es wird eine Bewehrung gewählt von 2Ø8@150 mit der Fläche 
+
+$$A_{s,F} = 2 \pi r^2 / 150 mm = 2\cdot\pi\cdot(4 mm)^2 / 150 mm = 670 mm^2/m$$
 ====
 10
+
+Für die Zugkraft in Strebe H 
+
+$$F_{d,H} = 1.0 \cdot Q_{d} = 150 kN$$
+
+wird eine konzentrierte Bewehrung mit der Fläche 
+
+$$A_{s,erf,H} = F_{d,H}/f_{sd}=150 kN/435 kN/mm^2 = 345 mm^2$$
+
+benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
+
+$$A_{s,H} = 2 \pi r^2 = 2\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
 ====
 11
+
+Im Bereich der Lasteinleitung wird zusätzliche konstruktive Bewehrung angeordnet.
+
 ====
 12
+
+Hier ist die gesamte Bewehrung der Wandscheibe dargestellt.
 ====
 13
 ====
