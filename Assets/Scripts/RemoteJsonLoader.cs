@@ -9,8 +9,6 @@ public class RemoteJsonLoader : MonoBehaviour
 {
     public float lineWidth = 0.05f;
     public float arrowSize = 0.1f;
-    public Color lineColorA = Color.blue;
-    public Color lineColorB = Color.yellow;
     private LinesFromRhino lineData;
     private List<LinesFromRhino> lineDatas;
     void Start()
@@ -32,18 +30,20 @@ public class RemoteJsonLoader : MonoBehaviour
         foreach (int layerIndex in RemoteCSVLoader.linesLayers)
         {
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            StartCoroutine(LoadLineJsonAsync(layerIndex, layerName));
+            string layerMaterial = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
+            StartCoroutine(LoadLineJsonAsync(layerIndex, layerName, layerMaterial));
         }
 
         Debug.Log($"found {RemoteCSVLoader.linesWithArrowLayers.Count}arrow LayerObject");
         foreach (int layerIndex in RemoteCSVLoader.linesWithArrowLayers)
         {
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            StartCoroutine(LoadArrowJsonAsync(layerIndex, layerName));
+            string layerMaterial = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
+            StartCoroutine(LoadArrowJsonAsync(layerIndex, layerName, layerMaterial));
         }
     }
 
-    IEnumerator LoadLineJsonAsync(int layerIndex, string layerName)
+    IEnumerator LoadLineJsonAsync(int layerIndex, string layerName, string layerMaterial)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/json/" + layerName + ".json"))
         {
@@ -65,14 +65,15 @@ public class RemoteJsonLoader : MonoBehaviour
             line.transform.SetParent(transform);
             line.name = layerName;
             line.layer = layerIndex;
-            AddLines(line.transform, lineData, lineColorA);
+            Color lineColor = GetColorFromName(layerMaterial);
+            AddLines(line.transform, lineData, lineColor);
             foreach (Transform child in line.GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = layerIndex;
             }
         }
     }
-    IEnumerator LoadArrowJsonAsync(int layerIndex, string layerName)
+    IEnumerator LoadArrowJsonAsync(int layerIndex, string layerName, string layerMaterial)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/json/" + layerName + ".json"))
         {
@@ -94,7 +95,8 @@ public class RemoteJsonLoader : MonoBehaviour
             lineWithArrow.transform.SetParent(transform);
             lineWithArrow.name = layerName;
             lineWithArrow.layer = layerIndex;
-            AddLinesWithArrow(lineWithArrow.transform, lineData, lineColorB);
+            Color lineColor = GetColorFromName(layerMaterial);
+            AddLinesWithArrow(lineWithArrow.transform, lineData, lineColor);
             foreach (Transform child in lineWithArrow.GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = layerIndex;
@@ -187,5 +189,34 @@ public class RemoteJsonLoader : MonoBehaviour
     public struct LinesFromRhino
     {
         public List<List<List<float>>> lines;
+    }
+    private Color GetColorFromName(string colorName)
+    {
+        Color resultColor = new Color();
+        switch (colorName)
+        {
+            default:
+                resultColor = Color.white;
+                break;
+            case "blue":
+                resultColor = Color.blue;
+                break;
+            case "green":
+                resultColor = Color.green;
+                break;
+            case "red":
+                resultColor = Color.red;
+                break;
+            case "yellow":
+                resultColor = Color.yellow;
+                break;
+            case "cyan":
+                resultColor = Color.cyan;
+                break;
+            case "magenta":
+                resultColor = Color.magenta;
+                break;
+        }
+        return resultColor;
     }
 }
