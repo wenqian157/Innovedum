@@ -131,8 +131,8 @@ public class RemoteJsonLoader : MonoBehaviour
             arrow.transform.localScale = new Vector3(1, 1, 1);
 
             var arrowR = arrow.AddComponent<LineRenderer>();
-            Vector3 vNew = (lines[i][0] - lines[i][1]).normalized * arrowSize * 2 + lines[i][0];
-            arrowR.SetPositions(new Vector3[] { vNew, lines[i][0] });
+            Vector3 vNew = (lines[i][1] - lines[i][0]).normalized * arrowSize * 2 + lines[i][1];
+            arrowR.SetPositions(new Vector3[] { vNew, lines[i][1] });
             arrowR.material = new Material(Shader.Find("Sprites/Default"));
             arrowR.startColor = c;
             arrowR.endColor = c;
