@@ -192,31 +192,29 @@ public class RemoteJsonLoader : MonoBehaviour
     }
     private Color GetColorFromName(string colorName)
     {
-        Color resultColor = new Color();
         switch (colorName)
         {
-            default:
-                resultColor = Color.white;
-                break;
             case "blue":
-                resultColor = Color.blue;
+                return Color.blue;
                 break;
             case "green":
-                resultColor = Color.green;
+                return Color.green;
                 break;
             case "red":
-                resultColor = Color.red;
+                return Color.red;
                 break;
             case "yellow":
-                resultColor = Color.yellow;
+                return Color.yellow;
                 break;
             case "cyan":
-                resultColor = Color.cyan;
+                return Color.cyan;
                 break;
             case "magenta":
-                resultColor = Color.magenta;
+                return Color.magenta;
+                break;
+            default:
+                return Color.white;
                 break;
         }
-        return resultColor;
     }
 }

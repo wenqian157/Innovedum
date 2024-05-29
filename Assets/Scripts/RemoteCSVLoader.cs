@@ -79,8 +79,8 @@ public class RemoteCSVLoader : MonoBehaviour
                 myLayerObjects[i].index = i + 6; // custome layer starting from 6
                 myLayerObjects[i].name = data[ 4 * (i + 1) + 1];
                 myLayerObjects[i].contentType = data[4 * (i + 1) + 2];
-                myLayerObjects[i].material = data[4 * (i + 1) + 3];
-                
+                // substring is because of a bug in unity
+                myLayerObjects[i].material = data[4 * (i + 1) + 3].Substring(0, data[4 * (i + 1) + 3].Length-1);
 
                 if (myLayerObjects[i].contentType == "mesh")
                 {
