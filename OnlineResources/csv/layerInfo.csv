@@ -1,10 +1,9 @@
-,,,
 0,lines_sut_beam_strut,lines,green
 1,lines_sut_beam_tie,lines,blue
 2,lines_sut_wall_strut,lines,green
 3,lines_sut_wall_tie,lines,blue
 4,arrow_force_internal_beam,arrow,red
-5,arrow_force_internal_wall,arrow,Red
+5,arrow_force_internal_wall,arrow,red
 6,arrow_force_external,arrow,red
 7,mesh_concrete_wall,mesh,concrete
 8,mesh_concrete_beam,mesh,concrete
