@@ -1,3 +1,4 @@
+index,name,type,material
 0,lines_sut_beam_strut,lines,green
 1,lines_sut_beam_tie,lines,blue
 2,lines_sut_wall_strut,lines,green
