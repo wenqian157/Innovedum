@@ -55,64 +55,55 @@ public class ObjReader : MonoBehaviour
     public string url = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources/obj/mesh_concrete_beam.obj";
     private Obj myObj;
 
-    public void LoadObj()
+    public static Mesh ObjToMesh(string objString)
     {
-        myObj = new Obj();
+        Obj obj = LoadObj(objString);
+        Mesh mesh = _ObjToMesh(obj);
+        // obj to mesh
+
+        return mesh;
+    }
+    private static Obj LoadObj(string objstring)
+    {
+        Obj myObj = new Obj();
         myObj.vertices = new List<float[]>();
         myObj.faces = new List<int[]>();
-        StartCoroutine(LoadObjAsync(url));
-    }
-    IEnumerator LoadObjAsync(string objstring)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(objstring))
-        {
-            www.certificateHandler = new BypassCertificate();
-            www.SendWebRequest();
-            if (!string.IsNullOrEmpty(www.error))
-            {
-                Debug.LogError($"{www.error}");
-                yield break;
-            }
-            while (!www.isDone)
-            {
-                Debug.Log("loading obj...");
-                yield return new WaitForSeconds(0.2f);
-            }
-            string stringData = www.downloadHandler.text;
-            string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
-            foreach (string line in data)
+        string[] data = objstring.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
+
+        foreach (string line in data)
+        {
+            // read vertices
+            if (line.StartsWith("v "))
             {
-                // read vertices
-                if (line.StartsWith("v "))
+                var vertexData = line.Substring(2).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var vertex = new float[]
                 {
-                    var vertexData = line.Substring(2).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    var vertex = new float[]
-                    {
-                        float.Parse(vertexData[0]),
-                        float.Parse(vertexData[1]),
-                        float.Parse(vertexData[2])
-                    };
-                    myObj.vertices.Add(vertex);
-                }
-                // read ObjFaces
-                else if (line.StartsWith("f "))
+                    float.Parse(vertexData[0]),
+                    float.Parse(vertexData[1]),
+                    float.Parse(vertexData[2])
+                };
+                myObj.vertices.Add(vertex);
+            }
+            // read ObjFaces
+            else if (line.StartsWith("f "))
+            {
+                var faceData = line.Substring(2).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var face = new int[faceData.Length];
+                for (int i = 0; i < faceData.Length; i++)
                 {
-                    var faceData = line.Substring(2).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    var face = new int[faceData.Length];
-                    for (int i = 0; i < faceData.Length; i++)
-                    {
-                        // Subtracting 1 to convert OBJ's 1-based indexing to C#'s 0-based indexing
-                        face[i] = int.Parse(faceData[i].Split('/')[0]) - 1;
-                    }
-                    myObj.faces.Add(face);
+                    // Subtracting 1 to convert OBJ's 1-based indexing to C#'s 0-based indexing
+                    face[i] = int.Parse(faceData[i].Split('/')[0]) - 1;
                 }
+                myObj.faces.Add(face);
             }
         }
-        Mesh mesh = ObjToMesh();
-        InitMesh(mesh);
+
+        return myObj;
+        //Mesh mesh = ObjToMesh();
+        //InitMesh(mesh);
     }
-    public Mesh ObjToMesh()
+    private static Mesh _ObjToMesh(Obj myObj)
     {
         Mesh mesh = new Mesh();
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
@@ -128,17 +119,8 @@ public class ObjReader : MonoBehaviour
         mesh.RecalculateNormals();
         return mesh;
     }
-    public Vector3[] UnityVerticesFromObj(List<float[]> vertices)
-    {
-        Vector3[] unityVerticies = new Vector3[vertices.Count];
-        for (int i = 0; i < vertices.Count; i++)
-        {
-            unityVerticies[i] = new Vector3(vertices[i][0], vertices[i][1], vertices[i][2]);
-        }
-        return unityVerticies;
-    }
 
-    public void InitMesh(Mesh mesh)
+    private void InitMeshObject(Mesh mesh)
     {
         MeshFilter meshFilter = GetComponent<MeshFilter>();
         if (meshFilter == null)
@@ -152,5 +134,14 @@ public class ObjReader : MonoBehaviour
             meshRenderer = this.gameObject.AddComponent<MeshRenderer>();
         }
         meshRenderer.material = new Material(Shader.Find("Standard"));
+    }
+    private static Vector3[] UnityVerticesFromObj(List<float[]> vertices)
+    {
+        Vector3[] unityVerticies = new Vector3[vertices.Count];
+        for (int i = 0; i < vertices.Count; i++)
+        {
+            unityVerticies[i] = new Vector3(vertices[i][0], vertices[i][1], vertices[i][2]);
+        }
+        return unityVerticies;
     }
 }
