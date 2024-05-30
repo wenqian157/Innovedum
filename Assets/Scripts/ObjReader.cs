@@ -53,11 +53,9 @@ public class ObjReader : MonoBehaviour
         }
     }
     public string url = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources/obj/mesh_concrete_beam.obj";
-    public Obj myObj;
-    public Mesh mesh;
-    public GameObject meshObject;
+    private Obj myObj;
 
-    public void LoadAsync()
+    public void LoadObj()
     {
         myObj = new Obj();
         myObj.vertices = new List<float[]>();
@@ -126,7 +124,8 @@ public class ObjReader : MonoBehaviour
         //add faces
         myObj.FlipFaces();
         mesh.triangles = myObj.FlattenedTriangles();
-
+        // add norms
+        mesh.RecalculateNormals();
         return mesh;
     }
     public Vector3[] UnityVerticesFromObj(List<float[]> vertices)
@@ -152,6 +151,6 @@ public class ObjReader : MonoBehaviour
         {
             meshRenderer = this.gameObject.AddComponent<MeshRenderer>();
         }
-        meshRenderer.material = new Material(Shader.Find("Particles/Standard Surface"));
+        meshRenderer.material = new Material(Shader.Find("Standard"));
     }
 }
