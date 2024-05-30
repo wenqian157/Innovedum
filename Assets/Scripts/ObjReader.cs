@@ -36,6 +36,29 @@ public class ObjReader : MonoBehaviour
                 faces[i] = face2;
             }
         }
+        // to import obj already flip yz when it is exported from rhino
+        // this step correct it's coordinates in unity
+        // this is from practical test
+        // detail reason needs to be further solve
+        public void AdjustCords()
+        {
+            for (int i = 0; i < vertices.Count; i++)
+            {
+                float[] v = vertices[i];
+                vertices[i] = new float[] { -v[0], v[1], v[2] };
+            }
+            for (int i = 0; i < faces.Count; i++)
+            {
+                int[] face = faces[i];
+                int[] face2 = new int[face.Length];
+
+                for (int j = 0; j < face.Length; j++)
+                {
+                    face2[j] = face[face.Length - 1 - j];
+                }
+                faces[i] = face2;
+            }
+        }
         public int[] FlattenedTriangles()
         {
             int[] indices = new int[faces.Count * 3];
@@ -52,16 +75,14 @@ public class ObjReader : MonoBehaviour
             return indices;
         }
     }
-    public string url = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources/obj/mesh_concrete_beam.obj";
-    private Obj myObj;
-
-    public static Mesh ObjToMesh(string objString)
+    
+    public static GameObject ObjToMeshObject(string objString)
     {
         Obj obj = LoadObj(objString);
-        Mesh mesh = _ObjToMesh(obj);
-        // obj to mesh
+        Mesh mesh = ObjToMesh(obj, false);
+        GameObject meshGO = InitMeshObject(mesh);
 
-        return mesh;
+        return meshGO;
     }
     private static Obj LoadObj(string objstring)
     {
@@ -100,40 +121,44 @@ public class ObjReader : MonoBehaviour
         }
 
         return myObj;
-        //Mesh mesh = ObjToMesh();
-        //InitMesh(mesh);
     }
-    private static Mesh _ObjToMesh(Obj myObj)
+    private static Mesh ObjToMesh(Obj myObj, bool flipYZ=true)
     {
         Mesh mesh = new Mesh();
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
-
+        if (flipYZ)
+        {
+            myObj.FlipYZ();
+            myObj.FlipFaces();
+        }
+        myObj.AdjustCords(); // detail see the function comments
         //add vercites
-        myObj.FlipYZ();
         mesh.vertices = UnityVerticesFromObj(myObj.vertices);
         // TODO color
         //add faces
-        myObj.FlipFaces();
         mesh.triangles = myObj.FlattenedTriangles();
         // add norms
         mesh.RecalculateNormals();
         return mesh;
     }
-
-    private void InitMeshObject(Mesh mesh)
+    private static GameObject InitMeshObject(Mesh mesh)
     {
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        GameObject GO = new GameObject();
+        MeshFilter meshFilter = GO.GetComponent<MeshFilter>();
         if (meshFilter == null)
         {
-            meshFilter = this.gameObject.AddComponent<MeshFilter>();
+            meshFilter = GO.AddComponent<MeshFilter>();
         }
         meshFilter.mesh = mesh;
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = GO.GetComponent<MeshRenderer>();
         if (meshRenderer == null)
         {
-            meshRenderer = this.gameObject.AddComponent<MeshRenderer>();
+            meshRenderer = GO.AddComponent<MeshRenderer>();
         }
-        meshRenderer.material = new Material(Shader.Find("Standard"));
+        //meshRenderer.material = new Material(Shader.Find("Standard"));
+        meshRenderer.material = Resources.Load<Material>("White");
+
+        return GO;
     }
     private static Vector3[] UnityVerticesFromObj(List<float[]> vertices)
     {

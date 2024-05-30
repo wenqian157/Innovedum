@@ -47,12 +47,15 @@ public class RemoteObjLoader : MonoBehaviour
                 Debug.Log("loading...");
                 yield return new WaitForSeconds(0.2f);
             }
-            var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
-            GameObject mesh = new OBJLoader().Load(textStream);
-            mesh.name = layerName;
-            mesh.transform.SetParent(this.transform);
-            mesh.layer = layerIndex;
-            foreach (Transform child in mesh.GetComponentsInChildren<Transform>())
+            //var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.downloadHandler.text));
+            //GameObject mesh = new OBJLoader().Load(textStream);
+
+            GameObject meshGO = ObjReader.ObjToMeshObject(www.downloadHandler.text);
+
+            meshGO.name = layerName;
+            meshGO.transform.SetParent(this.transform);
+            meshGO.layer = layerIndex;
+            foreach (Transform child in meshGO.GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = layerIndex;
             }
