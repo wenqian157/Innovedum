@@ -5353,7 +5353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineWidth: 0.02
-  arrowSize: 0.2
+  arrowSize: 0.12
 --- !u!114 &838193900
 MonoBehaviour:
   m_ObjectHideFlags: 0
