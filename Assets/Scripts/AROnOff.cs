@@ -12,10 +12,14 @@ public class AROnOff : MonoBehaviour
 
     private bool arOn = false;
 
-    public void OnClickOnOffAR()
+    public void OnClickOnOffAR(bool state)
     {
-        arOn = !arOn;
-        Debug.Log($"ARsession: {arOn}");
+        arOn = state;
+        OnOffAR();
+    }
+    private void OnOffAR()
+    {
+        //Debug.Log($"ARsession: {arOn}");
         mainCam.SetActive(!arOn);
         arMainCam.SetActive(arOn);
         if (arOn)
