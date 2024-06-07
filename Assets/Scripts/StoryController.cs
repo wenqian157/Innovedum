@@ -6,7 +6,7 @@ using System.Linq;
 public class StoryController : MonoBehaviour
 {
     public static StoryController instance;
-    public Camera arCam;
+    //public Camera arCam;
     public Camera cam;
     public TMPro.TextMeshProUGUI step;
     public TMPro.TextMeshProUGUI stepNameText;
@@ -23,7 +23,7 @@ public class StoryController : MonoBehaviour
         currentState = 0;
         tempState = 0;
 
-        arCam = cam;
+        //arCam = cam;
     }
     private void Start()
     {
@@ -37,7 +37,7 @@ public class StoryController : MonoBehaviour
         stepNames = RemoteCSVLoader.StoryLine.stepNameArray.ToList();
         currentLayerFilter = layerFilters[0];
         cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-        arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+        //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
         stepNameText.text = stepNames[0];
     }
@@ -65,7 +65,7 @@ public class StoryController : MonoBehaviour
             currentLayerFilter = layerFilters[currentState];
             //Debug.Log($"current step: {currentState}, --" + string.Join("\t", currentLayerFilter));
             cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-            arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+            //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
             step.text = currentState.ToString();
             stepNameText.text = stepNames[currentState];
@@ -79,7 +79,7 @@ public class StoryController : MonoBehaviour
         currentLayerFilter = layerFilters[currentState];
 
         cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-        arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+        //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
         step.text = currentState.ToString();
         stepNameText.text = stepNames[currentState];

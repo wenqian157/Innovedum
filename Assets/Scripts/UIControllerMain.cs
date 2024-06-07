@@ -11,6 +11,7 @@ public class UIControllerMain : MonoBehaviour
     public GameObject layerGO;
     public AROnOff arOnOff;
     public GameObject stepTextGO;
+    public GameObject navigationGO;
     private int currentState = 0;
     private int tempState;
 
@@ -32,13 +33,13 @@ public class UIControllerMain : MonoBehaviour
             stepTextGO.SetActive(true);
             layerGO.SetActive(false);
             arOnOff.OnClickOnOffAR(false);
+            navigationGO.SetActive(true);
 
             if (tempState == 1)
             {
                 StoryController.currentState = 0;
                 StoryController.instance.OnUISetStep(0);
                 cam.cullingMask = StoryController.instance.IndexesToLayerMask(StoryController.currentLayerFilter);
-                arCam.cullingMask = StoryController.instance.IndexesToLayerMask(StoryController.currentLayerFilter);
             }
             tempState = currentState;
         }
@@ -48,6 +49,7 @@ public class UIControllerMain : MonoBehaviour
             stepTextGO.SetActive(false);
             layerGO.SetActive(true);
             arOnOff.OnClickOnOffAR(false);
+            navigationGO.SetActive(true);
 
             if (tempState == 0)
             {
@@ -61,6 +63,7 @@ public class UIControllerMain : MonoBehaviour
             stepTextGO.SetActive(false);
             layerGO.SetActive(false);
             arOnOff.OnClickOnOffAR(true);
+            navigationGO.SetActive(false);
             arCam.cullingMask = cam.cullingMask;
         }
     }

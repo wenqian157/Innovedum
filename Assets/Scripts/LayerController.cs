@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class LayerController : MonoBehaviour
 {
     public static LayerController instance;
-    public Camera arCam;
+    //public Camera arCam;
     public Camera cam;
     public GameObject layerParent;
     public static List<string> layerNameList;
@@ -72,7 +72,7 @@ public class LayerController : MonoBehaviour
             currentLayerList.Remove(index);
         }
         cam.cullingMask = IndexesToLayerMask(currentLayerList);
-        arCam.cullingMask = IndexesToLayerMask(currentLayerList);
+        //arCam.cullingMask = IndexesToLayerMask(currentLayerList);
 
         //cam.cullingMask = LayerMask.GetMask(currentLayerList.ToArray());
         //arCam.cullingMask = LayerMask.GetMask(currentLayerList.ToArray());
@@ -84,7 +84,7 @@ public class LayerController : MonoBehaviour
             toggle.isOn = true;
         }
         cam.cullingMask = IndexesToLayerMask(layerList);
-        arCam.cullingMask = IndexesToLayerMask(layerList);
+        //arCam.cullingMask = IndexesToLayerMask(layerList);
     }
     public LayerMask IndexesToLayerMask(List<int> indexes)
     {

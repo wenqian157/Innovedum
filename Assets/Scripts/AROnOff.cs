@@ -19,7 +19,6 @@ public class AROnOff : MonoBehaviour
     }
     private void OnOffAR()
     {
-        //Debug.Log($"ARsession: {arOn}");
         mainCam.SetActive(!arOn);
         arMainCam.SetActive(arOn);
         if (arOn)
@@ -31,8 +30,16 @@ public class AROnOff : MonoBehaviour
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
             foreach (var line in lines)
             {
-                line.startWidth = 0.001f;
-                line.endWidth = 0.001f;
+                if(line.gameObject.name == "line")
+                {
+                    line.startWidth = 0.001f;
+                    line.endWidth = 0.001f;
+                }
+                else if (line.gameObject.name == "arrow")
+                {
+                    line.startWidth = 0.005f;
+                    line.endWidth = 0;
+                }
             }
         }
         else
@@ -43,8 +50,16 @@ public class AROnOff : MonoBehaviour
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
             foreach (var line in lines)
             {
-                line.startWidth = 0.05f;
-                line.endWidth = 0.05f;
+                if (line.gameObject.name == "line")
+                {
+                    line.startWidth = 0.02f;
+                    line.endWidth = 0.02f;
+                }
+                else if (line.gameObject.name == "arrow")
+                {
+                    line.startWidth = 0.12f;
+                    line.endWidth = 0;
+                }
             }
         }
     }
