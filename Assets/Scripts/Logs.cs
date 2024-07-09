@@ -38,7 +38,7 @@ public class Logs : MonoBehaviour
     }
     private void LogMessage(string message, string stackTrace, LogType type)
     {
-        if (debug.text.Length > 500)
+        if (debug.text.Length > 5000)
         {
             debug.text = message + "\n";
         }
