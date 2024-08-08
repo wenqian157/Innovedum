@@ -153,7 +153,7 @@ Zur Bemessung der Bewehrung werden lediglich die Zugstreben benötigt.
 ====
 18
 
-Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbewehrung durchgeführt. Die massgebende Scheibe 1 hat eine Querkraft von $V_{d}/z = 562.5 kN/m $ aufzunehmen. 
+Für die einzelnen Scheiben des Hohlkastens wird eine Querkraftbemessung durchgeführt. Die massgebende Scheibe 1 hat eine Querkraft von $V_{d}/z = 562.5 kN/m $ aufzunehmen. 
 
 Mit dem Winkel der Druckfeldneigung $\alpha = 45 \degree $ und $z_v = 0.8 m  $ ergibt sich die erforderliche Bügelbewehrung zu: 
 
