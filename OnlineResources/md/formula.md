@@ -48,7 +48,7 @@ $$A_{s,erf,B} = F_{d,B}/f_{sd}=150 kN/435 kN/mm^2 = 345 mm^2$$
 
 benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
 
-$$A_{s,B} = 2 \pi r^2 = 4\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
+$$A_{s,B} = 2 \pi r^2 = 2\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
 
 
 ====
@@ -145,7 +145,7 @@ Hier ist das gesamte Fachwerkmodell inklusive der Verbindung zwischen Wandscheib
 ====
 16
 
-Für die Bemessung des Hohlkastens wird dieses Modell verwendet
+Für die Bemessung des Hohlkastens wird dieses Modell verwendet.
 ====
 17
 
