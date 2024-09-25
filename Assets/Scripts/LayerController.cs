@@ -31,7 +31,7 @@ public class LayerController : MonoBehaviour
         };
         foreach (var item in RemoteCSVLoader.myLayerObjects)
         {
-            layerNameList.Add(item.name);
+            layerNameList.Add(item.displayName);
         }
         layerList = Enumerable.Range(0, layerNameList.Count+6).ToList();
         currentLayerList = layerList;
