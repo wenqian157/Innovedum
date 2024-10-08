@@ -12,7 +12,7 @@ public class LayerController : MonoBehaviour
     public GameObject layerParent;
     public static List<string> layerNameList;
     public static List<int> layerList;
-    private List<int> currentLayerList;
+    public List<int> currentLayerList;
     private static List<Toggle> allToggles;
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class LayerController : MonoBehaviour
         {
             layerNameList.Add(item.displayName);
         }
-        layerList = Enumerable.Range(0, layerNameList.Count+6).ToList();
+        layerList = Enumerable.Range(0, layerNameList.Count).ToList();
         currentLayerList = layerList;
 
         CreateLayerToggle();
@@ -72,19 +72,22 @@ public class LayerController : MonoBehaviour
             currentLayerList.Remove(index);
         }
         cam.cullingMask = IndexesToLayerMask(currentLayerList);
-        //arCam.cullingMask = IndexesToLayerMask(currentLayerList);
-
-        //cam.cullingMask = LayerMask.GetMask(currentLayerList.ToArray());
-        //arCam.cullingMask = LayerMask.GetMask(currentLayerList.ToArray());
     }
-    public void TurnOnAllLayers()
+    public void TurnOnOffAllLayers(bool onOff)
     {
         foreach (var toggle in allToggles)
         {
-            toggle.isOn = true;
+            toggle.isOn = onOff;
         }
-        cam.cullingMask = IndexesToLayerMask(layerList);
-        //arCam.cullingMask = IndexesToLayerMask(layerList);
+    }
+    public void UpdateLayerToggles(List<int> layerList)
+    {
+        TurnOnOffAllLayers(false);
+        foreach (int i in layerList)
+        {
+            if(i != 0)
+            allToggles[i-6].isOn = true;
+        }
     }
     public LayerMask IndexesToLayerMask(List<int> indexes)
     {

@@ -13,9 +13,9 @@ public class StoryController : MonoBehaviour
     public RemoteTextLoader textLoader;
     private List<List<int>> layerFilters;
     [HideInInspector]
-    public static List<int> currentLayerFilter;
+    public List<int> currentLayerFilter;
     private List<string> stepNames;
-    public static int currentState;
+    public int currentState;
     private int tempState;
     private void Awake()
     {
@@ -36,8 +36,6 @@ public class StoryController : MonoBehaviour
         layerFilters = RemoteCSVLoader.StoryLine.layerFilters.ToList();
         stepNames = RemoteCSVLoader.StoryLine.stepNameArray.ToList();
         currentLayerFilter = layerFilters[0];
-        cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-        //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
         stepNameText.text = stepNames[0];
     }
@@ -62,15 +60,7 @@ public class StoryController : MonoBehaviour
         else
         {
             currentState = tempState;
-            currentLayerFilter = layerFilters[currentState];
-            //Debug.Log($"current step: {currentState}, --" + string.Join("\t", currentLayerFilter));
-            cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-            //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-
-            step.text = currentState.ToString();
-            stepNameText.text = stepNames[currentState];
-
-            textLoader.UpdateText(currentState);
+            OnUISetStep(currentState);
         }
     }
     public void OnUISetStep(int index)
@@ -79,7 +69,6 @@ public class StoryController : MonoBehaviour
         currentLayerFilter = layerFilters[currentState];
 
         cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
-        //arCam.cullingMask = IndexesToLayerMask(currentLayerFilter);
 
         step.text = currentState.ToString();
         stepNameText.text = stepNames[currentState];

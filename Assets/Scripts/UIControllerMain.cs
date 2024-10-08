@@ -13,11 +13,11 @@ public class UIControllerMain : MonoBehaviour
     public GameObject stepTextGO;
     public GameObject navigationGO;
     private int currentState = 0;
-    private int tempState;
+    //private int tempState;
 
     private void Awake()
     {
-        tempState = currentState;
+        //tempState = currentState;
     }
     public void OnUIBack2Menu()
     {
@@ -27,7 +27,7 @@ public class UIControllerMain : MonoBehaviour
     public void OnUISwitchState(int state)
     {
         currentState = state;
-        if(currentState == 0)
+        if(currentState == 0) //by steps
         {
             stepGO.SetActive(true);
             stepTextGO.SetActive(true);
@@ -35,15 +35,10 @@ public class UIControllerMain : MonoBehaviour
             arOnOff.OnClickOnOffAR(false);
             navigationGO.SetActive(true);
 
-            if (tempState == 1)
-            {
-                StoryController.currentState = 0;
-                StoryController.instance.OnUISetStep(0);
-                cam.cullingMask = StoryController.instance.IndexesToLayerMask(StoryController.currentLayerFilter);
-            }
-            tempState = currentState;
+            StoryController.instance.OnUISetStep(StoryController.instance.currentState);
         }
-        else if(currentState == 1)
+
+        else if(currentState == 1) //by layers
         {
             stepGO.SetActive(false);
             stepTextGO.SetActive(false);
@@ -51,13 +46,11 @@ public class UIControllerMain : MonoBehaviour
             arOnOff.OnClickOnOffAR(false);
             navigationGO.SetActive(true);
 
-            if (tempState == 0)
-            {
-                LayerController.instance.TurnOnAllLayers();
-            }
-            tempState = currentState;
+            LayerController.instance.UpdateLayerToggles(
+            StoryController.instance.currentLayerFilter);
         }
-        else if(currentState == 2)
+
+        else if(currentState == 2)  // ar mode
         {
             stepGO.SetActive(false);
             stepTextGO.SetActive(false);
