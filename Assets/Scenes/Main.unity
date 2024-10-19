@@ -2603,6 +2603,7 @@ GameObject:
   - component: {fileID: 838193899}
   - component: {fileID: 838193900}
   - component: {fileID: 838193901}
+  - component: {fileID: 838193902}
   m_Layer: 0
   m_Name: RemoteLoader
   m_TagString: Untagged
@@ -2641,6 +2642,8 @@ MonoBehaviour:
   step: {fileID: 1475058436}
   stepNameText: {fileID: 819748707}
   textLoader: {fileID: 838193900}
+  currentLayerFilter: 
+  currentState: 0
 --- !u!114 &838193898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2696,6 +2699,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
   layerParent: {fileID: 2055493684}
+  currentLayerList: 
+--- !u!114 &838193902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838193895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a688a15702214b7cbc3200d674e45e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &848692041
 GameObject:
   m_ObjectHideFlags: 0

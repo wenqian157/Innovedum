@@ -71,7 +71,7 @@ public class LayerController : MonoBehaviour
         {
             currentLayerList.Remove(index);
         }
-        cam.cullingMask = IndexesToLayerMask(currentLayerList);
+        UpdateLayerMask();
     }
     public void TurnOnOffAllLayers(bool onOff)
     {
@@ -98,5 +98,9 @@ public class LayerController : MonoBehaviour
                 mask |= 1 << index;
         }
         return mask;
+    }
+    public void UpdateLayerMask()
+    {
+        cam.cullingMask = IndexesToLayerMask(currentLayerList);
     }
 }

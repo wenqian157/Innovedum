@@ -17,11 +17,14 @@ public class RemoteCSVLoader : MonoBehaviour
     public static List<int> objLayers = new List<int>();
     public static List<int> linesLayers = new List<int>();
     public static List<int> linesWithArrowLayers = new List<int>();
+    public static List<int> objWithText = new List<int>();
 
     public static string urlBase;
     private static string urlCSVLayer;
     private static string urlCSVStory;
     public static RemoteCSVLoader instance;
+
+    public static bool loadcomplete = false;
     
     public class LayerObject
     {
@@ -30,6 +33,7 @@ public class RemoteCSVLoader : MonoBehaviour
         public string contentType;
         public string material;
         public string displayName;
+        public string withText;
     }
     public static LayerObject[] myLayerObjects; 
     [Serializable]
@@ -73,18 +77,19 @@ public class RemoteCSVLoader : MonoBehaviour
 
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
-            layerCount = data.Length / 5 - 1; // 5 is the column numbers in the csv: index, name, type, material, display name
+            layerCount = data.Length / 6 - 1; // 6 is the column numbers in the csv: index, name, type, material, display name, if with text
             myLayerObjects = new LayerObject[layerCount];
             for (int i = 0; i < layerCount; i++)
             {
                 myLayerObjects[i] = new LayerObject();
                 myLayerObjects[i].index = i + 6; // custome layer starting from 6
-                myLayerObjects[i].name = data[ 5 * (i + 1) + 1];
-                myLayerObjects[i].contentType = data[5 * (i + 1) + 2];
+                myLayerObjects[i].name = data[ 6 * (i + 1) + 1];
+                myLayerObjects[i].contentType = data[6 * (i + 1) + 2];
                 // substring is because of a bug in unity
-                //myLayerObjects[i].material = data[5 * (i + 1) + 3].Substring(0, data[5 * (i + 1) + 3].Length-1);
-                myLayerObjects[i].material = data[5 * (i + 1) + 3];
-                myLayerObjects[i].displayName = data[5 * (i + 1) + 4];
+                //myLayerObjects[i].material = data[6 * (i + 1) + 3].Substring(0, data[5 * (i + 1) + 3].Length-1);
+                myLayerObjects[i].material = data[6 * (i + 1) + 3];
+                myLayerObjects[i].displayName = data[6 * (i + 1) + 4];
+                myLayerObjects[i].withText = data[6 * (i + 1) + 5];
 
                 if (myLayerObjects[i].contentType == "mesh")
                 {
@@ -97,6 +102,11 @@ public class RemoteCSVLoader : MonoBehaviour
                 else if (myLayerObjects[i].contentType == "arrow")
                 {
                     linesWithArrowLayers.Add(myLayerObjects[i].index);
+                }
+
+                if (int.Parse(myLayerObjects[i].withText) == 0)
+                {
+                    objWithText.Add(myLayerObjects[i].index);
                 }
             }
             instance.StartCoroutine(ReadCSVStory(urlCSVStory));

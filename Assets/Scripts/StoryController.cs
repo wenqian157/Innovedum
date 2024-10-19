@@ -76,6 +76,10 @@ public class StoryController : MonoBehaviour
         textLoader.UpdateText(currentState);
 
     }
+    public void UpdateLayerMask()
+    {
+        cam.cullingMask = IndexesToLayerMask(currentLayerFilter);
+    }
     //public void OnClickDisplayLayer(int layerIndex)
     //{
     //    if (!layerRange.Contains(layerIndex))
