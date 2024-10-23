@@ -11,7 +11,10 @@ public class RemoteTextGeometryLoader : MonoBehaviour
     private TextGeometry textGeometry;
     private bool lookAtCam = true;
     private List<GameObject> textGOList;
-    private List<TextMeshPro> listOfText;
+    private List<TEXDraw3D> listOfText;
+    private int latexCount = 0;
+    private int tempCount = -1;
+    private bool loadComplete = false;
 
     void Start()
     {
@@ -62,12 +65,13 @@ public class RemoteTextGeometryLoader : MonoBehaviour
 
             for (int i = 0; i < textGeometry.text.Count; i++)
             {
-                AddTextGeometry(
+                AddLatexGeometry(
                     textGOLayerParent.transform,
                     textGeometry.text[i],
                     textGeometry.pt[i],
                     layerIndex
                     );
+                latexCount += 1;
             }
         }
         StoryController.instance.UpdateLayerMask();
@@ -107,19 +111,75 @@ public class RemoteTextGeometryLoader : MonoBehaviour
             trans.gameObject.layer = layerIndex;
         }
     }
+    private void AddLatexGeometry(Transform parent, string text, float[] pt, int layerIndex)
+    {
+        GameObject textGOLocation = new GameObject();
+
+        textGOLocation.transform.parent = parent;
+        textGOLocation.transform.localPosition = new Vector3(
+            pt[0],
+            pt[2],
+            pt[1]
+            );
+        textGOLocation.transform.localScale = new Vector3(1, 1, 1);
+        textGOLocation.transform.localRotation = Quaternion.identity;
+
+        GameObject textGORect = new GameObject();
+        textGORect.transform.SetParent(textGOLocation.transform);
+
+        TEXDraw3D latex3D = textGORect.AddComponent<TEXDraw3D>();
+        latex3D.text = text;
+        latex3D.color = Color.red;
+        latex3D.size = 0.15f;
+        latex3D.pixelsPerUnit = 200;
+
+        RectTransform rectTransform = textGORect.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            rectTransform.localPosition = new Vector3(0, 0.3f, 0);
+        }
+
+        List<Transform> allChildren = parent.gameObject.GetComponentsInChildren<Transform>().ToList();
+        foreach (Transform trans in allChildren)
+        {
+            trans.gameObject.layer = layerIndex;
+        }
+    }
     private void Update()
     {
-        listOfText = transform.GetComponentsInChildren<TextMeshPro>().ToList();
-        if (lookAtCam)
+        while (tempCount != latexCount)
         {
-            foreach (TextMeshPro textMesh in listOfText)
+            List<TEXDraw3D> tempList = transform.GetComponentsInChildren<TEXDraw3D>().ToList();
+            tempCount = tempList.Count;
+            if(tempCount == latexCount)
             {
-                textMesh.transform.LookAt(
-                textMesh.transform.position +
-                Camera.main.transform.rotation * Vector3.forward,
-                Camera.main.transform.rotation * Vector3.up
-                );
+                Debug.Log("text geometry load complete");
+                loadComplete = true;
+                listOfText = tempList;
+                break;
             }
+        }
+
+        if (loadComplete)
+        {
+            if (lookAtCam)
+            {
+                foreach (TEXDraw3D textMesh in listOfText)
+                {
+                    textMesh.transform.LookAt(
+                    textMesh.transform.position +
+                    Camera.main.transform.rotation * Vector3.forward,
+                    Camera.main.transform.rotation * Vector3.up
+                    );
+                }
+            }
+        }
+    }
+    public void OnClickTextOnOff()
+    {
+        foreach (TEXDraw3D textMesh in listOfText)
+        {
+            textMesh.gameObject.SetActive(!textMesh.gameObject.activeSelf);
         }
     }
     [SerializeField]

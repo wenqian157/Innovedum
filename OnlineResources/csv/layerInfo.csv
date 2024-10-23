@@ -21,4 +21,4 @@ index,name,type,material,display_name_german,with_text
 19,mesh_reinforcement_beam_stringer_bot,mesh,steel,Bewehrung Stringer unten,1
 20,mesh_support,mesh,concrete,Umgebung ,1
 21,mesh_reinforcement_wall_secondary,mesh,steel,Konstruktive Bewehrung ,1
-22,mesh_wall_section,mesh,concrete,Wandabschnitt,1
+22,mesh_wall_section,mesh,transparent,Wandabschnitt,1

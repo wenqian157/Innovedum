@@ -29,10 +29,11 @@ public class RemoteObjLoader : MonoBehaviour
         foreach (int layerIndex in RemoteCSVLoader.objLayers)
         {
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            StartCoroutine(LoadObjAsync(layerIndex, layerName));
+            string material = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
+            StartCoroutine(LoadObjAsync(layerIndex, layerName, material));
         }
     }
-    IEnumerator LoadObjAsync(int layerIndex, string layerName)
+    IEnumerator LoadObjAsync(int layerIndex, string layerName, string material)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(RemoteCSVLoader.urlBase + "/obj/" + layerName + ".obj"))
         {
@@ -55,6 +56,7 @@ public class RemoteObjLoader : MonoBehaviour
             meshGO.name = layerName;
             meshGO.transform.SetParent(this.transform);
             meshGO.layer = layerIndex;
+            ApplyMaterial(meshGO, material);
             foreach (Transform child in meshGO.GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = layerIndex;
@@ -62,5 +64,24 @@ public class RemoteObjLoader : MonoBehaviour
         }
 
         log.SetActive(false);
+    }
+    private void ApplyMaterial(GameObject gameObject, string material)
+    {
+        MeshFilter meshFilter = gameObject.GetComponent<MeshFilter>();
+        if (meshFilter is null)
+        {
+            return;
+        }
+
+        MeshRenderer meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        if (meshRenderer is null)
+        {
+            meshRenderer = gameObject.AddComponent<MeshRenderer>();
+        }
+
+        Material mat = Resources.Load<Material>(material);
+        if (mat is null) return;
+
+        meshRenderer.material = mat;
     }
 }
