@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class RemoteInfoLoader : MonoBehaviour
 {
-    public string projectUrl = "https://raw.githubusercontent.com/wenqian157/Innovedum/main/OnlineResources";
+    public List<string> projectUrlList = new List<string>();
     public static string urlBase;
     public static RemoteInfoLoader Instance;
     private string urlInfo;
@@ -23,12 +23,26 @@ public class RemoteInfoLoader : MonoBehaviour
             Destroy(Instance.gameObject);
             Instance = this;
         }
-        urlBase = projectUrl;
     }
-    public void OnUIReadInfo()
+    public void OnUIReadInfo(int id)
     {
+        urlBase = projectUrlList[id];
+        if (urlBase is null) return;
         urlInfo = urlBase + "/txt/info.txt";
         StartCoroutine(ReadInfo(urlInfo));
+
+        RemoteCSVLoader.urlBase = urlBase;
+        RemoteCSVLoader.projectID = id;
+
+        switch (id)
+        {
+            case 0:
+                RemoteCSVLoader.displayingScale = 1;
+                break;
+            case 1:
+                RemoteCSVLoader.displayingScale = 0.5f;
+                break;
+        }
     }
     public static IEnumerator ReadInfo(string url)
     {

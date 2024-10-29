@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 
 public class RemoteObjLoader : MonoBehaviour
 {
-    public GameObject log;
     void Start()
     {
         StartCoroutine(ReadCSVAsync());
@@ -31,6 +30,7 @@ public class RemoteObjLoader : MonoBehaviour
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
             string material = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
             StartCoroutine(LoadObjAsync(layerIndex, layerName, material));
+            LoadingProgress.Instance.coroutineCount++;
         }
     }
     IEnumerator LoadObjAsync(int layerIndex, string layerName, string material)
@@ -56,14 +56,14 @@ public class RemoteObjLoader : MonoBehaviour
             meshGO.name = layerName;
             meshGO.transform.SetParent(this.transform);
             meshGO.layer = layerIndex;
+            meshGO.transform.localScale = new Vector3(1, 1, 1);
             ApplyMaterial(meshGO, material);
             foreach (Transform child in meshGO.GetComponentsInChildren<Transform>())
             {
                 child.gameObject.layer = layerIndex;
             }
         }
-
-        log.SetActive(false);
+        LoadingProgress.Instance.coroutineCount--;
     }
     private void ApplyMaterial(GameObject gameObject, string material)
     {

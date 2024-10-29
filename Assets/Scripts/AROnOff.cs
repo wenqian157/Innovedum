@@ -24,7 +24,9 @@ public class AROnOff : MonoBehaviour
         if (arOn)
         {
             model.transform.SetParent(arModelParent.transform);
-            ResetTransform(model.transform, new Vector3(0, 0, 0.05f), Quaternion.identity, new Vector3(0.05f, 0.05f, 0.05f));
+            ResetTransform(model.transform, new Vector3(0, 0, 0.05f), Quaternion.identity, new Vector3(
+                RemoteCSVLoader.displayingScale*0.05f, RemoteCSVLoader.displayingScale*0.05f, RemoteCSVLoader.displayingScale*0.05f
+                ));
             model.transform.Rotate(new Vector3(90, 0, 0));
 
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
@@ -45,7 +47,9 @@ public class AROnOff : MonoBehaviour
         else
         {
             model.transform.SetParent(modelParent.transform);
-            ResetTransform(model.transform, new Vector3(0, 0, 0), Quaternion.identity, new Vector3(1, 1, 1));
+            ResetTransform(model.transform, new Vector3(0, 0, 0), Quaternion.identity, new Vector3(
+                RemoteCSVLoader.displayingScale, RemoteCSVLoader.displayingScale, RemoteCSVLoader.displayingScale
+                ));
 
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
             foreach (var line in lines)

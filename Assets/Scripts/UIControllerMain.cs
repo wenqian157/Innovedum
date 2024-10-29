@@ -23,6 +23,7 @@ public class UIControllerMain : MonoBehaviour
     {
         Debug.Log("load open scene...");
         SceneManager.LoadScene("Open", LoadSceneMode.Single);
+        RemoteCSVLoader.instance.Reset();
     }
     public void OnUISwitchState(int state)
     {

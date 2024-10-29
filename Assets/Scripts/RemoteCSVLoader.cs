@@ -20,6 +20,8 @@ public class RemoteCSVLoader : MonoBehaviour
     public static List<int> objWithText = new List<int>();
 
     public static string urlBase;
+    public static int projectID;
+    public static float displayingScale;
     private static string urlCSVLayer;
     private static string urlCSVStory;
     public static RemoteCSVLoader instance;
@@ -45,12 +47,29 @@ public class RemoteCSVLoader : MonoBehaviour
     }
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            if (instance == this) return;
+            Destroy(instance.gameObject);
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
+    public void Reset()
+    {
+        objLayers = new List<int>();
+        linesLayers = new List<int>();
+        linesWithArrowLayers = new List<int>();
+        objWithText = new List<int>();
+}
     public static void OnUILoadScene()
     {
-        urlBase = RemoteInfoLoader.Instance.projectUrl;
+        if (urlBase is null) return;
+
         urlCSVLayer = urlBase + "/csv/layerInfo.csv";
         urlCSVStory = urlBase + "/csv/storyInfo.csv";
         
@@ -134,7 +153,7 @@ public class RemoteCSVLoader : MonoBehaviour
 
             Debug.Log("load story data: " + data.Length);
 
-            storyCount = data.Length / (layerCount + 2);
+            storyCount = data.Length / (layerCount + 2); 
             StoryLine.layerFilters = new List<int>[storyCount];
             
             for (int j = 0; j < storyCount; j++)

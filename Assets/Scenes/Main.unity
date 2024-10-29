@@ -2739,9 +2739,10 @@ GameObject:
   - component: {fileID: 838193900}
   - component: {fileID: 838193901}
   - component: {fileID: 838193902}
+  - component: {fileID: 838193903}
   m_Layer: 0
   m_Name: RemoteLoader
-  m_TagString: Untagged
+  m_TagString: ModelParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2845,6 +2846,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a688a15702214b7cbc3200d674e45e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &838193903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838193895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d374321f2c96140208270b843a72c7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &848692041
@@ -3423,7 +3436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1124956270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5352,7 +5365,7 @@ GameObject:
   - component: {fileID: 1938869386}
   m_Layer: 5
   m_Name: LogText
-  m_TagString: Untagged
+  m_TagString: Log
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
