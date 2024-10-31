@@ -36,7 +36,7 @@ public class UIControllerMain : MonoBehaviour
             arOnOff.OnClickOnOffAR(false);
             navigationGO.SetActive(true);
 
-            StoryController.instance.OnUISetStep(StoryController.instance.currentState);
+            StoryController.instance.SetStep(StoryController.instance.currentState);
         }
 
         else if(currentState == 1) //by layers

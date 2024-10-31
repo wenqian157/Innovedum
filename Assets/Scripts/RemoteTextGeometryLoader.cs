@@ -8,35 +8,26 @@ using UnityEngine.Networking;
 
 public class RemoteTextGeometryLoader : MonoBehaviour
 {
-    private TextGeometry textGeometry;
-    private bool lookAtCam = true;
-    private List<GameObject> textGOList;
+    private TextGeometryAll textGeometryAll;
+    private bool lookAtCam = false;
     private List<TEXDraw3D> listOfText;
-    private int latexCount = 0;
-    private int tempCount = -1;
-    private bool loadComplete = false;
+    [HideInInspector]
+    public bool is3DText = false;
 
     void Start()
     {
         StartCoroutine(ReadCSVAsync());
+        StartCoroutine(getAllText3D());
     }
     IEnumerator ReadCSVAsync()
     {
         yield return new WaitForSeconds(1.0f);
-        RemoteLoadAllText();
+        StartCoroutine(LoadText3DAsync());
+        LoadingProgress.Instance.coroutineCount++;
     }
-    private void RemoteLoadAllText()
+    IEnumerator LoadText3DAsync()
     {
-        Debug.Log($"found {RemoteCSVLoader.objWithText.Count}line LayerObject");
-        foreach (var layerIndex in RemoteCSVLoader.objWithText)
-        {
-            string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
-            StartCoroutine(LoadTextGeometryAsync(layerIndex, layerName));
-        }
-    }
-    IEnumerator LoadTextGeometryAsync(int layerIndex, string layerName)
-    {
-        string url = RemoteCSVLoader.urlBase + "/json/" + layerName + "_text.json";
+        string url = RemoteCSVLoader.urlBase + "/json/step_text.json";
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
             www.certificateHandler = new BypassCertificate();
@@ -52,66 +43,42 @@ public class RemoteTextGeometryLoader : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
             string stringData = www.downloadHandler.text;
-            textGeometry = JsonConvert.DeserializeObject<TextGeometry>(stringData);
-
-            // create one GO for all txt in a layer
-            GameObject textGOLayerParent = new GameObject();
-            textGOLayerParent.transform.SetParent(transform);
-            textGOLayerParent.transform.localPosition = new Vector3(0, 0, 0);
-            textGOLayerParent.transform.localRotation = Quaternion.identity;
-            textGOLayerParent.transform.localScale = new Vector3(1, 1, 1);
-            textGOLayerParent.name = layerName + "_text";
-            textGOLayerParent.layer = layerIndex;
-
-            for (int i = 0; i < textGeometry.text.Count; i++)
+            if(stringData == "404: Not Found")
             {
-                AddLatexGeometry(
-                    textGOLayerParent.transform,
-                    textGeometry.text[i],
-                    textGeometry.pt[i],
-                    layerIndex
-                    );
-                latexCount += 1;
+                yield break;
+            }
+            textGeometryAll = JsonConvert.DeserializeObject<TextGeometryAll>(stringData);
+            GameObject textParent = new GameObject();
+            textParent.transform.SetParent(transform);
+            textParent.transform.localPosition = new Vector3(0, 0, 0);
+            textParent.transform.localRotation = Quaternion.identity;
+            textParent.transform.localScale = new Vector3(1, 1, 1);
+            textParent.name = "textParent";
+            is3DText = true;
+            LoadingProgress.Instance.is3DText = true;
+
+            foreach (var textGeometry in textGeometryAll.text3d)
+            {
+                CreateTextGeometrySubParent(textParent, textGeometry);
             }
         }
-        StoryController.instance.UpdateLayerMask();
+        LoadingProgress.Instance.coroutineCount--;
     }
-    private void AddTextGeometry(Transform parent, string text, float[] pt, int layerIndex)
+    private void CreateTextGeometrySubParent(GameObject parent, TextGeometry textGeometry)
     {
-        GameObject textGOLocation = new GameObject();
+        GameObject textSubParent = new GameObject();
+        textSubParent.transform.SetParent(parent.transform);
+        textSubParent.transform.localPosition = new Vector3(0, 0, 0);
+        textSubParent.transform.localRotation = Quaternion.identity;
+        textSubParent.transform.localScale = new Vector3(1, 1, 1);
+        textSubParent.name = textGeometry.step.ToString();
 
-        textGOLocation.transform.parent = parent;
-        textGOLocation.transform.localPosition = new Vector3(
-            pt[0],
-            pt[2],
-            pt[1]
-            );
-        textGOLocation.transform.localScale = new Vector3(1, 1, 1);
-        textGOLocation.transform.localRotation = Quaternion.identity;
-
-        GameObject textGORect = new GameObject();
-        textGORect.transform.SetParent(textGOLocation.transform);
-
-        TextMeshPro textMesh = textGORect.AddComponent<TextMeshPro>();
-        textMesh.text = text;
-        textMesh.fontSize = 1.5f;
-        textMesh.color = Color.red;
-
-        RectTransform rectTransform = textGORect.GetComponent<RectTransform>();
-        if(rectTransform != null)
+        for (int i = 0; i < textGeometry.text.Count; i++)
         {
-            rectTransform.localPosition = new Vector3(0, 0, 0);
-            rectTransform.pivot = new Vector2(0, 0);
-            rectTransform.sizeDelta = new Vector2(2, 0.4f);
-        }
-
-        List<Transform> allChildren = parent.gameObject.GetComponentsInChildren<Transform>().ToList();
-        foreach (Transform trans in allChildren)
-        {
-            trans.gameObject.layer = layerIndex;
+            AddLatexGeometry(textSubParent.transform, textGeometry.text[i], textGeometry.pt[i]);
         }
     }
-    private void AddLatexGeometry(Transform parent, string text, float[] pt, int layerIndex)
+    private void AddLatexGeometry(Transform parent, string text, float[] pt)
     {
         GameObject textGOLocation = new GameObject();
 
@@ -138,54 +105,44 @@ public class RemoteTextGeometryLoader : MonoBehaviour
         {
             rectTransform.localPosition = new Vector3(0, 0.3f, 0);
         }
-
-        List<Transform> allChildren = parent.gameObject.GetComponentsInChildren<Transform>().ToList();
-        foreach (Transform trans in allChildren)
+    }
+    IEnumerator getAllText3D()
+    {
+        while (true)
         {
-            trans.gameObject.layer = layerIndex;
+            yield return new WaitForSeconds(0.2f);
+            if (LoadingProgress.Instance.loadComplete)
+            {
+                lookAtCam = true;
+                break;
+            }
         }
     }
     private void Update()
     {
-        while (tempCount != latexCount)
+        if (is3DText && lookAtCam)
         {
-            List<TEXDraw3D> tempList = transform.GetComponentsInChildren<TEXDraw3D>().ToList();
-            tempCount = tempList.Count;
-            if(tempCount == latexCount)
+            listOfText = transform.GetComponentsInChildren<TEXDraw3D>().ToList();
+            foreach (TEXDraw3D textMesh in listOfText)
             {
-                Debug.Log("text geometry load complete");
-                loadComplete = true;
-                listOfText = tempList;
-                break;
+                textMesh.transform.LookAt(
+                textMesh.transform.position +
+                Camera.main.transform.rotation * Vector3.forward,
+                Camera.main.transform.rotation * Vector3.up
+                );
             }
-        }
-
-        if (loadComplete)
-        {
-            if (lookAtCam)
-            {
-                foreach (TEXDraw3D textMesh in listOfText)
-                {
-                    textMesh.transform.LookAt(
-                    textMesh.transform.position +
-                    Camera.main.transform.rotation * Vector3.forward,
-                    Camera.main.transform.rotation * Vector3.up
-                    );
-                }
-            }
-        }
-    }
-    public void OnClickTextOnOff()
-    {
-        foreach (TEXDraw3D textMesh in listOfText)
-        {
-            textMesh.gameObject.SetActive(!textMesh.gameObject.activeSelf);
         }
     }
     [SerializeField]
     public struct TextGeometry
     {
+        public int step;
         public List<string> text;
         public List<float[]> pt;
+    }
+    [SerializeField]
+    public struct TextGeometryAll
+    {
+        public List<TextGeometry> text3d;
     }
 }

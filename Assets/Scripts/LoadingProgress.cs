@@ -10,6 +10,8 @@ public class LoadingProgress : MonoBehaviour
     private bool loadStart;
     [HideInInspector]
     public bool loadComplete = false;
+    [HideInInspector]
+    public bool is3DText = false;
     private void Awake()
     {
         if (Instance == null)
