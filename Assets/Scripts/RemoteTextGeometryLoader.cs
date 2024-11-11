@@ -34,6 +34,7 @@ public class RemoteTextGeometryLoader : MonoBehaviour
             www.SendWebRequest();
             if (!string.IsNullOrEmpty(www.error))
             {
+                LoadingProgress.Instance.coroutineCount--;
                 Debug.LogError($"{www.error}");
                 yield break;
             }
@@ -45,6 +46,7 @@ public class RemoteTextGeometryLoader : MonoBehaviour
             string stringData = www.downloadHandler.text;
             if(stringData == "404: Not Found")
             {
+                LoadingProgress.Instance.coroutineCount--;
                 yield break;
             }
             textGeometryAll = JsonConvert.DeserializeObject<TextGeometryAll>(stringData);
