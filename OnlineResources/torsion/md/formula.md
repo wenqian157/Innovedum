@@ -1,16 +1,16 @@
 
 00
-Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast $Q_{d} = 150 kN$ belastet.
+Das dargestellte System bestehend aus Wandscheibe und Hohlkasten wird mit einer Einzellast $Q_{d} = 150 \text{kN}$ belastet.
 
 ====
 01
 
 In einem ersten Schritt wird die Wandscheibe betrachtet, welche Auflagerreaktionen aus dem Hohlkasten erhält. 
 
-$$R_{d,1} = 450$$ kN
-$$R_{d,2} = 281$$ kN
-$$R_{d,3} = 300$$ kN
-$$R_{d,4} = 281$$ kN
+$$R_{d,1} = 450 \text{kN}$$
+$$R_{d,2} = 281 \text{kN}$$
+$$R_{d,3} = 300 \text{kN}$$
+$$R_{d,4} = 281 \text{kN}$$
 
 ====
 02
@@ -26,11 +26,11 @@ Für die Bemessung der Bewehrung werden lediglich die Zugstreben des Fachwerkmod
 
 Für die Zugkraft in Strebe A 
 
-$$F_{d,A} = 3.375 \cdot Q_{d} = 506$$ kN
+$$F_{d,A} = 3.375 \cdot Q_{d} = 506\text{kN}$$
 
 wird eine konzentrierte Bewehrung mit der Fläche 
 
-$$A_{s,erf,A} = F_{d,A}/f_{sd}=506 \text{kN}/435 \text{kN/mm}^2=1164 \text{mm}^2$$
+$$A_{s,erf,A} = \frac{F_{d,A}}{f_{sd}}=506 \text{kN}/435 \text{kN/mm}^2=1164 \text{mm}^2$$
 
 benötigt. Es wird eine Bewehrung gewählt von 4Ø20 mit der Fläche 
 
@@ -49,6 +49,7 @@ $$A_{s,erf,B} = F_{d,B}/f_{sd}=150 \text{kN}/435 \text{kN/mm}^2 = 345 \text{mm}^
 benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
 
 $$A_{s,B} = 2 \pi r^2 = 4\cdot\pi\cdot(8 \text{mm})^2 = 402 \text{mm}^2$$
+
 
 ====
 06 
@@ -83,7 +84,7 @@ $$A_{s,D} = 2 \pi r^2 / 150 \text{mm} = 2\cdot\pi\cdot(4 \text{mm})^2 / 150 \tex
 
 Für die Zugkraft in Strebe E 
 
-$$F_{d,E} = 2.0 \cdot Q_{d} / 0.6 <text{m} = 500 \text{kN/m}$$
+$$F_{d,E} = 2.0 \cdot Q_{d} / 0.6 \text{m} = 500 \text{kN/m}$$
 
 wird eine verteilte Bewehrung mit der Fläche 
 
@@ -144,7 +145,7 @@ Hier ist das gesamte Fachwerkmodell inklusive der Verbindung zwischen Wandscheib
 ====
 16
 
-Für die Bemessung des Hohlkastens wird dieses Modell verwendet.
+Für die Bemessung des Hohlkastens wird dieses Modell verwendet
 ====
 17
 

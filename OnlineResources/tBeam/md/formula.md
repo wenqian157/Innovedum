@@ -1,6 +1,6 @@
 
 00
-Das dargestellte System besteht aus mehreren PLattenbalken nebeneinander. Diese überspannen als einfache Balken 16 m. 
+Das dargestellte System besteht aus mehreren Plattenbalken nebeneinander. Diese überspannen als einfache Balken 16 m. 
 
 ====
 01
@@ -35,12 +35,12 @@ Als Längsbewehrung werden 7Ø30 gewählt.
 ====
 07
 
-Zur Sicherstellung der Querkrafttragfähigkeit wird eine Bügelbewehrung Ø8@125 gewählt. 
+Zur Sicherstellung der Querkrafttragsicherheit wird eine Bügelbewehrung Ø8@125 gewählt. 
 
 ====
 08
 
-Die notwendige Querbewehrung der Platte ergibt sich als Überlagerund aus der Beansprachung durch Quermoment und Ausbreiteung der Flanschdruckkräfte.
+Die notwendige Querbewehrung der Platte ergibt sich als Überlagerung aus der Beanspruchung durch Querbiegemoment und Ausbreitung der Flanschdruckkräfte.
 
 ====
 09
