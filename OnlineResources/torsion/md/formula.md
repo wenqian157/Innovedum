@@ -48,7 +48,8 @@ $$A_{s,erf,B} = F_{d,B}/f_{sd}=150 \text{kN}/435 \text{kN/mm}^2 = 345 \text{mm}^
 
 benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche 
 
-$$A_{s,B} = 2 \pi r^2 = 4\cdot\pi\cdot(8 \text{mm})^2 = 402 \text{mm}^2$$
+$$A_{s,B} = 2 \pi r^2 = 2\cdot\pi\cdot(8 mm)^2 = 402 mm^2$$
+
 
 ====
 06 
