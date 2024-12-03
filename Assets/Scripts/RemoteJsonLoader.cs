@@ -32,6 +32,7 @@ public class RemoteJsonLoader : MonoBehaviour
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
             string layerMaterial = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
             StartCoroutine(LoadLineJsonAsync(layerIndex, layerName, layerMaterial));
+            LoadingProgress.Instance.coroutineCount++;
         }
 
         Debug.Log($"found {RemoteCSVLoader.linesWithArrowLayers.Count}arrow LayerObject");
@@ -40,6 +41,7 @@ public class RemoteJsonLoader : MonoBehaviour
             string layerName = RemoteCSVLoader.myLayerObjects[layerIndex - 6].name;
             string layerMaterial = RemoteCSVLoader.myLayerObjects[layerIndex - 6].material;
             StartCoroutine(LoadArrowJsonAsync(layerIndex, layerName, layerMaterial));
+            LoadingProgress.Instance.coroutineCount++;
         }
     }
 
@@ -65,6 +67,7 @@ public class RemoteJsonLoader : MonoBehaviour
             line.transform.SetParent(transform);
             line.name = layerName;
             line.layer = layerIndex;
+            line.transform.localScale = new Vector3(1, 1, 1);
             Color lineColor = GetColorFromName(layerMaterial);
             AddLines(line.transform, lineData, lineColor);
             foreach (Transform child in line.GetComponentsInChildren<Transform>())
@@ -72,6 +75,7 @@ public class RemoteJsonLoader : MonoBehaviour
                 child.gameObject.layer = layerIndex;
             }
         }
+        LoadingProgress.Instance.coroutineCount--;
     }
     IEnumerator LoadArrowJsonAsync(int layerIndex, string layerName, string layerMaterial)
     {
@@ -95,6 +99,7 @@ public class RemoteJsonLoader : MonoBehaviour
             lineWithArrow.transform.SetParent(transform);
             lineWithArrow.name = layerName;
             lineWithArrow.layer = layerIndex;
+            lineWithArrow.transform.localScale = new Vector3(1, 1, 1);
             Color lineColor = GetColorFromName(layerMaterial);
             AddLinesWithArrow(lineWithArrow.transform, lineData, lineColor);
             foreach (Transform child in lineWithArrow.GetComponentsInChildren<Transform>())
@@ -102,6 +107,7 @@ public class RemoteJsonLoader : MonoBehaviour
                 child.gameObject.layer = layerIndex;
             }
             }
+        LoadingProgress.Instance.coroutineCount--;
     }
     private void AddLines(Transform parent, LinesFromRhino lineData, Color c)
     {

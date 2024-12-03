@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 9549caa4f48f5468880bd24fa063b1d0
+  - enabled: 0
+    path: Assets/OpenCVForUnity/Examples/MainModules/objdetect/ArUcoExample/ArUcoWebCamExample.unity
+    guid: 341aba2f1628bc049af49cd0dda3a513
+  - enabled: 0
+    path: Assets/Scenes/MainARDebug.unity
+    guid: 60558fb6fbcf04cceb89ef59539ca9f3
+  - enabled: 0
+    path: Assets/Scenes/MainAR2.unity
+    guid: c135760eacd36413db103cf1c52f67e1
   m_configObjects: {}

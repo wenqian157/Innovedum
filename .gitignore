@@ -51,6 +51,14 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+# video
+*.mp4
+*.mov
+
+# for presentation
+/Others
+/OnlineRresources
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
