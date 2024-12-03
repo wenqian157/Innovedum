@@ -1,41 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
+
 
 public class RemoteInfoLoader : MonoBehaviour
 {
-    public List<string> projectUrlList = new List<string>();
-    public static string urlBase;
-    public static RemoteInfoLoader Instance;
-    private string urlInfo;
-    private string urlName;
+    public List<string> projectUrlList = new List<string>(
+        )
+    { "https://raw.githubusercontent.com/wenqian157/webServer/main/torsion",
+      "https://raw.githubusercontent.com/wenqian157/webServer/main/tBeam"};
 
-    private void Awake()
+    public int projectID;
+    public static string urlBase;
+
+    private void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            if (Instance == this) return;
-            Destroy(Instance.gameObject);
-            Instance = this;
-        }
+        OnUIReadInfo(projectID);
     }
     public void OnUIReadInfo(int id)
     {
-        urlBase = projectUrlList[id];
-        if (urlBase is null) return;
-        urlInfo = urlBase + "/txt/info.txt";
-        StartCoroutine(ReadInfo(urlInfo));
-        urlName = urlBase + "/txt/name.txt";
-        StartCoroutine(ReadProjectName(urlName));
-
-        RemoteCSVLoader.urlBase = urlBase;
+        RemoteCSVLoader.urlBase = projectUrlList[id];
         RemoteCSVLoader.projectID = id;
 
         switch (id)
@@ -47,53 +31,6 @@ public class RemoteInfoLoader : MonoBehaviour
                 RemoteCSVLoader.displayingScale = 0.5f;
                 break;
         }
-    }
-    public static IEnumerator ReadInfo(string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
-        {
-            www.SendWebRequest();
-            if (!string.IsNullOrEmpty(www.error))
-            {
-                Debug.LogError($"{www.error}");
-                yield break;
-            }
-            while (!www.isDone)
-            {
-                Debug.Log("loading project information...");
-                Logs.Instance.announce.text = "loading project information...";
-                yield return new WaitForSeconds(0.2f);
-            }
-
-            Debug.Log($"request is done: {www.downloadHandler.text}");
-            Debug.Log(www.result);
-            Debug.Log(www.downloadProgress);
-            string stringData = www.downloadHandler.text;
-            Logs.Instance.announce.text = stringData;
-        }
-    }
-    public static IEnumerator ReadProjectName(string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
-        {
-            www.SendWebRequest();
-            if (!string.IsNullOrEmpty(www.error))
-            {
-                Debug.LogError($"{www.error}");
-                yield break;
-            }
-            while (!www.isDone)
-            {
-                Debug.Log("loading project name...");
-                Logs.Instance.announce.text = "loading project name...";
-                yield return new WaitForSeconds(0.2f);
-            }
-
-            Debug.Log($"request is done: {www.downloadHandler.text}");
-            Debug.Log(www.result);
-            Debug.Log(www.downloadProgress);
-            string stringData = www.downloadHandler.text;
-            RemoteCSVLoader.projectName = stringData;
-        }
+        RemoteCSVLoader.OnUILoadScene();
     }
 }

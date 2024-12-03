@@ -25,6 +25,8 @@ public class RemoteCSVLoader : MonoBehaviour
     private static string urlCSVLayer;
     private static string urlCSVStory;
     public static RemoteCSVLoader instance;
+    public static bool csvLoadComplete = false;
+    
 
     public static bool loadcomplete = false;
     
@@ -56,7 +58,6 @@ public class RemoteCSVLoader : MonoBehaviour
             Destroy(instance.gameObject);
             instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
     public void Reset()
     {
@@ -166,14 +167,9 @@ public class RemoteCSVLoader : MonoBehaviour
                 StoryLine.stepNameArray[j] = data[storyCount * (layerCount + 1) + j];
             }
         }
-        OnUILoadMain();
+        csvLoadComplete = true;
     }
-    private static void OnUILoadMain()
-    {
-        Debug.Log("load main scene...");
-        Logs.Instance.announce.text = "load main scene...";
-        SceneManager.LoadScene("Main", LoadSceneMode.Single);
-    }
+
 }
 public class BypassCertificate : CertificateHandler
 {
