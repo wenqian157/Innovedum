@@ -20,6 +20,7 @@ public class RemoteCSVLoader : MonoBehaviour
 
     public static string urlBase;
     public static int projectID;
+    public static string projectName;
     public static float displayingScale;
     private static string urlCSVLayer;
     private static string urlCSVStory;

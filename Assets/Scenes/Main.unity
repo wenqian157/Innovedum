@@ -2740,6 +2740,7 @@ GameObject:
   - component: {fileID: 838193901}
   - component: {fileID: 838193902}
   - component: {fileID: 838193903}
+  - component: {fileID: 838193904}
   m_Layer: 0
   m_Name: RemoteLoader
   m_TagString: ModelParent
@@ -2792,7 +2793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a9f7e0aba724f4db71b44b1f8b79e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 1938869385}
 --- !u!114 &838193899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2848,6 +2848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a688a15702214b7cbc3200d674e45e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is3DText: 0
 --- !u!114 &838193903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,6 +2861,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d374321f2c96140208270b843a72c7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &838193904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838193895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b93d620b4904f80b5e393231b80bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 1134507410}
 --- !u!1 &848692041
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,7 +3086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.23456976, y: -0.40821788, z: 0.10938167, w: 0.8754261}
-  m_LocalPosition: {x: 5.67, y: 2.7, z: -7.1}
+  m_LocalPosition: {x: 6.2073035, y: 4.1686616, z: -4.6789923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -12,6 +12,8 @@ public class LoadingProgress : MonoBehaviour
     public bool loadComplete = false;
     [HideInInspector]
     public bool is3DText = false;
+    [HideInInspector]
+    public bool loadCSV = false;
     private void Awake()
     {
         if (Instance == null)
@@ -47,5 +49,9 @@ public class LoadingProgress : MonoBehaviour
             StoryController.instance.UpdateLayerMask();
             enabled = false;
         }
+    }
+    private void LoadCSV()
+    {
+
     }
 }
