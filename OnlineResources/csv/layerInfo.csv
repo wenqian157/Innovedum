@@ -3,9 +3,9 @@ index;name;type;material;display_name_german
 1;lines_sut_beam_tie;lines;blue;Zugstreben Hohlkasten
 2;lines_sut_wall_strut;lines;green;Druckstreben Wand
 3;lines_sut_wall_tie;lines;blue;Zugstreben Wand
-4;arrow_force_internal_beam;arrow;red;Auflagerkräfte Wand
+4;arrow_force_internal_beam;arrow;red;Auflagerkrï¿½fte Wand
 5;arrow_force_internal_wall;arrow;red;Einwirkungen Hohlkasten
-6;arrow_force_external;arrow;red;Äussere Last
+6;arrow_force_external;arrow;red;ï¿½ussere Last
 7;mesh_concrete_wall;mesh;concrete;Beton Wand
 8;mesh_concrete_beam;mesh;concrete;Beton Hohlkasten
 9;mesh_reinforcement_wall_A;mesh;steel;Bewehrung Strebe A
@@ -15,8 +15,8 @@ index;name;type;material;display_name_german
 13;mesh_reinforcement_wall_E;mesh;steel;Bewehrung Strebe E
 14;mesh_reinforcement_wall_F;mesh;steel;Bewehrung Strebe F
 15;mesh_reinforcement_wall_H;mesh;steel;Bewehrung Strebe H
-16;mesh_reinforcement_beam_long;mesh;steel;Längsbewehrung Hohlkasten
-17;mesh_reinforcement_beam_stirrups;mesh;steel;Bügelbewehrung Hohlkasten
+16;mesh_reinforcement_beam_long;mesh;steel;Lï¿½ngsbewehrung Hohlkasten
+17;mesh_reinforcement_beam_stirrups;mesh;steel;Bï¿½gelbewehrung Hohlkasten
 18;mesh_reinforcement_beam_stringer_top;mesh;steel;Bewehrung Stringer oben
 19;mesh_reinforcement_beam_stringer_bot;mesh;steel;Bewehrung Stringer unten
 20;mesh_support;mesh;concrete;Umgebung 

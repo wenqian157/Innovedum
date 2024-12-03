@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -92,6 +94,7 @@ public class ObjReader : MonoBehaviour
 
         string[] data = objstring.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
+        //int tempi = 0;
         foreach (string line in data)
         {
             // read vertices
@@ -100,11 +103,17 @@ public class ObjReader : MonoBehaviour
                 var vertexData = line.Substring(2).Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 var vertex = new float[]
                 {
-                    float.Parse(vertexData[0]),
-                    float.Parse(vertexData[1]),
-                    float.Parse(vertexData[2])
+                    float.Parse(vertexData[0], CultureInfo.InvariantCulture),
+                    float.Parse(vertexData[1], CultureInfo.InvariantCulture),
+                    float.Parse(vertexData[2], CultureInfo.InvariantCulture)
                 };
                 myObj.vertices.Add(vertex);
+                //if (tempi < 3)
+                //{
+                //    Debug.Log($"read string: {vertexData[0]}, {vertexData[1]}, {vertexData[2]}");
+                //    Debug.Log($"float parse: {vertex[0]}, {vertex[1]}, {vertex[2]}, \n");
+                //}
+                //tempi += 1;
             }
             // read ObjFaces
             else if (line.StartsWith("f "))

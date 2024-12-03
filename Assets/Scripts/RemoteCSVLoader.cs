@@ -19,9 +19,14 @@ public class RemoteCSVLoader : MonoBehaviour
     public static List<int> linesWithArrowLayers = new List<int>();
 
     public static string urlBase;
+    public static int projectID;
+    public static string projectName;
+    public static float displayingScale;
     private static string urlCSVLayer;
     private static string urlCSVStory;
     public static RemoteCSVLoader instance;
+
+    public static bool loadcomplete = false;
     
     public class LayerObject
     {
@@ -29,6 +34,7 @@ public class RemoteCSVLoader : MonoBehaviour
         public string name;
         public string contentType;
         public string material;
+        public string displayName;
     }
     public static LayerObject[] myLayerObjects; 
     [Serializable]
@@ -40,12 +46,28 @@ public class RemoteCSVLoader : MonoBehaviour
     }
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            if (instance == this) return;
+            Destroy(instance.gameObject);
+            instance = this;
+        }
         DontDestroyOnLoad(gameObject);
     }
+    public void Reset()
+    {
+        objLayers = new List<int>();
+        linesLayers = new List<int>();
+        linesWithArrowLayers = new List<int>();
+}
     public static void OnUILoadScene()
     {
-        urlBase = RemoteInfoLoader.Instance.projectUrl;
+        if (urlBase is null) return;
+
         urlCSVLayer = urlBase + "/csv/layerInfo.csv";
         urlCSVStory = urlBase + "/csv/storyInfo.csv";
         
@@ -69,18 +91,21 @@ public class RemoteCSVLoader : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
             }
             string stringData = www.downloadHandler.text;
+
             string[] data = stringData.Split(new string[] { ",", "\n" }, StringSplitOptions.None);
 
-            layerCount = data.Length / 4 - 1;
+            layerCount = data.Length / 5 - 1; // 6 is the column numbers in the csv: index, name, type, material, display name
             myLayerObjects = new LayerObject[layerCount];
             for (int i = 0; i < layerCount; i++)
             {
                 myLayerObjects[i] = new LayerObject();
                 myLayerObjects[i].index = i + 6; // custome layer starting from 6
-                myLayerObjects[i].name = data[ 4 * (i + 1) + 1];
-                myLayerObjects[i].contentType = data[4 * (i + 1) + 2];
+                myLayerObjects[i].name = data[ 5 * (i + 1) + 1];
+                myLayerObjects[i].contentType = data[5 * (i + 1) + 2];
                 // substring is because of a bug in unity
-                myLayerObjects[i].material = data[4 * (i + 1) + 3].Substring(0, data[4 * (i + 1) + 3].Length-1);
+                //myLayerObjects[i].material = data[5 * (i + 1) + 3].Substring(0, data[5 * (i + 1) + 3].Length-1);
+                myLayerObjects[i].material = data[5 * (i + 1) + 3];
+                myLayerObjects[i].displayName = data[5 * (i + 1) + 4];
 
                 if (myLayerObjects[i].contentType == "mesh")
                 {
@@ -120,7 +145,7 @@ public class RemoteCSVLoader : MonoBehaviour
 
             Debug.Log("load story data: " + data.Length);
 
-            storyCount = data.Length / (layerCount + 2);
+            storyCount = data.Length / (layerCount + 2); 
             StoryLine.layerFilters = new List<int>[storyCount];
             
             for (int j = 0; j < storyCount; j++)
