@@ -29,6 +29,8 @@ public class CameraController : MonoBehaviour
     private Quaternion originTarRot;
     private Vector3 originCamPos;
     private Quaternion originCamRot;
+    private float orthoZoom = 15;
+    private Camera cam;
 
     private enum camStates { perspective, top, front, left};
     private camStates currentCam;
@@ -45,6 +47,8 @@ public class CameraController : MonoBehaviour
         originCamPos = transform.position;
         originCamRot = transform.rotation;
 
+        cam = this.GetComponent<Camera>();
+
         Init(); 
     }
     private void Init()
@@ -60,7 +64,7 @@ public class CameraController : MonoBehaviour
         currentRotation = transform.rotation;
         desiredRotation = transform.rotation;
 
-        xDeg = Vector3.Angle(Vector3.right, transform.right);
+        xDeg = -Vector3.Angle(Vector3.right, transform.right); // this is related to how we orient the 3d model initially
         yDeg = Vector3.Angle(Vector3.up, transform.up); 
     }
     void LateUpdate()
@@ -75,47 +79,61 @@ public class CameraController : MonoBehaviour
         // orbit!
         else if (Input.GetMouseButton(1))
         {
-            xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-            yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            if(currentCam == camStates.perspective)
+            {
+                xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+                yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
 
-            ////////OrbitAngle
+                ////////OrbitAngle
+                //Clamp the vertical axis for the orbit
+                yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
+                // set camera rotation
+                desiredRotation = Quaternion.Euler(yDeg, xDeg, 0);
+                currentRotation = transform.rotation;
 
-            //Clamp the vertical axis for the orbit
-            yDeg = ClampAngle(yDeg, yMinLimit, yMaxLimit);
-            // set camera rotation
-            desiredRotation = Quaternion.Euler(yDeg, xDeg, 0);
-            currentRotation = transform.rotation;
-
-            rotation = Quaternion.Lerp(currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
-            transform.rotation = rotation;
+                rotation = Quaternion.Lerp(currentRotation, desiredRotation, Time.deltaTime * zoomDampening);
+                transform.rotation = rotation;
+            }
         }
-
-        // zoom!
-        // affect the desired Zoom distance if we roll the scrollwheel
-        desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs(desiredDistance);
-        //clamp the zoom min/max
-        desiredDistance = Mathf.Clamp(desiredDistance, minDistance, maxDistance);
-        // For smoothing of the zoom, lerp distance
-        currentDistance = Mathf.Lerp(currentDistance, desiredDistance, Time.deltaTime * zoomDampening);
 
         // calculate position based on the new currentDistance
         if(currentCam == camStates.top)
         {
-            rotation = Quaternion.Euler(0, 0, 0);
+            // zoom
+            orthoZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000;
+            orthoZoom = Mathf.Clamp(orthoZoom, 1, 20);
+            cam.orthographicSize = orthoZoom;
+
+            // pan
             position = target.position - rotation * Vector3.down *currentDistance;
         }
         else if (currentCam == camStates.left)
         {
-            rotation = Quaternion.Euler(0, 0, 0);
+            // zoom
+            orthoZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000;
+            orthoZoom = Mathf.Clamp(orthoZoom, 1, 20);
+            cam.orthographicSize = orthoZoom;
             position = target.position - rotation * Vector3.right * currentDistance;
         }
         else if (currentCam == camStates.front)
         {
-            rotation = Quaternion.Euler(0, 0, 0);
+            // zoom
+            orthoZoom -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * 1000;
+            orthoZoom = Mathf.Clamp(orthoZoom, 1, 20);
+            cam.orthographicSize = orthoZoom;
             position = target.position - rotation * Vector3.back * currentDistance;
         }
         else
         {
+            // zoom!
+            // affect the desired Zoom distance if we roll the scrollwheel
+            desiredDistance -= Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * zoomRate * Mathf.Abs(desiredDistance);
+            //clamp the zoom min/max
+            desiredDistance = Mathf.Clamp(desiredDistance, minDistance, maxDistance);
+            // For smoothing of the zoom, lerp distance
+            currentDistance = Mathf.Lerp(currentDistance, desiredDistance, Time.deltaTime * zoomDampening);
+
+            //pan
             position = target.position - (rotation * Vector3.forward * currentDistance + targetOffset);
         }
         
@@ -135,40 +153,39 @@ public class CameraController : MonoBehaviour
         transform.SetPositionAndRotation(originCamPos, originCamRot);
         Init();
 
-        var cam = this.GetComponent<Camera>();
         cam.orthographic = false;
     }
     public void TopView()
     {
         currentCam = camStates.top;
         rotation = Quaternion.Euler(90, 0, 0);
-        target.SetPositionAndRotation(new Vector3(0, 20 - distance, 0), Quaternion.Euler(90, 0, 0));
+        target.SetPositionAndRotation(new Vector3(0, 20 - 5, -6), Quaternion.Euler(90, 0, 0));
         transform.SetPositionAndRotation(new Vector3(0, 20, 0), Quaternion.Euler(90, 0, 0));
         
-        var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
         cam.orthographicSize = 15;
+        orthoZoom = 15;
     }
     public void LeftView()
     {
         currentCam = camStates.left;
         rotation = Quaternion.Euler(0, 90, 0);
-        target.SetPositionAndRotation(new Vector3(-20 - distance, 0, 0), Quaternion.Euler(0, 90, 0));
+        target.SetPositionAndRotation(new Vector3(-20 - 5, 0, -8), Quaternion.Euler(0, 90, 0));
         transform.SetPositionAndRotation(new Vector3(-20, 0, 0), Quaternion.Euler(0, 90, 0));
 
-        var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
         cam.orthographicSize = 15;
+        orthoZoom = 15;
     }
     public void FrontView()
     {
         currentCam = camStates.left;
         rotation = Quaternion.Euler(0, 90, 0);
-        target.SetPositionAndRotation(new Vector3(0, 0, -20 - distance), Quaternion.Euler(0, 0, 0));
+        target.SetPositionAndRotation(new Vector3(0, 0, -20 - 5), Quaternion.Euler(0, 0, 0));
         transform.SetPositionAndRotation(new Vector3(0, 0, -20), Quaternion.Euler(0, 0, 0));
 
-        var cam = this.GetComponent<Camera>();
         cam.orthographic = true;
         cam.orthographicSize = 15;
+        orthoZoom = 15;
     }
 }

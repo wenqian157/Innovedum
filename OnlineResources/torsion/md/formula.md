@@ -50,7 +50,6 @@ benötigt. Es wird eine Bewehrung gewählt von 2Ø16 mit der Fläche
 
 $$A_{s,B} = 2 \pi r^2 = 4\cdot\pi\cdot(8 \text{mm})^2 = 402 \text{mm}^2$$
 
-
 ====
 06 
 
@@ -145,7 +144,7 @@ Hier ist das gesamte Fachwerkmodell inklusive der Verbindung zwischen Wandscheib
 ====
 16
 
-Für die Bemessung des Hohlkastens wird dieses Modell verwendet
+Für die Bemessung des Hohlkastens wird dieses Modell verwendet.
 ====
 17
 

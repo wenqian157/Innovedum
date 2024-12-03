@@ -5,22 +5,21 @@ using System.Threading;
 
 public class Test : MonoBehaviour
 {
-    int count = 0;
-    int max = 10;
+    private float orthoSize = 5;
+    private Camera cam;
 
     void Start()
     {
-        
+        cam = GetComponent<Camera>();
+        cam.orthographic = true;
     }
 
     void Update()
     {
-        while (count < max)
-        {
-            count++;
-            Thread.Sleep(500);
-            Debug.Log(count);
-        }
-        Debug.Log(Time.deltaTime);
+        orthoSize += Input.GetAxis("Mouse ScrollWheel")* 100;
+        Debug.Log(orthoSize);
+
+        cam.orthographicSize = orthoSize;
     }
+        
 }

@@ -11,6 +11,8 @@ public class RemoteInfoLoader : MonoBehaviour
     public static string urlBase;
     public static RemoteInfoLoader Instance;
     private string urlInfo;
+    private string urlName;
+
     private void Awake()
     {
         if (Instance == null)
@@ -30,6 +32,8 @@ public class RemoteInfoLoader : MonoBehaviour
         if (urlBase is null) return;
         urlInfo = urlBase + "/txt/info.txt";
         StartCoroutine(ReadInfo(urlInfo));
+        urlName = urlBase + "/txt/name.txt";
+        StartCoroutine(ReadProjectName(urlName));
 
         RemoteCSVLoader.urlBase = urlBase;
         RemoteCSVLoader.projectID = id;
@@ -66,6 +70,30 @@ public class RemoteInfoLoader : MonoBehaviour
             Debug.Log(www.downloadProgress);
             string stringData = www.downloadHandler.text;
             Logs.Instance.announce.text = stringData;
+        }
+    }
+    public static IEnumerator ReadProjectName(string url)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get(url))
+        {
+            www.SendWebRequest();
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Debug.LogError($"{www.error}");
+                yield break;
+            }
+            while (!www.isDone)
+            {
+                Debug.Log("loading project name...");
+                Logs.Instance.announce.text = "loading project name...";
+                yield return new WaitForSeconds(0.2f);
+            }
+
+            Debug.Log($"request is done: {www.downloadHandler.text}");
+            Debug.Log(www.result);
+            Debug.Log(www.downloadProgress);
+            string stringData = www.downloadHandler.text;
+            RemoteCSVLoader.projectName = stringData;
         }
     }
 }
