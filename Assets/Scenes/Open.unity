@@ -268,7 +268,6 @@ GameObject:
   m_Component:
   - component: {fileID: 212853738}
   - component: {fileID: 212853739}
-  - component: {fileID: 212853740}
   - component: {fileID: 212853741}
   m_Layer: 0
   m_Name: RemoteCSVLoader
@@ -304,25 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc70a0fb105f944f0abf5c6f808b3044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &212853740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212853736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ab5ede572588c4ab88ae3ba8bb4be3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectUrlList:
-  - https://raw.githubusercontent.com/wenqian157/webServer/main/torsion
-  - https://raw.githubusercontent.com/wenqian157/webServer/main/tBeam
-  projectNameList:
-  - Torsion
-  - TBeam
-  projectID: 1
 --- !u!114 &212853741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +403,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 212853740}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RemoteInfoLoader, Assembly-CSharp
         m_MethodName: OnUIReadInfo
         m_Mode: 3
@@ -1624,7 +1604,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 212853740}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RemoteInfoLoader, Assembly-CSharp
         m_MethodName: OnUIReadInfo
         m_Mode: 3

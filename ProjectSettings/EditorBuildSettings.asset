@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Open.unity
     guid: 64cf56bf30d9f41928a20032fc64051e
   - enabled: 1
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainAR2.unity
     guid: c135760eacd36413db103cf1c52f67e1
+  - enabled: 1
+    path: Assets/Scenes/OpenForAll.unity
+    guid: 6be0ddb04722f4b2d80e0141f26a8984
   m_configObjects: {}

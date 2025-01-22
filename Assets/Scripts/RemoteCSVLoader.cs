@@ -64,8 +64,9 @@ public class RemoteCSVLoader : MonoBehaviour
         linesLayers = new List<int>();
         linesWithArrowLayers = new List<int>();
 }
-    public static void OnUILoadScene()
+    public void OnUILoadScene()
     {
+        Debug.Log("load scene...");
         if (urlBase is null) return;
 
         urlCSVLayer = urlBase + "/csv/layerInfo.csv";
@@ -73,7 +74,7 @@ public class RemoteCSVLoader : MonoBehaviour
         
         instance.StartCoroutine(ReadCSVLayer(urlCSVLayer));
     }
-    public static IEnumerator ReadCSVLayer(string url)
+    public IEnumerator ReadCSVLayer(string url)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
@@ -86,6 +87,7 @@ public class RemoteCSVLoader : MonoBehaviour
             }
             while (!www.isDone)
             {
+                Debug.Log("why");
                 Debug.Log("loading layer csv...");
                 Logs.Instance.announce.text = "loading layer csv...";
                 yield return new WaitForSeconds(0.2f);
@@ -123,7 +125,7 @@ public class RemoteCSVLoader : MonoBehaviour
             instance.StartCoroutine(ReadCSVStory(urlCSVStory));
         }
     }
-    public static IEnumerator ReadCSVStory(string url)
+    public IEnumerator ReadCSVStory(string url)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(url))
         {
