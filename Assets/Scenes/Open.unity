@@ -333,9 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectUrlList:
-  - https://raw.githubusercontent.com/wenqian157/webServer/main/tBeam
+  - https://raw.githubusercontent.com/wenqian157/webServer/main/torsion
   projectNameList:
-  - tBeam
+  - Torsion
   projectID: 0
 --- !u!1 &480136170
 GameObject:
