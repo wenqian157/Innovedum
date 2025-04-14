@@ -333,9 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectUrlList:
-  - https://raw.githubusercontent.com/wenqian157/webServer/main/torsion
+  - https://raw.githubusercontent.com/wenqian157/webServer/refs/heads/main/SBII_Ex2_prestressing
   projectNameList:
-  - Torsion
+  - ex2
   projectID: 0
 --- !u!1 &480136170
 GameObject:

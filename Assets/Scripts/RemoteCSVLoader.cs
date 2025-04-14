@@ -63,7 +63,7 @@ public class RemoteCSVLoader : MonoBehaviour
         objLayers = new List<int>();
         linesLayers = new List<int>();
         linesWithArrowLayers = new List<int>();
-}
+    }
     public void OnUILoadScene()
     {
         Debug.Log("load scene...");
@@ -177,11 +177,11 @@ public class RemoteCSVLoader : MonoBehaviour
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }
-public class BypassCertificate : CertificateHandler
-{
-    protected override bool ValidateCertificate(byte[] certificateData)
-    {
-        return true;
-    }
-}
+//public class BypassCertificate : CertificateHandler
+//{
+//    protected override bool ValidateCertificate(byte[] certificateData)
+//    {
+//        return true;
+//    }
+//}
 
