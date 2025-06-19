@@ -43,7 +43,7 @@ public class RemoteInfoLoader : MonoBehaviour
         switch (id)
         {
             case 0:
-                RemoteCSVLoader.displayingScale = 1;
+                RemoteCSVLoader.displayingScale = 0.5f;
                 break;
             case 1:
                 RemoteCSVLoader.displayingScale = 0.5f;

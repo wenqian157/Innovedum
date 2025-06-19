@@ -99,7 +99,7 @@ public class RemoteTextGeometryLoader : MonoBehaviour
         TEXDraw3D latex3D = textGORect.AddComponent<TEXDraw3D>();
         latex3D.text = text;
         latex3D.color = Color.red;
-        latex3D.size = 0.15f;
+        latex3D.size = 0.1f;
         latex3D.pixelsPerUnit = 200;
 
         RectTransform rectTransform = textGORect.GetComponent<RectTransform>();
