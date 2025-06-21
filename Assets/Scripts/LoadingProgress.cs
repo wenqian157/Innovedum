@@ -46,12 +46,8 @@ public class LoadingProgress : MonoBehaviour
             {
                 log.SetActive(false);
             }
-            StoryController.instance.UpdateLayerMask();
+            //StoryController.instance.UpdateLayerMask();
             enabled = false;
         }
-    }
-    private void LoadCSV()
-    {
-
     }
 }

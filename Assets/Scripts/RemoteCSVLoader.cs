@@ -177,11 +177,4 @@ public class RemoteCSVLoader : MonoBehaviour
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 }
-//public class BypassCertificate : CertificateHandler
-//{
-//    protected override bool ValidateCertificate(byte[] certificateData)
-//    {
-//        return true;
-//    }
-//}
 
