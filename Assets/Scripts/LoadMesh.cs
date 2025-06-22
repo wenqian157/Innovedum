@@ -17,11 +17,11 @@ public class LoadMesh : MonoBehaviour
         {
             string name = LoadCSV.instance.myLayerObjects[i-6].name;
             string material = LoadCSV.instance.myLayerObjects[i-6].material;
-            StartCoroutine(LoadAsync(i, name, material));
+            StartCoroutine(LoadMeshAsync(i, name, material));
             LoadingProgress.Instance.coroutineCount++;
         }
     }
-    IEnumerator LoadAsync(int layerIndex, string layerName, string material)
+    IEnumerator LoadMeshAsync(int layerIndex, string layerName, string material)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(LoadInfo.instance.urlBase + "/obj/" + layerName + ".obj"))
         {
@@ -33,11 +33,11 @@ public class LoadMesh : MonoBehaviour
             }
             while (!www.isDone)
             {
-                Debug.Log("loading...");
-                yield return new WaitForSeconds(0.1f);
+                Debug.Log("loading mesh...");
+                yield return new WaitForSeconds(0.2f);
             }
-
             GameObject meshGO = ObjReader.ObjToMeshObject(www.downloadHandler.text);
+            Mesh mesh = meshGO.GetComponent<MeshFilter>().mesh;
             meshGO.name = layerName;
             meshGO.transform.SetParent(transform);
             meshGO.layer = layerIndex;

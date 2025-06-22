@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System;
@@ -109,11 +108,11 @@ public class LoadCSV : MonoBehaviour
                 {
                     meshLayers.Add(myLayerObjects[i].index);
                 }
-                else if (myLayerObjects[i].type == "line")
+                else if (myLayerObjects[i].type == "lines")
                 {
                     lineLayers.Add(myLayerObjects[i].index);
                 }
-                else if (myLayerObjects[i].type == "arrow")
+                else if (myLayerObjects[i].type == "arrows")
                 {
                     arrowLayers.Add(myLayerObjects[i].index);
                 }

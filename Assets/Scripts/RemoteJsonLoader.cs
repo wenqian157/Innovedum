@@ -63,7 +63,7 @@ public class RemoteJsonLoader : MonoBehaviour
 
             string stringData = www.downloadHandler.text;
             lineData = JsonConvert.DeserializeObject<LinesFromRhino>(stringData);
-            GameObject line = new GameObject();
+            GameObject line = new GameObject(); 
             line.transform.SetParent(transform);
             line.name = layerName;
             line.layer = layerIndex;
