@@ -10,10 +10,6 @@ public class LoadingProgress : MonoBehaviour
     private bool loadStart;
     [HideInInspector]
     public bool loadComplete = false;
-    [HideInInspector]
-    public bool is3DText = false;
-    [HideInInspector]
-    public bool loadCSV = false;
     private void Awake()
     {
         if (Instance == null)
@@ -41,12 +37,6 @@ public class LoadingProgress : MonoBehaviour
         {
             loadComplete = true;
             Debug.Log("load complete ---------------------");
-            GameObject log = GameObject.FindWithTag("Log");
-            if (log is not null)
-            {
-                log.SetActive(false);
-            }
-            //StoryController.instance.UpdateLayerMask();
             enabled = false;
         }
     }

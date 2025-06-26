@@ -8,7 +8,13 @@ public class LoadInfo : MonoBehaviour
     public static LoadInfo instance;
     public string urlBase;
     public string projectName;
-    public float projectScale;
+    public float projectScale = 0.2f;
+    public float lineWidth = 0.05f;
+    public float arrowSize = 0.1f;
+    public float fontSize = 0.1f;
+    public float fontRes = 200;
+    public Color textColor = Color.red;
+    public float arScale = 0.05f;
     private void Awake()
     {
         if (instance == null)

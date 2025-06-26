@@ -72,10 +72,6 @@ public class StoryController : MonoBehaviour
 
         UpdateLayerMask();
 
-        if (LoadingProgress.Instance.is3DText)
-        {
-            Displaying3DText(currentState);
-        }
 
     }
     public void UpdateLayerMask()
@@ -115,10 +111,6 @@ public class StoryController : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             if (LoadingProgress.Instance.loadComplete)
             {
-                if (LoadingProgress.Instance.is3DText)
-                {
-                    Collect3DText();
-                }
                 SetStep(0);
                 break;
             }

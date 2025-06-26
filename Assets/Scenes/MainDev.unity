@@ -1400,7 +1400,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 838193896}
   - {fileID: 1285149679}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -2444,7 +2443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350, y: -125.65657}
+  m_AnchoredPosition: {x: 350, y: -125.65674}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &729750124
@@ -2725,156 +2724,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819748705}
   m_CullTransparentMesh: 1
---- !u!1 &838193895
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 838193896}
-  - component: {fileID: 838193897}
-  - component: {fileID: 838193898}
-  - component: {fileID: 838193899}
-  - component: {fileID: 838193900}
-  - component: {fileID: 838193901}
-  - component: {fileID: 838193902}
-  - component: {fileID: 838193903}
-  - component: {fileID: 838193904}
-  m_Layer: 0
-  m_Name: RemoteLoader
-  m_TagString: ModelParent
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &838193896
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 360028476}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &838193897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f546389c4439f4d9d70096cb2688ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
-  step: {fileID: 1475058436}
-  stepNameText: {fileID: 819748707}
-  textLoader: {fileID: 838193900}
-  currentLayerFilter: 
-  currentState: 0
---- !u!114 &838193898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9f7e0aba724f4db71b44b1f8b79e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &838193899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe99428a56afd4be7aeba3e86dddda27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lineWidth: 0.02
-  arrowSize: 0.12
---- !u!114 &838193900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf7a20df66a9f24abd8780b01db4bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texDraw: {fileID: 1517404522}
-  data: []
---- !u!114 &838193901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b534085da60d3744d841e9acf58c3368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 963194227}
-  layerParent: {fileID: 2055493684}
-  currentLayerList: 
---- !u!114 &838193902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a688a15702214b7cbc3200d674e45e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  is3DText: 0
---- !u!114 &838193903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d374321f2c96140208270b843a72c7e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &838193904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 838193895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b93d620b4904f80b5e393231b80bb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 1134507410}
 --- !u!1 &848692041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,9 +2808,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 838193897}
-        m_TargetAssemblyTypeName: LayerController, Assembly-CSharp
-        m_MethodName: OnClickPreviousNext
+      - m_Target: {fileID: 1285149684}
+        m_TargetAssemblyTypeName: StepControl, Assembly-CSharp
+        m_MethodName: ChangeStep
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3517,7 +3366,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 838193902}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RemoteTextGeometryLoader, Assembly-CSharp
         m_MethodName: OnClickTextOnOff
         m_Mode: 1
@@ -3715,6 +3564,10 @@ GameObject:
   - component: {fileID: 1285149681}
   - component: {fileID: 1285149682}
   - component: {fileID: 1285149683}
+  - component: {fileID: 1285149685}
+  - component: {fileID: 1285149684}
+  - component: {fileID: 1285149686}
+  - component: {fileID: 1285149687}
   m_Layer: 0
   m_Name: DataLoader
   m_TagString: Untagged
@@ -3735,7 +3588,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 360028476}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1285149680
 MonoBehaviour:
@@ -3751,8 +3604,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coroutineCount: 0
   loadComplete: 0
-  is3DText: 0
-  loadCSV: 0
 --- !u!114 &1285149681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3777,8 +3628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ea33f251c2fb54aaec52ba8d02f151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineWidth: 0.05
-  arrowSize: 0.5
 --- !u!114 &1285149683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3791,9 +3640,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626fb84bb4cb21c40b34fc1cd1a05131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textColor: {r: 1, g: 0, b: 0, a: 1}
-  fontSize: 0.3
-  fontRes: 200
+--- !u!114 &1285149684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285149678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac7a96c447daa741bc56af7f5ae4a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepCount: {fileID: 1475058436}
+  stepName: {fileID: 819748707}
+  currentStep: 0
+--- !u!114 &1285149685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285149678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669f013ec072cb74191685cf6650bc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texDraw: {fileID: 1517404522}
+--- !u!114 &1285149686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285149678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70b0d6f05c2e384f943e9c1593b941f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 963194227}
+  layerToggleParent: {fileID: 2055493684}
+  layerNameList: []
+  layerList: 
+--- !u!114 &1285149687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285149678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b7e20732dadf9e48a47a54c937af099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 1134507410}
 --- !u!1 &1309541692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3942,13 +3845,14 @@ GameObject:
   - component: {fileID: 1376461358}
   - component: {fileID: 1376461357}
   - component: {fileID: 1376461361}
+  - component: {fileID: 1376461362}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1376461357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4051,6 +3955,20 @@ MonoBehaviour:
   arOnOff: {fileID: 2545276514384624117}
   stepTextGO: {fileID: 502463092}
   navigationGO: {fileID: 53089359}
+--- !u!114 &1376461362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376461356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb42693f693246dcb1ecf32550c4b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  announce: {fileID: 1938869386}
+  debug: {fileID: 1938869386}
 --- !u!1 &1402788024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,9 +4453,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 838193897}
-        m_TargetAssemblyTypeName: LayerController, Assembly-CSharp
-        m_MethodName: OnClickPreviousNext
+      - m_Target: {fileID: 1285149684}
+        m_TargetAssemblyTypeName: StepControl, Assembly-CSharp
+        m_MethodName: ChangeStep
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11578,7 +11496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 963194225}
   arMainCam: {fileID: 8065947460430090302}
-  model: {fileID: 838193895}
+  model: {fileID: 1285149678}
   arModelParent: {fileID: 1831577434094075843}
   modelParent: {fileID: 360028475}
 --- !u!1 &8065947460430090302

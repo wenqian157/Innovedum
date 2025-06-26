@@ -18,13 +18,17 @@ public class LoadText : MonoBehaviour
     {
         public List<Text3D> text3d;
     }
-    public Color textColor = Color.red;
-    public float fontSize = 0.1f;
-    public float fontRes = 200;
+    private Color textColor;
+    private float fontSize;
+    private float fontRes ;
     private bool lookAtCam = false;
     private List<TEXDraw3D> allText3D = new List<TEXDraw3D>();
     void Start()
     {
+        fontSize = LoadInfo.instance.fontSize;
+        fontRes = LoadInfo.instance.fontRes;
+        textColor = LoadInfo.instance.textColor;
+
         LoadTextByLayer();
         StartCoroutine(FaceCam());
     }
@@ -68,9 +72,14 @@ public class LoadText : MonoBehaviour
             textParent.transform.localRotation = Quaternion.identity;
             textParent.transform.localScale = new Vector3(1, 1, 1);
             textParent.name = "text_" + name;
+            textParent.layer = index;
             foreach (Text3D text3D in text3DList.text3d)
             {
                 AddText(textParent.transform, text3D);
+            }
+            foreach (Transform child in textParent.GetComponentsInChildren<Transform>())
+            {
+                child.gameObject.layer = index;
             }
             LoadingProgress.Instance.coroutineCount--;
         }

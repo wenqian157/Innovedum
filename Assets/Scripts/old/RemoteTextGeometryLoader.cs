@@ -57,7 +57,6 @@ public class RemoteTextGeometryLoader : MonoBehaviour
             textParent.transform.localScale = new Vector3(1, 1, 1);
             textParent.name = "textParent";
             is3DText = true;
-            LoadingProgress.Instance.is3DText = true;
 
             foreach (var textGeometry in textGeometryAll.text3d)
             {

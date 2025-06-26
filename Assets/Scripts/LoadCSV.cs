@@ -36,7 +36,6 @@ public class LoadCSV : MonoBehaviour
     {
         public string[] stepNameArray;
         public List<int>[] layerFilters;
-        public string[] stepInfoArray;
     }
     [HideInInspector]
     public LayerObject[] myLayerObjects;
@@ -80,7 +79,7 @@ public class LoadCSV : MonoBehaviour
             while (!www.isDone)
             {
                 Debug.Log("loading csv...");
-                Logs.Instance.announce.text = "loading csv...";
+                //Logs.Instance.announce.text = "loading csv...";
                 yield return new WaitForSeconds(0.1f);
             }
             string stringData = www.downloadHandler.text;
@@ -142,7 +141,7 @@ public class LoadCSV : MonoBehaviour
     private void LoadMain()
     {
         Debug.Log("load main scene...");
-        Logs.Instance.announce.text = "load main scene...";
+        //Logs.Instance.announce.text = "load main scene...";
         SceneManager.LoadScene("MainDev", LoadSceneMode.Single);
     }
 }

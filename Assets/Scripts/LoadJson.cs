@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 
 public class LoadJson : MonoBehaviour
 {
-    public float lineWidth = 0.05f;
-    public float arrowSize = 0.1f;
+    private float lineWidth;
+    private float arrowSize;
     [Serializable]
     public struct LineData
     {
@@ -16,6 +16,8 @@ public class LoadJson : MonoBehaviour
     }
     private void Start()
     {
+        lineWidth = LoadInfo.instance.lineWidth;
+        arrowSize = LoadInfo.instance.arrowSize;
         LoadJsonByLayer();
     }
     private void LoadJsonByLayer()
