@@ -56,8 +56,7 @@ ExportedObj/
 *.mov
 
 # for presentation
-/Others
-/OnlineRresources
+/Publish
 
 # Unity3D generated meta files
 *.pidb.meta

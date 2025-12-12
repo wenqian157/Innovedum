@@ -24,9 +24,9 @@ public class AROnOff : MonoBehaviour
         if (arOn)
         {
             model.transform.SetParent(arModelParent.transform);
-            ResetTransform(model.transform, new Vector3(0, 0, 0.05f), Quaternion.identity, new Vector3(
-                RemoteCSVLoader.displayingScale*0.05f, RemoteCSVLoader.displayingScale*0.05f, RemoteCSVLoader.displayingScale*0.05f
-                ));
+            float arScale = LoadInfo.instance.projectScale * LoadInfo.instance.arScale;
+            ResetTransform(model.transform, new Vector3(0, 0, 0), Quaternion.identity, 
+                new Vector3(arScale, arScale, arScale));
             model.transform.Rotate(new Vector3(90, 0, 0));
 
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
@@ -34,12 +34,12 @@ public class AROnOff : MonoBehaviour
             {
                 if(line.gameObject.name == "line")
                 {
-                    line.startWidth = 0.001f;
-                    line.endWidth = 0.001f;
+                    line.startWidth = LoadInfo.instance.lineWidth * LoadInfo.instance.arScale;
+                    line.endWidth = LoadInfo.instance.lineWidth * LoadInfo.instance.arScale;
                 }
                 else if (line.gameObject.name == "arrow")
                 {
-                    line.startWidth = 0.005f;
+                    line.startWidth = LoadInfo.instance.arrowSize * LoadInfo.instance.arScale;
                     line.endWidth = 0;
                 }
             }
@@ -48,7 +48,7 @@ public class AROnOff : MonoBehaviour
         {
             model.transform.SetParent(modelParent.transform);
             ResetTransform(model.transform, new Vector3(0, 0, 0), Quaternion.identity, new Vector3(
-                RemoteCSVLoader.displayingScale, RemoteCSVLoader.displayingScale, RemoteCSVLoader.displayingScale
+                LoadInfo.instance.projectScale, LoadInfo.instance.projectScale, LoadInfo.instance.projectScale
                 ));
 
             LineRenderer[] lines = model.GetComponentsInChildren<LineRenderer>();
@@ -56,12 +56,12 @@ public class AROnOff : MonoBehaviour
             {
                 if (line.gameObject.name == "line")
                 {
-                    line.startWidth = 0.02f;
-                    line.endWidth = 0.02f;
+                    line.startWidth = LoadInfo.instance.lineWidth;
+                    line.endWidth = LoadInfo.instance.lineWidth;
                 }
                 else if (line.gameObject.name == "arrow")
                 {
-                    line.startWidth = 0.12f;
+                    line.startWidth = LoadInfo.instance.arrowSize;
                     line.endWidth = 0;
                 }
             }

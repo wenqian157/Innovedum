@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,18 +14,7 @@ public class UIControllerMain : MonoBehaviour
     public GameObject stepTextGO;
     public GameObject navigationGO;
     private int currentState = 0;
-    //private int tempState;
 
-    private void Awake()
-    {
-        //tempState = currentState;
-    }
-    public void OnUIBack2Menu()
-    {
-        Debug.Log("load open scene...");
-        SceneManager.LoadScene("Open", LoadSceneMode.Single);
-        RemoteCSVLoader.instance.Reset();
-    }
     public void OnUISwitchState(int state)
     {
         currentState = state;
@@ -36,7 +26,8 @@ public class UIControllerMain : MonoBehaviour
             arOnOff.OnClickOnOffAR(false);
             navigationGO.SetActive(true);
 
-            StoryController.instance.SetStep(StoryController.instance.currentState);
+            int currentStep = StepControl.instance.currentStep;
+            StepControl.instance.SetStep(currentStep);
         }
 
         else if(currentState == 1) //by layers
@@ -47,11 +38,13 @@ public class UIControllerMain : MonoBehaviour
             arOnOff.OnClickOnOffAR(false);
             navigationGO.SetActive(true);
 
-            LayerController.instance.UpdateLayerToggles(
-            StoryController.instance.currentLayerFilter);
+            int currentStep = StepControl.instance.currentStep;
+            List<int> currentFilter = LoadCSV.instance.myStoryObject.layerFilters[currentStep].ToList();
+            LayerControl.instance.currentFilter = currentFilter;
+            LayerControl.instance.UpdateLayerToggles();
         }
 
-        else if(currentState == 2)  // ar mode
+        else if (currentState == 2)  // ar mode
         {
             stepGO.SetActive(false);
             stepTextGO.SetActive(false);
